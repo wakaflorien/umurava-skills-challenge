@@ -1,6 +1,6 @@
 
 
-## Description
+## Umurava Skills Challenge
 
 ### Project Brief: Developing the EdTech Product called Skills Challenges 
 
