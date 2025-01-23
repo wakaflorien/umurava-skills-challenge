@@ -10,11 +10,13 @@ export default {
     extend: {
       colors: {
         background: "var(--background)",
-        backgroundA: "backgroundA",
+        backgroundA: "#F1F1F1",
         foreground: "var(--foreground)",
         primary: "#2B71F0",
         secondary: "#001A40",
-        tertiary: "#BCBDC0"
+        tertiary: "#F1F1F1",
+        tertiaryColor: "#687588",
+        success: "#0F973D"
       },
     },
   },

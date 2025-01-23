@@ -4,7 +4,7 @@ import Link from "next/link"
 
 const Nav = () => {
     return (
-        <nav className="flex justify-between sticky top-0 sm:mx-16">
+        <nav className="sm:flex justify-between sticky top-0 sm:px-16 bg-background hidden">
             <Link href={"/"} className="!cursor-pointer">
                 <Image
                     src="/logo.png"
