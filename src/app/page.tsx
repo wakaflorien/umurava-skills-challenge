@@ -4,6 +4,9 @@ import Button from "./components/Button";
 import Image from "next/image";
 import Div from "./components/Div";
 import Card from "./components/Card";
+import MiniDiv from "./components/MiniDiv";
+import { Icon } from '@iconify-icon/react';
+
 
 export default function Home() {
   return (
@@ -43,8 +46,8 @@ export default function Home() {
         <section className="bg-backgroundA h-full grid gap-24 sm:grid-row-3 sm:px-32 sm:py-16">
 
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
-            <h1 className="w-full sm:w-1/2 text-black text-2xl sm:text-4xl sm:leading-tight font-bold">Build Work Experience through Skills Challenges Program.</h1>
-            <p className="w-full sm:w-1/2 text-tertiaryColor line-clamp-2">Enhance your Employability and Accelerate your Career Growth by working on Hands-on projects & hackathons from various businesses & organizations.</p>
+            <h1 className="text-black text-2xl sm:text-4xl sm:leading-tight font-bold">Experience a New Way of Building Work Experience.</h1>
+            <p className="w-full sm:w-1/2 text-tertiaryColor line-clamp-2">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
           </div>
 
           <div className="grid gap-4 sm:grid-row-2">
@@ -86,7 +89,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8 sm:px-8">
-            <h1 className="w-full sm:w-1/2 text-black text-2xl sm:text-4xl sm:leading-tight font-bold">Skills Challenges Cover various in-demand skills and Careers for the digital economy.</h1>
+            <h1 className="text-black text-2xl sm:text-4xl sm:leading-tight font-bold">Skills Challenges Cover various in-demand skills and Careers for the digital economy.</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor line-clamp-2">Explore the projects that various talents are working on.</p>
           </div>
 
@@ -131,7 +134,7 @@ export default function Home() {
         {/* Challenges and Hackathons section  */}
         <section className="h-full grid gap-24 sm:grid-row-3 justify-items-center sm:px-32">
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
-            <h1 className="w-full sm:w-1/2 text-black text-2xl sm:text-4xl font-bold">Explore Challenges & Hackathons.</h1>
+            <h1 className="text-black text-2xl sm:text-4xl font-bold">Explore Challenges & Hackathons.</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-3 sm:gap-8">
@@ -139,6 +142,45 @@ export default function Home() {
           </div>
 
           <Button classNames="w-[150px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-4" label="View More" onClick={() => console.log("View More")} />
+        </section>
+
+        {/* Participate in skills challenge  */}
+        <section className="bg-backgroundA h-full grid gap-24 sm:grid-row-2 justify-items-center sm:px-32 sm:py-16">
+          <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
+            <h1 className="text-black text-2xl sm:text-4xl font-bold">What else can I gain from participating in Skills Challenges ?</h1>
+            <p className="w-full sm:w-1/2 text-tertiaryColor">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-3 sm:gap-8">
+            <div className="space-y-6">
+              {[{ title: "Enhance Your Employment Path", desc: "Network with other talented individuals and learn from their experiences." }, { title: "Personal Growth", desc: "Challenge yourself, learn new skills, and expand your professional network." },].map((i, index) => (<MiniDiv key={index}
+                icon="/briefcase.png"
+                iconWidth={16}
+                iconHeight={16}
+                title={i.title}
+                desc={i.desc} />))}
+            </div>
+            <div className="space-y-6">
+              {[{ title: "Earn Recognition and Prizes", desc: "Gain valuable experience and knowledge to advance your career in the digital economy." }, { title: "Learn from Industry Experts", desc: "Access valuable insights and guidance from experienced professionals in the digital careers fields and spaces." },].map((i, index) => (<MiniDiv key={index}
+                icon="/briefcase.png"
+                iconWidth={16}
+                iconHeight={16}
+                title={i.title}
+                desc={i.desc} />))}
+            </div>
+            <div>
+              <Image
+                aria-hidden
+                src={`/banner_img1.png`}
+                alt={`Hero banner`}
+                layout="responsive"
+                width={200}
+                height={200}
+                objectFit="cover"
+                priority
+              />
+            </div>
+          </div>
+          <Icon icon="mdi-light:alert" />
         </section>
 
       </main>
