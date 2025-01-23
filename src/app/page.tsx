@@ -76,7 +76,7 @@ export default function Home() {
         </section>
 
         {/* Skills section  */}
-        <section className="h-full grid gap-32 sm:grid-row-4 sm:px-24">
+        <section className="h-full grid gap-24 sm:grid-row-4 sm:px-24">
 
           <div className="flex items-center justify-between bg-primary text-white rounded-lg sm:p-8">
             {[{ title: "1", desc: "Year" }, { title: "500 +", desc: "Challenges Completed" }, { title: "10K +", desc: "Users" }, { title: "6+", desc: "Countries" }].map(item => (<div key={item.title} className="flex flex-col">
@@ -129,7 +129,7 @@ export default function Home() {
         </section>
 
         {/* Challenges and Hackathons section  */}
-        <section className="h-full grid gap-32 sm:grid-row-3 justify-items-center sm:px-32">
+        <section className="h-full grid gap-24 sm:grid-row-3 justify-items-center sm:px-32">
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
             <h1 className="w-full sm:w-1/2 text-black text-2xl sm:text-4xl font-bold">Explore Challenges & Hackathons.</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
