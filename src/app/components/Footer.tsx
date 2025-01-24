@@ -3,14 +3,14 @@ import Button from "./Button";
 
 const Footer = () => {
     return (
-        <footer className="bg-secondary flex flex-col gap-4 px-8 sm:px-24 py-2 sm:py-4 sm:divide-y divide-white/20">
-            <div className="flex items-center justify-between">
+        <footer className="bg-secondary flex flex-col gap-4 px-8 sm:px-24 py-2 sm:py-12 sm:divide-y divide-white/20">
+            <div className="flex items-center justify-between sm:py-8">
                 <Image
                     aria-hidden
-                    src="/mail.png"
+                    src="/CareerTicket_4x-removebg-preview 1.png"
                     alt="File icon"
-                    width={32}
-                    height={32}
+                    width={40}
+                    height={40}
                 />
                 <div className="flex gap-2">
                     {["facebook", "google-plus", "linkedin", "youtube"].map(item => (
@@ -26,7 +26,7 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-4  sm:flex-row items-start justify-between sm:pt-4">
+            <div className="flex flex-col gap-4  sm:flex-row items-start justify-between sm:py-8">
                 <div className="flex flex-col">
                     <h1 className="text-white text-md sm:text-lg font-semibold">Our Address</h1>
                     <ul className="flex flex-col sm:gap-2 sm:py-2 text-tertiary">

@@ -1,38 +1,49 @@
-import Image from "next/image";
 import * as React from "react";
+import Image from "next/image";
 import Button from "./Button";
+import { CardProps } from "../@types/global";
 
-const Card = () => {
+const Card: React.FC<CardProps> = ({ image, isOpen, type, title, skills = [], security, timeline, onClick, name, location, jobTitle, imageWidth, imageHeight }) => {
     return (
         <div className="flex flex-col border border-tertiary rounded-lg">
             <div className="flex flex-col items-start justify-center sm:gap-3 sm:p-4">
-                <div className="bg-primary flex flex-col w-full h-full rounded-md">
-                    <Button classNames="sm:self-end w-fit bg-success text-white sm:text-xs p-2 !rounded-full sm:m-3" label={"Open"} onClick={() => console.log("View item")} />
+                <div className="relative bg-primary flex flex-col w-[300px] h-[180px] items-center justify-center rounded-md">
+                    {isOpen && (<Button classNames="absolute top-0 right-0 w-fit bg-success text-white sm:text-xs p-2 !rounded-full sm:m-3" label={"Open"} onClick={() => console.log("View Open")} />)}
+                    {/* sm:self-end */}
                     <Image
-                        aria-hidden
-                        src={`/logo.png`}
+                        src={image}
                         alt={`Hero banner logo`}
-                        layout="responsive"
-                        width={100}
-                        height={100}
-                        objectFit="cover"
+                        width={imageWidth}
+                        height={imageHeight}
                         priority
+                        objectFit="cover"
                     />
                 </div>
-                <p className="text-black text-sm sm:text-lg font-semibold">Design a Dashboard for SokoFund</p>
 
-                <p className="text-black sm:text-md font-semibold">Skills Needed:</p>
+                {type === "challenge" && (<>
+                    <p className="text-black text-md sm:text-lg font-semibold">{title}</p>
 
-                <div className="flex flex-wrap sm:gap-2">
-                    {["UI/UX Design", "User Research", "Product Design"].map(item => (<Button key={item} classNames="w-fit bg-white text-primary sm:text-sm border border-primary p-1 !rounded-lg" label={item} onClick={() => console.log("View item")} />))}
-                </div>
+                    <p className="text-black text-sm sm:text-md font-bold">Skills Needed:</p>
 
-                <p className="tex-xs text-black">Security Level : <span className="sm:tex-xs text-tertiaryColor font-normal">(Junior, Intermediate, Senior)</span></p>
-                <p className="tex-xs text-black">Timeline : <span className="sm:tex-xs text-tertiaryColor font-normal">15 Days</span></p>
+                    <div className="flex flex-wrap sm:gap-2">
+                        {skills.map(item => (<Button key={item} classNames="w-fit bg-white text-primary sm:text-sm border border-primary p-1 !rounded-lg" label={item} onClick={() => console.log("View item")} />))}
+                    </div>
+
+                    <p className="text-black text-sm sm:text-md font-bold">Seniority Level : <span className="sm:tex-xs text-tertiaryColor font-normal">{security}</span></p>
+                    <p className="text-black text-sm sm:text-md font-bold">Timeline : <span className="sm:tex-xs text-tertiaryColor font-normal">{timeline}</span></p>
+                </>)}
+
+                {type === "testimonial" && (<div className="flex sm:flex-row sm:gap-4">
+                    <div className="bg-primary h-12 w-12 rounded-full"></div>
+                    <div className="flex sm:flex-col sm:gap-1">
+                        <p className="text-black text-sm sm:text-md font-bold">{name}</p>
+                        <p className="text-tertiaryColor text-sm sm:text-md">{jobTitle}, {location}</p>
+                    </div>
+                </div>)}
             </div>
-            <div className="border-t border-tertiary sm:p-4">
-                <Button classNames="w-[150px] bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-2" label="View Challenge" onClick={() => console.log("View Challenge")} />
-            </div>
+            {type === "challenge" && (<div className="border-t border-tertiary sm:p-4">
+                <Button classNames="w-[150px] bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-2" label="View Challenge" onClick={onClick} />
+            </div>)}
         </div>
     )
 }
