@@ -14,13 +14,17 @@ export type DivProps = {
 
 export type CardProps = {
   image: string;
-  isOpen: boolean;
-  type: "challenge" | "testimonial";
   title?: string;
   skills?: Array<string>;
   security?: string;
   timeline?: string;
   onClick?: () => void;
+  imageWidth: number;
+  imageHeight: number;
+};
+
+export type MiniCardProps = {
+  image: string;
   name?: string;
   location?: string;
   jobTitle?: string;

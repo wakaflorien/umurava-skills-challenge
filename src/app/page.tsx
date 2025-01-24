@@ -6,11 +6,13 @@ import Image from "next/image";
 import Div from "./components/Div";
 import Card from "./components/Card";
 import MiniDiv from "./components/MiniDiv";
-import { Icon } from '@iconify-icon/react';
 import GetStartedStep from "./components/GetStartedStep";
+import MiniCard from "./components/MiniCard";
+import { useRouter } from "next/navigation";
 
 
 export default function Home() {
+  const router = useRouter();
   return (
     <div className="relative flex flex-col min-h-screen h-full w-full max-w-screen-2xl mx-auto font-[family-name:var(--font-geist-sans)]">
       <Nav />
@@ -23,7 +25,7 @@ export default function Home() {
               <h1 className="text-primary text-2xl sm:text-5xl sm:leading-tight font-bold">Build Work Experience through Skills Challenges Program </h1>
               <p className="text-tertiaryColor">Enhance your Employability and Accelerate your Career Growth by working on Hands-on projects & hackathons from various businesses & organizations.</p>
             </header>
-            <Button classNames="w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Get Started" onClick={() => console.log("Get Started")} />
+            <Button classNames="w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Get Started" onClick={() => router.push('/hackathons')} />
           </div>
 
           <div className="flex gap-4 w-full sm:pt-24">
@@ -55,23 +57,23 @@ export default function Home() {
           <div className="grid gap-4 sm:grid-row-2">
             <Div
               icon="/briefcase.png"
-              iconWidth={32}
-              iconHeight={32}
+              iconWidth={24}
+              iconHeight={24}
               title="Build a Strong Portfolio and Hands-On Experience"
               desc="Tackle real-world projects through challenges and hackathons that mirror real world challenges faced by businesses and organizations. Therefore, showcase your skills and accomplishments to potential employers and clients through a portofolio of completed projects." />
 
             <div className="grid gap-4 sm:grid-cols-2 rounded-md">
               <Div
                 icon="/briefcase.png"
-                iconWidth={32}
-                iconHeight={32}
+                iconWidth={24}
+                iconHeight={24}
                 title="Enhance Your Employment Path"
                 desc="elop the in-demand skills and build a strong portofolio to increase your chances of landing your dream job or contract." />
 
               <Div
                 icon="/briefcase.png"
-                iconWidth={32}
-                iconHeight={32}
+                iconWidth={24}
+                iconHeight={24}
                 title="Earn Recognition and Prizes"
                 desc="Earn both Money and Knowledge Prizes by participating in various contests and competitions by working on real world projects and hackathons from our partner companies & organizations." />
 
@@ -102,17 +104,15 @@ export default function Home() {
           </div>
 
           <div className="bg-backgroundA grid gap-8 sm:grid-cols-2 rounded-md">
-            <div className="flex flex-col gap-4 sm:gap-16 rounded-lg text-white p-4 sm:p-8">
-              <div className="bg-white w-fit p-4 rounded-md">
+            <div className="flex flex-col justify-center gap-4 sm:gap-8 rounded-lg text-white p-4 sm:p-8">
                 <Image
                   className="cursor-pointer"
                   aria-hidden
-                  src={"/briefcase.png"}
+                  src={"/sf.png"}
                   alt="File icon"
-                  width={32}
-                  height={32}
+                  width={64}
+                  height={64}
                 />
-              </div>
               <p className="text-tertiaryColor">The Embedded Finance Platform and Payroll Management Software Solutions for your organization and Workforce.</p>
               <div className="flex items-center gap-2">
                 <a href="#/learnmore" className="text-primary">Learn More</a>
@@ -152,13 +152,11 @@ export default function Home() {
             {Array.from({ length: 3 }).map((_, index) => (<Card
               key={index}
               image={`/white_logo.png`}
-              isOpen={true}
-              type={'challenge'}
               title={'Design a Dashboard for SokoFund'}
               skills={["UI/UX Design", "User Research", "Product Design"]}
               security={'(Junior, Intermediate, Senior)'}
               timeline={'15 Days'}
-              onClick={() => console.log("View Challenge")}
+              onClick={() => router.push('/hackathons')}
               imageWidth={150}
               imageHeight={50}
             />))}
@@ -203,7 +201,6 @@ export default function Home() {
               />
             </div>
           </div>
-          <Icon icon="mdi-light:alert" />
         </section>
 
         {/* Challenges Program */}
@@ -213,11 +210,9 @@ export default function Home() {
             <p className="w-full sm:w-1/2 text-tertiaryColor">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
           </div>
           <div className="flex sm:flex-row gap-4 sm:gap-8 w-full overflow-x-auto no-scrollbar z-0">
-            {Array.from({ length: 9 }).map((_, index) => (<Card
+            {Array.from({ length: 9 }).map((_, index) => (<MiniCard
               key={index}
               image={`/play.svg`}
-              isOpen={false}
-              type={'testimonial'}
               name={'Manzi Jack'}
               location={'Kigali'}
               jobTitle={'Product Designer'}
@@ -228,7 +223,7 @@ export default function Home() {
         </section>
 
         {/* How to Get started */}
-        <section className="bg-backgroundA h-full w-full grid gap-24 sm:grid-row-2 justify-items-center sm:px-32 sm:py-16" id="hackathons">
+        <section className="bg-backgroundA h-full w-full grid gap-24 sm:grid-row-2 justify-items-center sm:px-32 sm:py-16" id="getStarted">
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
             <h1 className="text-black text-2xl sm:text-4xl font-bold">How to get started</h1>
 
@@ -283,7 +278,7 @@ export default function Home() {
               <h1 className="text-2xl sm:text-3xl font-bold">Ready to Unlock Your Career Potential Today!</h1>
               <p>Join a challenge or a hackathon to gain valuable work experience, build an impressive portofolio and increase your chances to land job opportunities and accelerate your career growth</p>
 
-              <Button classNames="w-[200px] bg-white text-primary sm:text-sm p-2 sm:p-3 rounded-md" label={`View Challenge`} onClick={() => console.log("View challenge")} />
+              <Button classNames="w-[200px] bg-white text-primary sm:text-sm p-2 sm:p-3 rounded-md" label={`View Challenge`} onClick={() => router.push('/hackathons')} />
             </div>
           </div>
         </section>

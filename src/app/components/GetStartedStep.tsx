@@ -5,7 +5,7 @@ import { StepProps } from "../@types/global";
 
 const GetStartedStep: React.FC<StepProps> = ({ stepCount, hasImage, image = "", title, desc, imageWidth, imageHeight }) => {
     return (
-        <div className="bg-white flex flex-col gap-1 sm:gap-3 rounded-lg">
+        <div className="bg-white flex flex-col gap-1 sm:gap-3 border border-gray-200 rounded-lg">
 
             <div className="rounded-full self-start sm:pt-2 sm:pl-2">
                 <Button classNames="w-fit bg-primary text-white sm:text-sm p-2 rounded-md sm:m-3" label={`Step ${stepCount}`} onClick={() => console.log("View step")} />

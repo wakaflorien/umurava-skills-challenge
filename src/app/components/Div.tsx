@@ -5,7 +5,7 @@ import { DivProps } from "../@types/global";
 const Div: React.FC<DivProps> = ({ icon, title, desc, iconWidth, iconHeight }) => {
     return (
         <div className="bg-primary flex flex-col gap-4 sm:gap-8 rounded-lg text-white p-2 sm:p-8">
-            <div className="bg-white w-fit p-4 rounded-md">
+            <div className="bg-white w-fit p-2 rounded-md">
                 <Image
                     className="cursor-pointer"
                     aria-hidden
