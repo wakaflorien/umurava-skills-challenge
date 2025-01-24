@@ -28,6 +28,7 @@ const Nav = () => {
                     width={150}
                     height={38}
                     priority
+                    objectFit='cover'
                 />
             </Link>
 

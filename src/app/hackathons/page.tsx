@@ -8,7 +8,7 @@ import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 const Hackathons = () => {
     
     return (
-        <div className="bg-backgroundA elative flex flex-col min-h-screen h-full w-full max-w-screen-2xl mx-auto font-[family-name:var(--font-geist-sans)]">
+        <div className="bg-backgroundA elative flex flex-col zoom-out">
             <Nav />
             <main className="flex flex-col sm:px-24 py-16 sm:space-y-16">
                 <div className="flex gap-2 sm:gap-4 cursor-pointer">

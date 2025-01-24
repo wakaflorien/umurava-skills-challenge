@@ -11,7 +11,7 @@ import BackDropShape from "../components/BackDropShape";
 const Institutions = () => {
     const router = useRouter();
     return (
-        <div className="bg-backgroundA elative flex flex-col min-h-screen h-full w-full max-w-screen-2xl mx-auto font-[family-name:var(--font-geist-sans)]">
+        <div className="bg-backgroundA elative flex flex-col zoom-out">
             <Nav />
             <main className="flex flex-col sm:space-y-16">
                 <section className="bg-white h-full grid sm:grid-cols-2 gap-8 sm:gap-16 sm:px-24 py-4 sm:py-24" id="partnerWithUs">

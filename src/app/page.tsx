@@ -15,7 +15,7 @@ import BackDropShape from "./components/BackDropShape";
 export default function Home() {
   const router = useRouter();
   return (
-    <div className="relative flex flex-col min-h-screen h-full w-full max-w-screen-2xl mx-auto font-[family-name:var(--font-geist-sans)]">
+    <div className="relative flex flex-col zoom-out">
       <Nav />
 
       <main className="flex flex-col sm:items-start space-y-11 mb-16">
