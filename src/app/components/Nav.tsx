@@ -32,7 +32,7 @@ const Nav = () => {
             </Link>
 
             <ul className="flex items-center gap-4 sm:gap-8 cursor-pointer">
-                {[{ link: "/", label: "Home" }, { link: "/hackathons", label: "Challenge & Hackathons" }, { link: "/institutions", label: "For Learning Institutions" }, { link: "/about", label: "About Us" }, { link: "/contact", label: "Contact Us" }].map((item, index) => (
+                {[{ link: "/", label: "Home" }, { link: "/hackathons", label: "Challenge & Hackathons" }, { link: "/institutions", label: "For Learning Institutions" }, { link: "/about", label: "About Us" }, { link: "/#contact", label: "Contact Us" }].map((item, index) => (
                     <li key={index} className={`${activeLink(item.label) ? "text-primary" : "text-black"} hover:text-primary cursor-pointer`} onClick={() => router.push(item.link)}>{item.label}</li>
                 ))}
             </ul>

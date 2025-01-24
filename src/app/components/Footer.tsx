@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Button from "./Button";
+import BackToTop from "./BackToTop";
 
 const Footer = () => {
     return (
@@ -90,6 +91,7 @@ const Footer = () => {
             <div className="flex flex-col gap-2  sm:flex-row items-center justify-between text-white text-md sm:text-xs sm:pt-4">
                 <p>Copyright &copy; All right reserved USC 2025</p>
                 <p>Privacy Policy | Terms and Conditions</p>
+                <BackToTop />
             </div>
         </footer>
     )

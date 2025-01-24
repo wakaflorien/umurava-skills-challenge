@@ -41,3 +41,7 @@ export type StepProps = {
   imageWidth?: number;
   imageHeight?: number;
 };
+
+export interface ShapeProps {
+    type: "one" | "two";
+}

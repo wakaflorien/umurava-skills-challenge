@@ -6,6 +6,7 @@ import Image from "next/image";
 import Div from "../components/Div";
 import Button from "../components/Button";
 import { useRouter } from "next/navigation";
+import BackDropShape from "../components/BackDropShape";
 
 const Institutions = () => {
     const router = useRouter();
@@ -13,78 +14,150 @@ const Institutions = () => {
         <div className="bg-backgroundA elative flex flex-col min-h-screen h-full w-full max-w-screen-2xl mx-auto font-[family-name:var(--font-geist-sans)]">
             <Nav />
             <main className="flex flex-col sm:space-y-16">
-                <section className="bg-white h-full grid sm:grid-cols-2 sm:px-24 py-16" id="videoIntro">
-                    <div className="flex flex-col items-start gap-4 sm:gap-8 sm:pt-24">
-                        <header className="flex flex-col gap-4 sm:gap-8">
-                            <h1 className="text-primary text-2xl sm:text-5xl sm:leading-tight font-bold">Our story</h1>
-                            <p className="text-tertiaryColor">With 3 years of experience matching African digital talents to local and global job markets, we still remain with a big number of jobs that remain unfilled due to the lack of experienced African Talents. Driven by our mission to place skilled and professional digital talent, we created Skills Challenges as a project-based learning solution for talents to gain real-world experience, solve problems, and build portfolios so that they become ready for global job markets.</p>
-                        </header>
-                    </div>
+                <section className="bg-white h-full grid sm:grid-cols-2 gap-8 sm:gap-16 sm:px-24 py-4 sm:py-24" id="partnerWithUs">
 
-                    <div className="flex items-start justify-center gap-4 w-full sm:pt-24 bg-primary rounded-lg">
-                        <video className="w-full" controls muted autoPlay>
-                            <source src="movie.mp4" type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
+                    <header className="flex flex-col gap-4 sm:gap-8">
+                        <h1 className="text-primary text-2xl sm:text-3xl sm:leading-tight font-bold">Accelerate Your Students and Traineess Employability and Career Growth through Project-based Learning Solution</h1>
+                        <p className="text-black  text-lg leading-8">We partner with Universities, Schools, and Trainining Institutions to build the work experience of their students and trainees through project based learning challenges and hackathons.</p>
 
-                    </div>
+                        <Button classNames="w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Partner With Us" onClick={() => router.push('/hackathons')} />
+
+                    </header>
+
+                    <Image
+                        aria-hidden
+                        src={`/institution_banner.png`}
+                        alt={`Hero banner`}
+                        layout="responsive"
+                        width={200}
+                        height={200}
+                        objectFit="cover"
+                        priority
+                    />
+
                 </section>
 
-                <section className="bg-backgroundA h-full grid gap-24 sm:grid-row-3 sm:px-32 sm:py-16" id="career">
+                <section className="bg-backgroundA h-full grid  sm:grid-row-3 gap-8 sm:gap-16 sm:px-32" id="offerings">
 
-                    <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
-                        <h1 className="text-black text-2xl sm:text-4xl sm:leading-tight font-bold">Why we are solving this problem.</h1>
+                    <div className="flex flex-col text-center">
+                        <h1 className="text-black text-xl sm:text-4xl sm:leading-tight font-bold">Key Offerings & Benefits:
+                        </h1>
                     </div>
 
-                    <div className="grid gap-4 sm:grid-row-2">
-                        <Div
-                            icon="/briefcase.png"
-                            iconWidth={24}
-                            iconHeight={24}
-                            title="Bridging the Experience Ga"
-                            desc="Many talents acquired theoretical knowledge and are rejected from jobs because they lack work experience and are not able to put in actions what they acquired in the schools." />
+                    <div className="grid sm:grid-row-2 gap-2 sm:gap-4">
 
-                        <div className="grid gap-4 sm:grid-cols-2 rounded-md">
+                        <div className="grid sm:grid-cols-3 gap-2 sm:gap-4">
                             <Div
                                 icon="/briefcase.png"
                                 iconWidth={24}
                                 iconHeight={24}
-                                title="Bridging Education and Employment"
-                                desc="Traditional education doesnt’ always prepare talents for the demands of the tech and digital economy and we are providing in-demand skills through Skills Challenges." />
+                                title="Employability and Career Development Opportunities"
+                                desc="Students gain hands-on experience working on real-world challenges and help them build professional networks that increase their chances and readiness of landing job opportunities and this lead to career advancement and long-term succes." />
+                            <Div
+                                icon="/briefcase.png"
+                                iconWidth={24}
+                                iconHeight={24}
+                                title="Practical Application of Classroom Knowledge"
+                                desc="The Skills Challenges bridge the gap between theoretical learning and practical application, reinforcing what students learn in their academic courses." />
 
                             <Div
                                 icon="/briefcase.png"
                                 iconWidth={24}
                                 iconHeight={24}
-                                title="Preparing Talents for Global Job Markets"
-                                desc="We are ensuring that African talents shine globally and that’s why we are equipping them with global technical experience and shandout globally." />
+                                title="Students & Trainees Engagement"
+                                desc="Embed and incorporate Skills Challenges into your courses to give students and trainees hands-on projects and practices that enhance their learning experience and skills mastery. Competitive and project-based challenges keep students motivated and actively engaged in their learning journey." />
+                        </div>
 
+                        <div className="grid sm:grid-cols-3 gap-4 sm:gap-8 rounded-md">
+
+                            <div className="grid sm:col-span-2">
+                                <Div
+                                    icon="/briefcase.png"
+                                    iconWidth={24}
+                                    iconHeight={24}
+                                    title="Access to the Industry Experts & Mentors"
+                                    desc="Skills Challenges expose students to industry experts and mentors who offer guidance, support, and insights on the trends of digital careers. This can help students gain a deep understanding of their chosen field.." />
+                            </div>
+
+                            <div>
+                                <Div
+                                    icon="/briefcase.png"
+                                    iconWidth={24}
+                                    iconHeight={24}
+                                    title="Skills Assessments"
+                                    desc="Embed our projects based tests and skills assessments directly into your curriculum." />
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <section className="bg-background h-full grid sm:grid-row-2 gap-8 sm:gap-16 justify-items-center sm:px-24 py-4 sm:py-8" id="partners">
+                    <div className="text-center w-3/4">
+                        <h1 className="text-xl sm:text-4xl sm:leading-tight font-bold">Join a few Educational Institutions using Skills Challenges by Umurava</h1>
+                    </div>
+
+                    <div className="flex flex-row flex-wrap justify-center gap-4 sm:gap-12">
+                        {["Tori 1.png", "Gdg_Kigali 1.png", "EducationCollaborative 2.png", "KeplerLogo 1.png", "HiiL_Logo 1.png", "CIBA 1.png", "Ared 1.png", "IGIHE_LOGO 1.png", "EducationCollaborative 1.png", "HiiL_Logo 2.png", "SokoFund 1.png"].map((logo, index) => (
+                            <Image
+                                key={index}
+                                aria-hidden
+                                src={`/${logo}`}
+                                alt={`Institution logo`}
+                                // layout="responsive"
+                                width={140}
+                                height={60}
+                                objectFit="container"
+                                priority
+                            />
+                        ))}
+                    </div>
+
+                </section>
+
+                <section className="bg-backgroundA h-full grid gap-8 sm:gap-16 sm:grid-row-2 justify-items-center sm:px-24 py-4 sm:py-8" id="participate">
+                    <div className="flex flex-col items-center justify-center text-center w-3/4 gap-4 sm:gap-8">
+                        <h1 className="text-xl sm:text-4xl sm:leading-tight font-bold">How Skills Challenges Program can Be Integrated into your Learning Institution</h1>
+
+                    </div>
+                    <div className="grid gap-4 sm:grid-cols-2 sm:gap-8">
+                        <div className="space-y-4 sm:space-y-6">
+                            {[{ pos: 1, desc: "As Career Development and Job Readiness Program" }, { pos: 2, desc: "As Skills Assessments Method after a course or a term" }, { pos: 3, desc: "As extracurricular activities to complement academic courses" }, { pos: 4, desc: "As the portfolio of the Students" }, { pos: 5, desc: "As part of Capstone Projects or final-year assignments" }].map((item, index) => (
+                                <div key={index} className="flex sm:gap-4 items-center">
+                                    <button className={`h-6 sm:w-10 w-6 sm:h-10 bg-primary text-white rounded-full border border-black`}>
+                                        {item.pos}
+                                    </button>
+                                    <p>{item.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <div>
+                            <Image
+                                aria-hidden
+                                src={`/banner_img1.png`}
+                                alt={`Hero banner`}
+                                layout="responsive"
+                                width={200}
+                                height={200}
+                                objectFit="cover"
+                                priority
+                            />
                         </div>
                     </div>
-
                 </section>
 
-                <section className="bg-background h-full grid gap-4 sm:grid-cols-2 sm:gap-8 sm:px-24 sm:py-16" id="participate">
-                    <div className="space-y-6 sm:space-y-16">
-                        <h1 className="text-xl sm:text-2xl sm:leading-tight font-bold">Skills Challenges Program is built on the Umurava Talent Marketplace Platform</h1>
-                        <p>A Project-based Learning Solution aimed at providing young and senior talents with an opportunity to showcase their skills to real-world projects and challenges from our partner companies and organizations. Umurava Skills Challenges enables young talents to build a portfolio and experience that increases their readiness to access job opportunities and projects.</p>
+                <section className="bg-white py-4 sm:py-16 sm:px-24">
+                    <div className="relative bg-primary grid sm:grid-cols-1 gap-4 sm:gap-8 justify-items-center text-white rounded-lg sm:p-8">
+                        <h1 className="text-xl sm:text-2xl font-bold">Ready to transform your learning institution?</h1>
 
-                        <Button classNames="w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Get Started" onClick={() => router.push('/hackathons')} />
-                    </div>
+                        <Button classNames="w-[200px] bg-white text-primary sm:text-sm p-2 sm:p-3 rounded-md" label={`Let's partner`} onClick={() => router.push('/hackathons')} />
 
-                    <div>
-                        <Image
-                            aria-hidden
-                            src={`/dashboard.png`}
-                            alt={`Hero banner`}
-                            // layout="responsive"
-                            width={500}
-                            height={500}
-                            objectFit="cover"
-                            priority
-                        />
+                        <BackDropShape type="two" />
+
                     </div>
                 </section>
+
             </main>
             <Footer />
         </div>
