@@ -3,16 +3,18 @@ import * as React from "react";
 import Footer from "../components/Footer";
 import Nav from "../components/Nav";
 import Card from "../components/Card";
-import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import { ArrowLeft } from "../components/svgs";
 
 const Hackathons = () => {
-    
+
     return (
         <div className="bg-backgroundA elative flex flex-col zoom-out">
             <Nav />
             <main className="flex flex-col sm:px-24 py-16 sm:space-y-16">
                 <div className="flex gap-2 sm:gap-4 cursor-pointer">
-                    <a href="./" className="flex gap-2 text-tertiaryColor"><Icon icon="solar:square-arrow-left-outline" width="24" height="24" style={{ color: "#000000" }} /> Go back</a>
+                    <a href="./" className="flex gap-2 text-tertiaryColor">
+                        <ArrowLeft className="h-6 w-6 bg-white text-black stroke-[0.5] border !border-tertiaryColor rounded-md" /> 
+                        Go back</a>
                     <span className="text-tertiaryColor">/</span>
                     <span className="text-primary">Challenge & Hackathons</span>
                 </div>

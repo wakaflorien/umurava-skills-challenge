@@ -6,3 +6,7 @@ export { default as Settings } from "./settings.svg";
 export { default as HelpCenter } from "./headset.svg";
 export { default as Gift } from "./gift.svg";
 export { default as Signout } from "./signout.svg";
+export { default as Document } from "./Document.svg";
+export { default as ArrowLeft } from "./arrow-left.svg";
+export { default as Search } from "./search.svg";
+export { default as Bell } from "./bell.svg";
