@@ -1,8 +1,18 @@
+import * as React from "react";
+
 export type ButtonProps = {
   classNames: string;
   label: string;
+  icon?: React.ReactNode;
   onClick?: () => void;
 };
+
+export type MetricProps = {
+  classNames?: string;
+  title: string;
+  value: number;
+  icon: React.ReactNode;
+}
 
 export type DivProps = {
   icon: string;

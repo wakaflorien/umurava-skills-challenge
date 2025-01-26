@@ -34,7 +34,7 @@ const Card: React.FC<CardProps> = ({ image, title, skills = [], security, timeli
             </div>
 
             <div className="border-t border-tertiary sm:p-4">
-                <Button classNames="w-[150px] bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-2" label="View Challenge" onClick={onClick} />
+                <Button classNames="w-[150px] bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-1 sm:p-2" label="View Challenge" onClick={onClick} />
             </div>
         </div>
     )

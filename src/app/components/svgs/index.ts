@@ -10,3 +10,4 @@ export { default as Document } from "./Document.svg";
 export { default as ArrowLeft } from "./arrow-left.svg";
 export { default as Search } from "./search.svg";
 export { default as Bell } from "./bell.svg";
+export { default as Show } from "./Show.svg";
