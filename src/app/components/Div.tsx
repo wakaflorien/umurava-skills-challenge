@@ -2,7 +2,7 @@ import * as React from "react";
 import Image from "next/image";
 import { DivProps } from "../@types/global";
 
-const Div: React.FC<DivProps> = ({ icon, title, desc, iconWidth, iconHeight }) => {
+export const Div: React.FC<DivProps> = ({ icon, title, desc, iconWidth, iconHeight }) => {
     return (
         <div className="bg-primary flex flex-col gap-2 sm:gap-4 rounded-lg text-white p-2 sm:p-4">
             <div className="bg-white w-fit p-2 rounded-md">
@@ -22,5 +22,3 @@ const Div: React.FC<DivProps> = ({ icon, title, desc, iconWidth, iconHeight }) =
         </div>
     )
 }
-
-export default Div;

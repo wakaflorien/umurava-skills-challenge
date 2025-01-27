@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Button from './Button';
+import {Button} from './Button';
 import { PaginationProps } from '../@types/global';
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage = 1, totalPages = 1, onPageChange }) => {
+export const Pagination: React.FC<PaginationProps> = ({ currentPage = 1, totalPages = 1, onPageChange }) => {
 
     const handlePrevious = () => {
         if (currentPage > 1) {
@@ -30,5 +30,3 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage = 1, totalPages = 1
         </div>
     );
 };
-
-export default Pagination;

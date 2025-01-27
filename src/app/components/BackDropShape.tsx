@@ -2,7 +2,7 @@ import Image from 'next/image';
 import * as React from 'react';
 import { ShapeProps } from '../@types/global';
 
-const BackDropShape: React.FC<ShapeProps> = ({ type }) => {
+export const BackDropShape: React.FC<ShapeProps> = ({ type }) => {
     return (
         <>
             <div className={`absolute ${type === "one" ? "left-20" : "left-0"} bottom-0`}>
@@ -32,5 +32,3 @@ const BackDropShape: React.FC<ShapeProps> = ({ type }) => {
         </>
     );
 }
-
-export default BackDropShape;

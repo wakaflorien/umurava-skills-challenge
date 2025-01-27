@@ -1,9 +1,9 @@
 import * as React from "react";
 import Image from "next/image";
-import Button from "./Button";
+import {Button} from "./Button";
 import { CardProps } from "../@types/global";
 
-const Card: React.FC<CardProps> = ({ image, title, skills = [], security, timeline, onClick, imageWidth, imageHeight }) => {
+export const Card: React.FC<CardProps> = ({ image, title, skills = [], security, timeline, onClick, imageWidth, imageHeight }) => {
     return (
         <div className="bg-white flex flex-col border border-gray-200 rounded-lg">
             <div className="flex flex-col items-start justify-center sm:gap-3 sm:p-4">
@@ -39,5 +39,3 @@ const Card: React.FC<CardProps> = ({ image, title, skills = [], security, timeli
         </div>
     )
 }
-
-export default Card

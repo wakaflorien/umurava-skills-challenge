@@ -1,16 +1,34 @@
 "use client";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
-import Button from "./components/Button";
+import { Nav } from "./components/Nav";
+import { Footer } from "./components/Footer";
+import {Button} from "./components/Button";
 import Image from "next/image";
-import Div from "./components/Div";
-import Card from "./components/Card";
-import MiniDiv from "./components/MiniDiv";
-import GetStartedStep from "./components/GetStartedStep";
-import MiniCard from "./components/MiniCard";
+import { Div } from "./components/Div";
+import { Card } from "./components/Card";
+import { MiniDiv } from "./components/MiniDiv";
+import { GetStartedStep } from "./components/GetStartedStep";
+import { MiniCard } from "./components/MiniCard";
 import { useRouter } from "next/navigation";
-import BackDropShape from "./components/BackDropShape";
+import { BackDropShape } from "./components/BackDropShape";
+import { hackathonsData } from "./dashboard/page";
 
+export const usersData = Array.from({ length: 9 }).map((_, index) => ({
+  key: index,
+  image: `/play.svg`,
+  name: 'Manzi Jac',
+  location: 'Kigali',
+  jobTitle: 'Product Designer',
+  imageWidth: 40,
+  imageHeight: 40,
+}));
+
+const stats = [{ title: "1", desc: "Year" }, { title: "500 +", desc: "Challenges Completed" }, { title: "10K +", desc: "Users" }, { title: "6+", desc: "Countries" }];
+
+const skills = ["UI/UX Design", "Data science", "Graphic Design", "Data analysis & research", "Animation", "Videography & Photography", "Data science", "AI & Machine learning", "web3", "digital marketing & communications"];
+
+const participation1 = [{ title: "Enhance Your Employment Path", icon: "Case Round.svg", desc: "Network with other talented individuals and learn from their experiences." }, { title: "Personal Growth", icon: "Diploma.svg", desc: "Challenge yourself, learn new skills, and expand your professional network." }];
+
+const participation2 = [{ title: "Earn Recognition and Prizes", icon: "Medal Ribbons Star.svg", desc: "Gain valuable experience and knowledge to advance your career in the digital economy." }, { title: "Learn from Industry Experts", icon: "Graph New Up.svg", desc: "Access valuable insights and guidance from experienced professionals in the digital careers fields and spaces." }];
 
 export default function Home() {
   const router = useRouter();
@@ -88,7 +106,7 @@ export default function Home() {
         <section className="h-full grid gap-24 sm:grid-row-4 sm:px-24">
 
           <div className="relative flex items-center justify-between bg-primary text-white rounded-lg sm-8 sm:p-16">
-            {[{ title: "1", desc: "Year" }, { title: "500 +", desc: "Challenges Completed" }, { title: "10K +", desc: "Users" }, { title: "6+", desc: "Countries" }].map(item => (<div key={item.title} className="flex flex-col">
+            {stats.map(item => (<div key={item.title} className="flex flex-col">
               <h1 className="text-2xl sm:text-3xl font-bold">{item.title}</h1>
               <p>{item.desc} </p>
             </div>))}
@@ -104,7 +122,7 @@ export default function Home() {
 
           <div className="flex flex-wrap items-center justify-center text-center gap-4 sm:gap-8 sm:px-8">
 
-            {["UI/UX Design", "Data science", "Graphic Design", "Data analysis & research", "Animation", "Videography & Photography", "Data science", "AI & Machine learning", "web3", "digital marketing & communications"].map((item, index) => (<Button key={index} classNames={`w-fit ${index !== 0 ? "bg-tertiary hover:bg-tertiary/90 text-tertiaryColor" : "bg-primary hover:bg-primary/90 text-white"} text-xs font-semibold p-2 sm:p-3`} label={item} onClick={() => console.log("Get Started")} />
+            {skills.map((item, index) => (<Button key={index} classNames={`w-fit ${index !== 0 ? "bg-tertiary hover:bg-tertiary/90 text-tertiaryColor" : "bg-primary hover:bg-primary/90 text-white"} text-xs font-semibold p-2 sm:p-3`} label={item} onClick={() => console.log("Get Started")} />
             ))}
           </div>
 
@@ -154,20 +172,20 @@ export default function Home() {
             <p className="w-full sm:w-1/2 text-tertiaryColor">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-3 sm:gap-8">
-            {Array.from({ length: 3 }).map((_, index) => (<Card
+            {hackathonsData.slice(0, 3).map((item, index) => (<Card
               key={index}
-              image={`/white_logo.png`}
-              title={'Design a Dashboard for SokoFund'}
-              skills={["UI/UX Design", "User Research", "Product Design"]}
-              security={'(Junior, Intermediate, Senior)'}
-              timeline={'15 Days'}
-              onClick={() => router.push('/hackathons')}
+              image={item.image}
+              title={item.title}
+              skills={item.skills}
+              security={item.security}
+              timeline={item.timeline}
+              onClick={item.onClick}
               imageWidth={150}
               imageHeight={50}
             />))}
           </div>
 
-          <Button classNames="w-[200px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="View More" onClick={() => console.log("View More")} />
+          <Button classNames="w-[200px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="View More" onClick={() => router.push("/hackathons")} />
         </section>
 
         {/* Participate in skills challenge  */}
@@ -178,7 +196,7 @@ export default function Home() {
           </div>
           <div className="grid gap-4 sm:grid-cols-3 sm:gap-8">
             <div className="space-y-6">
-              {[{ title: "Enhance Your Employment Path", icon: "Case Round.svg", desc: "Network with other talented individuals and learn from their experiences." }, { title: "Personal Growth", icon: "Diploma.svg", desc: "Challenge yourself, learn new skills, and expand your professional network." },].map((i, index) => (<MiniDiv key={index}
+              {participation1.map((i, index) => (<MiniDiv key={index}
                 icon={i.icon}
                 iconWidth={16}
                 iconHeight={16}
@@ -186,7 +204,7 @@ export default function Home() {
                 desc={i.desc} />))}
             </div>
             <div className="space-y-6">
-              {[{ title: "Earn Recognition and Prizes", icon: "Medal Ribbons Star.svg", desc: "Gain valuable experience and knowledge to advance your career in the digital economy." }, { title: "Learn from Industry Experts", icon: "Graph New Up.svg", desc: "Access valuable insights and guidance from experienced professionals in the digital careers fields and spaces." },].map((i, index) => (<MiniDiv key={index}
+              {participation2.map((i, index) => (<MiniDiv key={index}
                 icon={i.icon}
                 iconWidth={16}
                 iconHeight={16}
@@ -215,14 +233,14 @@ export default function Home() {
             <p className="w-full sm:w-1/2 text-tertiaryColor">See what our clients say about working with us. Their success speaks for our dedication and expertise.</p>
           </div>
           <div className="flex sm:flex-row gap-4 sm:gap-8 w-full overflow-x-auto no-scrollbar z-0">
-            {Array.from({ length: 9 }).map((_, index) => (<MiniCard
+            {usersData.map((item, index) => (<MiniCard
               key={index}
-              image={`/play.svg`}
-              name={'Manzi Jack'}
-              location={'Kigali'}
-              jobTitle={'Product Designer'}
-              imageWidth={40}
-              imageHeight={40}
+              image={item.image}
+              name={item.name}
+              location={item.location}
+              jobTitle={item.jobTitle}
+              imageWidth={item.imageWidth}
+              imageHeight={item.imageHeight}
             />))}
           </div>
         </section>
@@ -287,7 +305,7 @@ export default function Home() {
             </div>
 
             <BackDropShape type="one" />
-            
+
           </div>
         </section>
 

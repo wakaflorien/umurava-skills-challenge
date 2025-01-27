@@ -1,9 +1,21 @@
 "use client";
 import * as React from 'react';
-import Button from '../components/Button';
+import {Button} from '../components/Button';
 import { ChevronRight, Document, Show } from '../components/svgs';
 import { Metric } from '../components/Metric';
-import Card from '../components/Card';
+import { Card } from '../components/Card';
+
+export const hackathonsData = Array.from({ length: 16 }).map((_, index) => ({
+    id: index,
+    image: `/white_logo.png`,
+    title: 'Design a Dashboard for SokoFund, FiniTech Product',
+    skills: ["UI/UX Design", "User Research", "Product Design"],
+    security: '(Junior, Intermediate, Senior)',
+    timeline: '15 Days',
+    onClick: () => console.log("View Challenge"),
+    imageWidth: 150,
+    imageHeight: 50
+}));
 
 const DashboardHome = () => {
     const [showAll, setShowAll] = React.useState(false);
@@ -31,7 +43,7 @@ const DashboardHome = () => {
                         <p>Build Work Experience through Skills Challenges</p>
                     </div>
                     <div>
-                        <Button icon={<Show className={`h-4 w-4`} />} classNames="w-[150px] bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-3" label="View profile" onClick={() => viewProfile()} />
+                        <Button icon={<Show className={`h-4 w-4`} />} classNames="bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-3" label="View profile" onClick={() => viewProfile()} />
                     </div>
                 </header>
 
@@ -49,14 +61,14 @@ const DashboardHome = () => {
 
                 {/* Challeges and Hackathons */}
                 <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
-                    {Array.from({ length: 16 }).slice(0, showCount).map((_, index) => (<Card
+                {hackathonsData.slice(0, showCount).map((item, index) => (<Card
                         key={index}
-                        image={`/white_logo.png`}
-                        title={'Design a Dashboard for SokoFund, FiniTech Product'}
-                        skills={["UI/UX Design", "User Research", "Product Design"]}
-                        security={'(Junior, Intermediate, Senior)'}
-                        timeline={'15 Days'}
-                        onClick={() => console.log("View Challenge")}
+                        image={item.image}
+                        title={item.title}
+                        skills={item.skills}
+                        security={item.security}
+                        timeline={item.timeline}
+                        onClick={item.onClick}
                         imageWidth={150}
                         imageHeight={50}
                     />))}

@@ -2,7 +2,7 @@ import * as React from "react"
 import Image from "next/image"
 import { DivProps } from "../@types/global"
 
-const MiniDiv: React.FC<DivProps> = ({ icon, iconWidth, iconHeight, title, desc }) => {
+export const MiniDiv: React.FC<DivProps> = ({ icon, iconWidth, iconHeight, title, desc }) => {
     return (
         <div className="flex flex-col sm:gap-2">
             <div className="bg-primary w-fit p-4 rounded-md">
@@ -22,5 +22,3 @@ const MiniDiv: React.FC<DivProps> = ({ icon, iconWidth, iconHeight, title, desc 
         </div>
     )
 }
-
-export default MiniDiv

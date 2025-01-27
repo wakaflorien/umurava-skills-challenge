@@ -1,10 +1,10 @@
 import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
-import React, { useState, useEffect, FC, useCallback } from 'react';
+import * as React from 'react';
 
-const BackToTop: FC = () => {
-    const [isVisible, setIsVisible] = useState(false);
+export const BackToTop: React.FC = () => {
+    const [isVisible, setIsVisible] = React.useState(false);
 
-    const toggleVisibility = useCallback(() => {
+    const toggleVisibility = React.useCallback(() => {
             if (window.scrollY > 300) {
                 setIsVisible(true);
             } else {
@@ -12,12 +12,12 @@ const BackToTop: FC = () => {
             }
         }, []);
 
-    useEffect(() => {
+    React.useEffect(() => {
         window.addEventListener('scroll', toggleVisibility);
         return () => {
             window.removeEventListener('scroll', toggleVisibility);
         };
-    }, []);
+    });
 
     const scrollToTop = () => {
         window.scrollTo({
@@ -42,5 +42,3 @@ const BackToTop: FC = () => {
         </>
     );
 };
-
-export default BackToTop;

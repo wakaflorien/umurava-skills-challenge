@@ -29,6 +29,10 @@ const activeLink = (label: string, pathname: string) => {
     return false;
 }
 
+const nav1 = [{ link: "/dashboard", label: "Dashboard" }, { link: "/dashboard/hackathons", label: "Challenges & Hackathons" }, { link: "/dashboard/community", label: "Community" }];
+
+const nav2 = [{ link: "/dashboard/settings", label: "Settings" }, { link: "/dashboard/help", label: "Help Center" }, { link: "/dashboard/refer", label: "Refer family & friends" }];
+
 export default function DashboardLayout({ children }: React.PropsWithChildren<object>) {
     // Readonly<{ children: React.ReactNode; }>)
 
@@ -47,7 +51,7 @@ export default function DashboardLayout({ children }: React.PropsWithChildren<ob
                                     <DashLogo className="text-white h-8 w-8" />
                                 </Link>
                                 <ul className='sm:space-y-4'>
-                                    {[{ link: "/dashboard", label: "Dashboard" }, { link: "/dashboard/hackathons", label: "Challenges & Hackathons" }, { link: "/dashboard/community", label: "Community" }].map((item, index) => (
+                                    {nav1.map((item, index) => (
                                         <li key={index} className={`flex items-center gap-1 sm:p-2 cursor-pointer rounded-md ${activeLink(item.label, pathname) ? "bg-white text-primary" : "bg-primary text-white"} hover:bg-white hover:text-primary stroke-white hover:stroke-primary`}>
 
                                             {item.link === "/dashboard" ? <Home className={`h-4 w-4 !stroke-[0.1] !stroke-current`} /> : item.link === "/dashboard/hackathons" ? <File className={`h-4 w-4 !stroke-[0.1] !stroke-current`} /> : <UserPlus className={`h-4 w-4 !stroke-[1.5] !stroke-current !fill-none`} />}
@@ -59,7 +63,7 @@ export default function DashboardLayout({ children }: React.PropsWithChildren<ob
 
                             <div className='sm:space-y-8'>
                                 <ul className='sm:space-y-4'>
-                                    {[{ link: "/dashboard/settings", label: "Settings" }, { link: "/dashboard/help", label: "Help Center" }, { link: "/dashboard/refer", label: "Refer family & friends" }].map((item, index) => (
+                                    {nav2.map((item, index) => (
                                         <li key={index} className={`flex items-center gap-1 sm:p-2 cursor-pointer rounded-md ${activeLink(item.label, pathname) ? "bg-white text-primary" : "bg-primary text-white"} hover:bg-white hover:text-primary stroke-white hover:stroke-current`}>
 
                                             {item.link === "/dashboard/settings" ? <Settings className={`h-4 w-4 !stroke-[0.1] !stroke-current`} /> : item.link === "/dashboard/help" ? <HelpCenter className={`h-4 w-4 !stroke-[0.1] !stroke-current`} /> : <Gift className={`h-4 w-4 !stroke-[0.1] !stroke-current`} />}

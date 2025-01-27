@@ -1,12 +1,12 @@
 "use client";
 import * as React from "react";
-import Footer from "../components/Footer";
-import Nav from "../components/Nav";
+import { Footer } from "../components/Footer";
+import { Nav } from "../components/Nav";
 import Image from "next/image";
-import Div from "../components/Div";
-import Button from "../components/Button";
+import { Div } from "../components/Div";
+import {Button} from "../components/Button";
 import { useRouter } from "next/navigation";
-import BackDropShape from "../components/BackDropShape";
+import { BackDropShape } from "../components/BackDropShape";
 
 const Institutions = () => {
     const router = useRouter();

@@ -1,46 +1,37 @@
 "use client";
 import * as React from 'react';
-import { Document } from '../../components/svgs';
-import { Metric } from '../../components/Metric';
-import Card from '../../components/Card';
-import Pagination from '@/app/components/Pagination';
+import { File } from '../../components/svgs';
+import { Card } from '../../components/Card';
+import { Pagination } from '@/app/components/Pagination';
+import { hackathonsData } from '../page';
+import { Button } from '@/app/components/Button';
 
 const ITEMS_PER_PAGE = 6;
+
+const tabs = [{ title: "All challenges", value: 500 }, { title: "Completed challenges", value: 5 }, { title: "Open challenges", value: 200 }, { title: "Ongoing challenges", value: 250 }];
 
 const DashboardHackathons = () => {
     const [currentPage, setCurrentPage] = React.useState(1);
 
-    const data = Array.from({ length: 16 }).map((_, index) => ({
-        id: index,
-        image: `/white_logo.png`,
-        title: 'Design a Dashboard for SokoFund, FiniTech Product',
-        skills: ["UI/UX Design", "User Research", "Product Design"],
-        security: '(Junior, Intermediate, Senior)',
-        timeline: '15 Days',
-        onClick: () => console.log("View Challenge"),
-        imageWidth: 150,
-        imageHeight: 50
-    }));
-
-    const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(hackathonsData.length / ITEMS_PER_PAGE);
 
     // Calculate start and end index for current page
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
 
     // Get current page items
-    const currentItems = data.slice(startIndex, endIndex);
+    const currentItems = hackathonsData.slice(startIndex, endIndex);
 
     return (
         <div className="flex-1 sm:pb-24">
             <div className='flex sm:flex-col sm:px-4 gap-4 sm:gap-8'>
                 <header className='space-y-2'>
-                    <h1 className='font-bold text-md sm:text-lg'>Welcome back {`Hilaire`},</h1>
-                    <p>Build Work Experience through Skills Challenges</p>
+                    <h1 className='font-bold text-md sm:text-lg'>Challenges</h1>
+                    <p>Join a challenge or a hackathon to gain valuable work experience,</p>
                 </header>
 
-                <div className='grid sm:grid-cols-3 sm:gap-4'>
-                    {[{ title: "Completed challenges", value: 5 }, { title: "Open challenges", value: 200 }, { title: "Ongoing challenges", value: 250 }].map((item, index) => (<Metric key={index} title={item.title} value={item.value} icon={<Document className={`h-6 w-6 text-primary`} />} />))}
+                <div className='flex sm:flex-row flex-col items-center justify-start gap-8 sm:gap-4'>
+                    {tabs.map((item, index) => (<Button key={index} icon={<File className={`h-4 w-4`} />} classNames="w-fit bg-[#F0F2F5] hover:bg-[#D0E0FC] text-tertiaryColor hover:text-primary sm:text-sm border border-[#D0D5DD] hover:border-primary font-semibold p-2 sm:p-3" label={item.title} hasCount={true} count={item.value} onClick={() => console.log("Tabs changed")} />))}
                 </div>
 
                 {/* Challeges and Hackathons */}

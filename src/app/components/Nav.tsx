@@ -1,5 +1,5 @@
 import Image from "next/image"
-import Button from "./Button"
+import {Button} from "./Button"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation";
 
@@ -14,7 +14,7 @@ const activeLink = (label: string, pathname: string) => {
     return false;
 }
 
-const Nav = () => {
+export const Nav = () => {
     const router = useRouter();
     const pathname = usePathname();
 
@@ -42,5 +42,3 @@ const Nav = () => {
         </nav>
     )
 }
-
-export default Nav

@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Button from "./Button";
-import BackToTop from "./BackToTop";
+import {Button} from "./Button";
+import { BackToTop } from "./BackToTop";
 
-const Footer = () => {
+export const Footer = () => {
     return (
         <footer className="bg-secondary flex flex-col gap-4 px-8 sm:px-24 py-2 sm:py-12 sm:divide-y divide-white/20">
             <div className="flex items-center justify-between sm:py-8">
@@ -96,5 +96,3 @@ const Footer = () => {
         </footer>
     )
 }
-
-export default Footer;

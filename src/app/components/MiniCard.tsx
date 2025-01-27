@@ -2,7 +2,7 @@ import * as React from "react";
 import Image from "next/image";
 import { MiniCardProps } from "../@types/global";
 
-const MiniCard: React.FC<MiniCardProps> = ({ image, name, location, jobTitle, imageWidth, imageHeight }) => {
+export const MiniCard: React.FC<MiniCardProps> = ({ image, name, location, jobTitle, imageWidth, imageHeight }) => {
     return (
         <div className="bg-white flex flex-col border border-gray-200 rounded-lg">
             <div className="flex flex-col items-start justify-center sm:gap-3 sm:p-4">
@@ -30,5 +30,3 @@ const MiniCard: React.FC<MiniCardProps> = ({ image, name, location, jobTitle, im
         </div>
     )
 }
-
-export default MiniCard;

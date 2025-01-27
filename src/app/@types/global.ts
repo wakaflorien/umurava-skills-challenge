@@ -4,6 +4,8 @@ export type ButtonProps = {
   classNames: string;
   label: string;
   icon?: React.ReactNode;
+  hasCount?: boolean;
+  count?: number
   onClick?: () => void;
   disabled?: boolean;
 };

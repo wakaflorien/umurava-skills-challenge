@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { MetricProps } from '../@types/global';
+
 export const Metric: React.FC<MetricProps> = ({ title, value, icon, classNames }) => {
     return (<div className='sm:p-4 border rounded-md border-[#D0E0FC]'>
         <div className={`flex items-center justify-between ${classNames}`}>

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import * as React from "react";
-import Button from "./Button";
+import {Button} from "./Button";
 import { StepProps } from "../@types/global";
 
-const GetStartedStep: React.FC<StepProps> = ({ stepCount, hasImage, image = "", title, desc, imageWidth, imageHeight }) => {
+export const GetStartedStep: React.FC<StepProps> = ({ stepCount, hasImage, image = "", title, desc, imageWidth, imageHeight }) => {
     return (
         <div className="bg-white flex flex-col gap-1 sm:gap-3 border border-gray-200 rounded-lg">
 
@@ -30,5 +30,3 @@ const GetStartedStep: React.FC<StepProps> = ({ stepCount, hasImage, image = "", 
         </div>
     )
 }
-
-export default GetStartedStep;
