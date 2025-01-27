@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation";
 
 
-export const activeLink = (label: string, pathname: string) => {
+const activeLink = (label: string, pathname: string) => {
     const labelText = label.toLowerCase();
     const realPath = pathname.split("/")[1];
 

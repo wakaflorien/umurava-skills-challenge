@@ -20,12 +20,12 @@ const Card: React.FC<CardProps> = ({ image, title, skills = [], security, timeli
                     />
                 </div>
 
-                <p className="text-black text-md sm:text-lg font-semibold">{title}</p>
+                <p className="text-black text-sm sm:text-md font-bold capitalize">{title}</p>
 
-                <p className="text-black text-sm sm:text-md font-bold">Skills Needed:</p>
+                <p className="text-black text-xs sm:text-sm font-semibold capitalize">Skills Needed:</p>
 
                 <div className="flex flex-wrap sm:gap-2">
-                    {skills.map(item => (<Button key={item} classNames="w-fit bg-white text-primary sm:text-sm border border-primary p-1 !rounded-lg" label={item} onClick={() => console.log("View item")} />))}
+                    {skills.map(item => (<Button key={item} classNames="w-fit bg-white text-primary text-xs border border-primary p-1 !rounded-lg" label={item} onClick={() => console.log("View item")} />))}
                 </div>
 
                 <p className="text-black text-sm sm:text-md font-bold">Seniority Level : <span className="sm:tex-xs text-tertiaryColor font-normal">{security}</span></p>

@@ -22,7 +22,7 @@ const Hackathons = () => {
                     {Array.from({ length: 16 }).map((_, index) => (<Card
                         key={index}
                         image={`/white_logo.png`}
-                        title={'Design a Dashboard for SokoFund'}
+                        title={'Design a Dashboard for SokoFund, FiniTech Product'}
                         skills={["UI/UX Design", "User Research", "Product Design"]}
                         security={'(Junior, Intermediate, Senior)'}
                         timeline={'15 Days'}

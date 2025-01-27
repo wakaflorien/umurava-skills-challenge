@@ -5,6 +5,7 @@ export type ButtonProps = {
   label: string;
   icon?: React.ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 };
 
 export type MetricProps = {
@@ -12,6 +13,13 @@ export type MetricProps = {
   title: string;
   value: number;
   icon: React.ReactNode;
+}
+
+export interface PaginationProps {
+    currentPage?: number;
+    totalPages?: number;
+    // data?: Array<Record<string, unknown>>;
+    onPageChange: (page: number) => void;
 }
 
 export type DivProps = {
