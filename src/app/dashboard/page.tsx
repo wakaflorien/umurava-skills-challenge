@@ -1,12 +1,13 @@
 "use client";
 import * as React from 'react';
-import {Button} from '../components/Button';
+import { Button } from '../components/Button';
 import { ChevronRight, Document, Show } from '../components/svgs';
 import { Metric } from '../components/Metric';
 import { Card } from '../components/Card';
 
 export const hackathonsData = Array.from({ length: 16 }).map((_, index) => ({
-    id: index,
+    status: index % 2 === 0 ? 'Open' : index % 3 === 0 ? 'Ongoing' : 'Completed',
+    id: index + 1,
     image: `/white_logo.png`,
     title: 'Design a Dashboard for SokoFund, FiniTech Product',
     skills: ["UI/UX Design", "User Research", "Product Design"],
@@ -61,7 +62,8 @@ const DashboardHome = () => {
 
                 {/* Challeges and Hackathons */}
                 <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
-                {hackathonsData.slice(0, showCount).map((item, index) => (<Card
+                    {hackathonsData.slice(0, showCount).map((item, index) => (<Card
+                        status={item.status}
                         key={index}
                         image={item.image}
                         title={item.title}

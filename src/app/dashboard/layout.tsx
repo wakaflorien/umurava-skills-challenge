@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./../globals.css";
 import Link from 'next/link';
 import { Bell, DashLogo, File, Gift, HelpCenter, Home, Search, Settings, Signout, UserPlus } from '../components/svgs';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 const geistSans = Geist({
@@ -37,6 +37,7 @@ export default function DashboardLayout({ children }: React.PropsWithChildren<ob
     // Readonly<{ children: React.ReactNode; }>)
 
     const pathname = usePathname();
+    const router = useRouter();
 
     return (
         <html lang="en">
@@ -95,8 +96,8 @@ export default function DashboardLayout({ children }: React.PropsWithChildren<ob
                                         <input className="bg-tertiary w-full text-black outline-none sm:p-2 rounded-md" placeholder="Search here ..." />
                                     </form>
                                     <div className='flex items-center gap-2'>
-                                        <div className='bg-tertiary flex !items-center !justify-center p-2 rounded-full'>
-                                            <Bell className={`h-4 w-4 self-center`} />
+                                        <div className='bg-tertiary flex items-center justify-center h-10 w-10 p-2 rounded-full cursor-pointer'>
+                                            <Bell className={`h-4 w-4`} />
                                         </div>
                                         <Image src="/.Sidebar/Image.png" alt="avatar" objectFit='contain' priority className="rounded-full" width={40} height={40} />
                                     </div>

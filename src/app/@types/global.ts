@@ -33,6 +33,7 @@ export type DivProps = {
 };
 
 export type CardProps = {
+  status: string;
   image: string;
   title?: string;
   skills?: Array<string>;

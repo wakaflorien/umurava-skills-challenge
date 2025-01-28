@@ -173,6 +173,7 @@ export default function Home() {
           </div>
           <div className="grid gap-4 sm:grid-cols-3 sm:gap-8">
             {hackathonsData.slice(0, 3).map((item, index) => (<Card
+status={item.status}
               key={index}
               image={item.image}
               title={item.title}

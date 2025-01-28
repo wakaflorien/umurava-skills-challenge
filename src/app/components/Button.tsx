@@ -12,7 +12,7 @@ export const Button: React.FC<ButtonProps> = ({ icon, classNames, label, hasCoun
                     {label}
                 </span>
 
-                {hasCount && <span className="text-inherit group-hover:text-white bg-[#E4E7EC] group-hover:bg-primary sm:p-1 rounded-full">{count}</span>}
+                {hasCount && <span className={`text-inherit group-hover:text-white bg-[#E4E7EC] group-hover:bg-primary sm:p-1 rounded-full`}>{count}</span>}
             </button>
         </div>
     )

@@ -3,12 +3,12 @@ import Image from "next/image";
 import {Button} from "./Button";
 import { CardProps } from "../@types/global";
 
-export const Card: React.FC<CardProps> = ({ image, title, skills = [], security, timeline, onClick, imageWidth, imageHeight }) => {
+export const Card: React.FC<CardProps> = ({ status, image, title, skills = [], security, timeline, onClick, imageWidth, imageHeight }) => {
     return (
         <div className="bg-white flex flex-col border border-gray-200 rounded-lg">
             <div className="flex flex-col items-start justify-center sm:gap-3 sm:p-4">
                 <div className="relative bg-primary flex flex-col w-full h-[180px] items-center justify-center rounded-md">
-                    <Button classNames="absolute top-0 right-0 w-fit bg-success text-white sm:text-xs p-2 !rounded-full sm:m-3" label={"Open"} onClick={() => console.log("View Open")} />
+                    <Button classNames={`absolute top-0 right-0 w-fit ${status === "Open" ? "bg-success" : status === "Ongoing" ? "bg-orange-500" : "bg-pink-700"} text-white sm:text-xs py-1 px-2 !rounded-full sm:m-3`} label={status} onClick={() => console.log("View Open")} />
                     {/* sm:self-end */}
                     <Image
                         src={image}
