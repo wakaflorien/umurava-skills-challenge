@@ -12,3 +12,4 @@ export { default as Search } from "./search.svg";
 export { default as Bell } from "./bell.svg";
 export { default as Show } from "./Show.svg";
 export { default as ChevronRight } from "./chevron-right.svg";
+export { default as Plane } from "./Plain.svg";

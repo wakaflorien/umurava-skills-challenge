@@ -3,9 +3,11 @@ import * as React from 'react';
 import { Geist, Geist_Mono } from "next/font/google";
 import "./../globals.css";
 import Link from 'next/link';
-import { Bell, DashLogo, File, Gift, HelpCenter, Home, Search, Settings, Signout, UserPlus } from '../components/svgs';
+import { Bell, DashLogo, File, Gift, HelpCenter, Home, Plane, Search, Settings, Signout, UserPlus } from '../components/svgs';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { Modal } from '../components/Modal';
+import { Button } from '../components/Button';
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -36,6 +38,8 @@ const nav2 = [{ link: "/dashboard/settings", label: "Settings" }, { link: "/dash
 export default function DashboardLayout({ children }: React.PropsWithChildren<object>) {
     // Readonly<{ children: React.ReactNode; }>)
 
+    const [isOpen, setIsOpen] = React.useState(false);
+
     const pathname = usePathname();
     const router = useRouter();
 
@@ -53,10 +57,10 @@ export default function DashboardLayout({ children }: React.PropsWithChildren<ob
                                 </Link>
                                 <ul className='sm:space-y-4'>
                                     {nav1.map((item, index) => (
-                                        <li key={index} className={`flex items-center gap-1 sm:p-2 cursor-pointer rounded-md ${activeLink(item.label, pathname) ? "bg-white text-primary" : "bg-primary text-white"} hover:bg-white hover:text-primary stroke-white hover:stroke-primary`}>
+                                        <li key={index} className={`flex items-center gap-1 sm:p-2 cursor-pointer rounded-md ${activeLink(item.label, pathname) ? "bg-white text-primary" : "bg-primary text-white"} hover:bg-white hover:text-primary stroke-white hover:stroke-primary`} onClick={() => item.link === "/dashboard/community" && setIsOpen(true)}>
 
                                             {item.link === "/dashboard" ? <Home className={`h-4 w-4 !stroke-[0.1] !stroke-current`} /> : item.link === "/dashboard/hackathons" ? <File className={`h-4 w-4 !stroke-[0.1] !stroke-current`} /> : <UserPlus className={`h-4 w-4 !stroke-[1.5] !stroke-current !fill-none`} />}
-                                            <Link href={item.link} className='sm:text-sm'>{item.label}</Link>
+                                            {item.link !== "/dashboard/community" ? (<Link href={item.link} className='sm:text-sm'>{item.label}</Link>) : <p className='sm:text-sm'>{item.label}</p>}
                                         </li>
                                     ))}
                                 </ul>
@@ -103,6 +107,23 @@ export default function DashboardLayout({ children }: React.PropsWithChildren<ob
                                     </div>
                                 </div>
                             </header>
+
+                            {/* Join Community Modal */}
+                            <Modal
+                                isOpen={isOpen}
+                                onClose={() => setIsOpen(false)}
+                            // title="Add New Task"
+                            >
+                                <div className='flex flex-col items-center justify-center sm:gap-4'>
+                                    <div className='bg-[#D0E0FC] rounded-full h-16 w-16 flex items-center justify-center'>
+                                        <Plane className={`h-8 w-8`} />
+                                    </div>
+                                    <h1 className='font-bold text-sm sm:text-lg text-center'>Join our WhatsApp community</h1>
+                                    <p className='text-center'>Get notified on the latest projects and hackathons</p>
+                                    <Button classNames="bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Join" onClick={() => console.log("join community")
+                                    } />
+                                </div>
+                            </Modal>
                             {children}
                         </div>
                     </main>

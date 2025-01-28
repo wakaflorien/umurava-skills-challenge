@@ -4,7 +4,6 @@ import { Button } from "@/app/components/Button";
 import { ArrowLeft, Bell } from "@/app/components/svgs";
 import { decodeUrl } from "@/utils/decodeUrl";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import * as React from "react";
 
