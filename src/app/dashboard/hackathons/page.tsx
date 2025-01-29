@@ -1,12 +1,13 @@
 "use client";
+
 import * as React from 'react';
 import { File, Plus } from '../../components/svgs';
-import { hackathonsData } from '../page';
 import { Button } from '@/app/components/Button';
 import { Pagination } from '@/app/components/Pagination';
 import { Card } from '@/app/components/Card';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '../layout';
+import { useAuth } from '@/app/providers/AuthProvider';
+import { hackathonsData } from '@/utils/data';
 
 const ITEMS_PER_PAGE = 6;
 

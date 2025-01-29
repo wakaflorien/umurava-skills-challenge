@@ -10,17 +10,7 @@ import { GetStartedStep } from "./components/GetStartedStep";
 import { MiniCard } from "./components/MiniCard";
 import { useRouter } from "next/navigation";
 import { BackDropShape } from "./components/BackDropShape";
-import { hackathonsData } from "./dashboard/page";
-
-export const usersData = Array.from({ length: 9 }).map((_, index) => ({
-  key: index,
-  image: `/play.svg`,
-  name: 'Manzi Jac',
-  location: 'Kigali',
-  jobTitle: 'Product Designer',
-  imageWidth: 40,
-  imageHeight: 40,
-}));
+import { hackathonsData, usersData } from "@/utils/data";
 
 const stats = [{ title: "1", desc: "Year" }, { title: "500 +", desc: "Challenges Completed" }, { title: "10K +", desc: "Users" }, { title: "6+", desc: "Countries" }];
 

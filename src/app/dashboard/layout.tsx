@@ -8,17 +8,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Modal } from '../components/Modal';
 import { Button } from '../components/Button';
-import { UserProviderProps } from '../@types/global';
 import { workSans } from '@/utils/fonts';
-
-const defaultUserProviderProps: UserProviderProps = {
-    id: 1,
-    name: "Hilaire Sh",
-    email: "email@example.com",
-    userType: "admin"
-    // userType: "participant"
-};
-const UserProvider = React.createContext<UserProviderProps>(defaultUserProviderProps);
+import { defaultUserProviderProps, UserProvider } from '../providers/AuthProvider';
 
 const activeLink = (label: string, pathname: string) => {
 
@@ -36,8 +27,7 @@ const nav1 = [{ link: "/dashboard", label: "Dashboard" }, { link: "/dashboard/ha
 
 const nav2 = [{ link: "/dashboard/settings", label: "Settings" }, { link: "/dashboard/help", label: "Help Center" }, { link: "/dashboard/refer", label: "Refer family & friends" }];
 
-export default function DashboardLayout({ children }: React.PropsWithChildren<object>) {
-    // Readonly<{ children: React.ReactNode; }>)
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
 
     const [isOpen, setIsOpen] = React.useState(false);
 
@@ -78,7 +68,7 @@ export default function DashboardLayout({ children }: React.PropsWithChildren<ob
                                     </ul>
                                     <div className="flex sm:flex-row sm:gap-4">
                                         <div className="relative bg-tertiaryColor h-8 w-8 rounded-full border-2 border-white">
-                                        <Image src="/.Sidebar/Image.png" alt="avatar" objectFit='contain' priority className="rounded-full" width={40} height={40} />
+                                            <Image src="/.Sidebar/Image.png" alt="avatar" objectFit='contain' priority className="rounded-full" width={40} height={40} />
                                             <div className='absolute bottom-0 right-0 bg-success h-3 w-3 border border-white rounded-full'></div>
                                         </div>
                                         <div className="flex sm:flex-col">
@@ -132,12 +122,4 @@ export default function DashboardLayout({ children }: React.PropsWithChildren<ob
             </body>
         </html>
     );
-}
-
-export const useAuth = (): UserProviderProps => {
-    const context = React.useContext(UserProvider);
-    if (!context) {
-        throw new Error('useAuth must be used within a UserProvider');
-    }
-    return context;
 }

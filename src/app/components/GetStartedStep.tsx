@@ -18,12 +18,11 @@ export const GetStartedStep: React.FC<StepProps> = ({ stepCount, hasImage, image
 
             {hasImage && (<div className="self-end rounded-br-lg">
                 <Image
-                    className="!rounded-br-lg"
+                    className={`!rounded-br-lg object-cover`}
                     src={image}
                     alt={`Frame one`}
                     width={imageWidth}
                     height={imageHeight}
-                    className={`object-cover`}
                     priority
                 />
             </div>)}

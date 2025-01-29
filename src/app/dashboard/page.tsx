@@ -4,21 +4,10 @@ import { Button } from '../components/Button';
 import { ChevronRight, Document, Participants, Show } from '../components/svgs';
 import { Metric } from '../components/Metric';
 import { Card } from '../components/Card';
-import { useAuth } from './layout';
 import { AdminMetric } from '../components/AdminMetric';
+import { useAuth } from '../providers/AuthProvider';
+import { hackathonsData } from '@/utils/data';
 
-export const hackathonsData = Array.from({ length: 16 }).map((_, index) => ({
-    status: index % 2 === 0 ? 'Open' : index % 3 === 0 ? 'Ongoing' : 'Completed',
-    id: index + 1,
-    image: `/white_logo.png`,
-    title: 'Design a Dashboard for SokoFund, FiniTech Product',
-    skills: ["UI/UX Design", "User Research", "Product Design"],
-    security: '(Junior, Intermediate, Senior)',
-    timeline: '15 Days',
-    onClick: () => console.log("View Challenge"),
-    imageWidth: 150,
-    imageHeight: 50
-}));
 
 const userStats = [{ title: "Completed challenges", value: 5 }, { title: "Open challenges", value: 200 }, { title: "Ongoing challenges", value: 250 }];
 

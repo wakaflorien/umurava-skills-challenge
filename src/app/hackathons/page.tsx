@@ -4,8 +4,8 @@ import { Footer } from "../components/Footer";
 import { Nav } from "../components/Nav";
 import { Card } from "../components/Card";
 import { ArrowLeft } from "../components/svgs";
-import { hackathonsData } from "../dashboard/page";
 import Link from "next/link";
+import { hackathonsData } from "@/utils/data";
 
 const Hackathons = () => {
 

@@ -1,13 +1,13 @@
 "use client";
 
 import { Button } from "@/app/components/Button";
-import { ArrowLeft, Calendar, Case, Dollar, Mail, Plane } from "@/app/components/svgs";
+import { ArrowLeft, Calendar, Case, Dollar, Mail } from "@/app/components/svgs";
 import { decodeUrl } from "@/utils/decodeUrl";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import * as React from "react";
-import { useAuth } from "../../layout";
 import { Modal } from "@/app/components/Modal";
+import { useAuth } from "@/app/providers/AuthProvider";
 
 const instructions = [
     {

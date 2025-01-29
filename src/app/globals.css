@@ -23,6 +23,9 @@
   .zoom-out {
     @apply min-h-screen h-full w-full max-w-screen-2xl mx-auto font-[family-name:var(--font-geist-sans)] !important;
   }
+  .inputText {
+    @apply rounded-[5px] sm:p-2 ring-1 ring-[#D0D5DD] outline-1 outline-[#FA9874] outline-offset-0 !important;
+  }
 }
 
 :root {
