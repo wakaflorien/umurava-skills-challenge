@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Umurava skills challenge ( Landing page and Dashboard )",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode, types: string }) {
   return (
     <html lang="en">
       <body
