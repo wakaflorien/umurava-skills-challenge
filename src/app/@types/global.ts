@@ -5,7 +5,7 @@ export type ButtonProps = {
   label: string;
   icon?: React.ReactNode;
   hasCount?: boolean;
-  count?: number
+  count?: number;
   onClick?: () => void;
   disabled?: boolean;
 };
@@ -13,15 +13,17 @@ export type ButtonProps = {
 export type MetricProps = {
   classNames?: string;
   title: string;
+  period?: string;
+  percentage?: string;
   value: number;
   icon: React.ReactNode;
-}
+};
 
 export interface PaginationProps {
-    currentPage?: number;
-    totalPages?: number;
-    // data?: Array<Record<string, unknown>>;
-    onPageChange: (page: number) => void;
+  currentPage?: number;
+  totalPages?: number;
+  // data?: Array<Record<string, unknown>>;
+  onPageChange: (page: number) => void;
 }
 
 export type DivProps = {
@@ -64,5 +66,35 @@ export type StepProps = {
 };
 
 export interface ShapeProps {
-    type: "one" | "two";
+  type: "one" | "two";
+}
+
+export interface UserProviderProps {
+  id?: number;
+  email?: string;
+  name?: string;
+  userType: "admin" | "participant";
+}
+
+export interface ChallengeFormProps {
+  title?: string;
+  deadline?: string;
+  duration?: string;
+  prize?: string;
+  email?: string;
+  description?: string;
+  brief?: string;
+  tasks?: string;
+  deliverables?: string,
+}
+
+export interface ChallengeFormComponentProps {
+  handleFormChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handleClearForm: () => void;
+  handleSubmitForm: () => void;
+  errors?: ChallengeFormProps;
+  values?: ChallengeFormProps;
+  submitType: "create" | "edit";
 }

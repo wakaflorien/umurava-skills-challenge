@@ -1,17 +1,19 @@
 "use client";
 import * as React from 'react';
-import { File } from '../../components/svgs';
+import { File, Plus } from '../../components/svgs';
 import { hackathonsData } from '../page';
 import { Button } from '@/app/components/Button';
 import { Pagination } from '@/app/components/Pagination';
 import { Card } from '@/app/components/Card';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '../layout';
 
 const ITEMS_PER_PAGE = 6;
 
 const tabs = [{ id: 1, title: "All challenges", value: 500 }, { id: 2, title: "Completed challenges", value: 5 }, { id: 3, title: "Open challenges", value: 200 }, { id: 4, title: "Ongoing challenges", value: 250 }];
 
 const DashboardHackathons = () => {
+    const { userType } = useAuth();
     const router = useRouter();
     const [currentPage, setCurrentPage] = React.useState(1);
     const [activeTab, setActiveTab] = React.useState("all");
@@ -34,6 +36,9 @@ const DashboardHackathons = () => {
         setActiveTab(tab);
     };
 
+    const navigateToCreate = () => {
+        router.push("/dashboard/hackathons/create");
+    }
 
     return (
         <div className="flex-1 sm:pb-24 sm:px-4">
@@ -43,8 +48,10 @@ const DashboardHackathons = () => {
                     <p>Join a challenge or a hackathon to gain valuable work experience</p>
                 </header>
 
-                <div className='flex sm:flex-row flex-col items-center justify-start gap-8 sm:gap-4'>
+                <div className='flex sm:flex-row flex-wrap flex-col items-center justify-start gap-8 sm:gap-4'>
                     {tabs.map((item, index) => (<Button key={index} icon={<File className={`h-4 w-4`} />} classNames={`w-fit border ${item.title.split(" ")[0].toLowerCase() === activeTab ? "bg-[#D0E0FC] !border-primary" : "bg-[#F0F2F5]"} hover:bg-[#D0E0FC] text-tertiaryColor hover:text-primary sm:text-sm border-[#D0D5DD] hover:border-primary font-semibold p-2 sm:p-3`} label={item.title} hasCount={true} count={item.value} onClick={() => handleChangeTab(item.title.split(" ")[0])} />))}
+
+                    {userType === "admin" && (<Button icon={<Plus className={`h-4 w-4`} />} classNames={`w-fit bg-primary text-white sm:text-sm font-semibold p-2 sm:p-4`} label={"Create New Challenge"} onClick={() => navigateToCreate()} />)}
                 </div>
 
                 {/* Challeges and Hackathons */}

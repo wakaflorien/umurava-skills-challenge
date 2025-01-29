@@ -31,7 +31,7 @@ const Institutions = () => {
                         layout="responsive"
                         width={200}
                         height={200}
-                        objectFit="cover"
+                        className={`object-cover`}
                         priority
                     />
 
@@ -140,7 +140,7 @@ const Institutions = () => {
                                 layout="responsive"
                                 width={200}
                                 height={200}
-                                objectFit="cover"
+                                className={`object-cover`}
                                 priority
                             />
                         </div>

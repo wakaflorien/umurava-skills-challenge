@@ -84,7 +84,7 @@ const About = () => {
                             // layout="responsive"
                             width={500}
                             height={500}
-                            objectFit="cover"
+                            className={`object-cover`}
                             priority
                         />
                     </div>

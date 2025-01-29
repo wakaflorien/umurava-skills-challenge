@@ -23,7 +23,7 @@ export const GetStartedStep: React.FC<StepProps> = ({ stepCount, hasImage, image
                     alt={`Frame one`}
                     width={imageWidth}
                     height={imageHeight}
-                    objectFit="cover"
+                    className={`object-cover`}
                     priority
                 />
             </div>)}

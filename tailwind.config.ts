@@ -18,6 +18,9 @@ export default {
         tertiaryColor: "#687588",
         success: "#0F973D"
       },
+      fontFamily: {
+        sans: ['var(--font-work-sans)']
+      }
     },
   },
   plugins: [],

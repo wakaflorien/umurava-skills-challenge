@@ -13,7 +13,7 @@ export const BackDropShape: React.FC<ShapeProps> = ({ type }) => {
                     layout="responsive"
                     width={200}
                     height={200}
-                    objectFit="cover"
+                    className={`object-cover`}
                     priority
                 />
             </div>
@@ -25,7 +25,7 @@ export const BackDropShape: React.FC<ShapeProps> = ({ type }) => {
                     layout="responsive"
                     width={200}
                     height={200}
-                    objectFit="cover"
+                    className={`object-cover`}
                     priority
                 />
             </div>

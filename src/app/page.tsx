@@ -1,7 +1,7 @@
 "use client";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
-import {Button} from "./components/Button";
+import { Button } from "./components/Button";
 import Image from "next/image";
 import { Div } from "./components/Div";
 import { Card } from "./components/Card";
@@ -58,7 +58,7 @@ export default function Home() {
                   layout="responsive"
                   width={200}
                   height={200}
-                  objectFit="cover"
+                  className={`object-cover`}
                   priority
                 />
               </div>
@@ -158,7 +158,7 @@ export default function Home() {
                 layout="responsive"
                 width={200}
                 height={200}
-                objectFit="cover"
+                className={`object-cover`}
                 priority
               />
             </div>
@@ -173,7 +173,7 @@ export default function Home() {
           </div>
           <div className="grid gap-4 sm:grid-cols-3 sm:gap-8">
             {hackathonsData.slice(0, 3).map((item, index) => (<Card
-status={item.status}
+              status={item.status}
               key={index}
               image={item.image}
               title={item.title}
@@ -220,7 +220,7 @@ status={item.status}
                 layout="responsive"
                 width={200}
                 height={200}
-                objectFit="cover"
+                className={`object-cover`}
                 priority
               />
             </div>
@@ -288,12 +288,11 @@ status={item.status}
           <div className="relative grid sm:grid-cols-3 bg-primary text-white rounded-lg sm:p-8">
             <div>
               <Image
-                className="rounded-md"
+                className="rounded-md object-cover"
                 src={"/twopeople.png"}
                 alt={`twopeople`}
                 width={250}
                 height={250}
-                objectFit="cover"
                 priority
               />
             </div>

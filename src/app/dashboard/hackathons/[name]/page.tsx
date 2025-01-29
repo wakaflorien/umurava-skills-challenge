@@ -1,32 +1,57 @@
 "use client";
 
 import { Button } from "@/app/components/Button";
-import { ArrowLeft, Bell } from "@/app/components/svgs";
+import { ArrowLeft, Calendar, Case, Dollar, Mail, Plane } from "@/app/components/svgs";
 import { decodeUrl } from "@/utils/decodeUrl";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import * as React from "react";
+import { useAuth } from "../../layout";
+import { Modal } from "@/app/components/Modal";
 
 const instructions = [
     {
         title: "talent@umurava.africa",
         subTitle: "Contact Email",
-        icon: <Bell className={`h-4 w-4`} />
+        icon: <Mail className={`h-4 w-4`} />
     },
     {
         title: "Web Design",
         subTitle: "Challenge Category",
-        icon: <Bell className={`h-4 w-4`} />
+        icon: <Case className={`h-4 w-4`} />
     },
     {
         title: "7 Days",
         subTitle: "Duration",
-        icon: <Bell className={`h-4 w-4`} />
+        icon: <Calendar className={`h-4 w-4`} />
     },
     {
         title: "$150 - $400",
         subTitle: "Prize Money",
-        icon: <Bell className={`h-4 w-4`} />
+        icon: <Dollar className={`h-4 w-4`} />
+    }
+];
+
+const participants = [
+    {
+        title: "talent@umurava.africa",
+        subTitle: "Contact Email",
+        image: "/.Sidebar/Image.png"
+    },
+    {
+        title: "Web Design",
+        subTitle: "Challenge Category",
+        image: "none"
+    },
+    {
+        title: "7 Days",
+        subTitle: "Duration",
+        image: "none"
+    },
+    {
+        title: "$150 - $400",
+        subTitle: "Prize Money",
+        image: "none",
     }
 ];
 
@@ -54,26 +79,37 @@ const deliverables = [
 ]
 
 const DashboardHackathon = () => {
+    const { userType } = useAuth();
     const pathname = usePathname();
     const router = useRouter();
-    
-    const selectedChallenge = pathname.split("dashboard/hackathons/")[1]
+
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    const selectedChallenge = decodeUrl(pathname.split("dashboard/hackathons/")[1])
+
+    const navigateToEdit = () => {
+        router.push(`/dashboard/hackathons/${selectedChallenge}/edit`)
+    }
+
+    const openDelete = () => {
+        setIsOpen(true);
+    }
 
     return (
         <div className="sm:px-4 flex-1 sm:pb-24 space-y-4">
             <div className=" bg-white sm:p-4 border rounded-lg">
-            <div className="flex gap-2 sm:gap-4 cursor-pointer">
+                <div className="flex gap-2 sm:gap-4 cursor-pointer">
                     <div className="flex items-center gap-2 text-tertiaryColor" onClick={() => router.back()}>
                         <ArrowLeft className={`h-5 w-5 !stroke-[0.1] !stroke-current border`} />
                         Go back</div>
                     <span className="text-tertiaryColor">/</span>
                     <span className="text-tertiaryColor" onClick={() => router.push('/dashboard/hackathons')}>Challenge & Hackathons</span>
                     <span className="text-tertiaryColor"> / </span>
-                    <span className="text-primary">{decodeUrl(selectedChallenge)}</span>
+                    <span className="text-primary">{selectedChallenge}</span>
                 </div>
             </div>
             <div className='grid sm:grid-cols-3 gap-2 sm:gap-4'>
-                <div className="col-span-2 bg-white grid sm:p-4 gap-4 sm:gap-8 border rounded-lg">
+                <div className="col-span-2 bg-white grid sm:space-y-4 sm:p-4 border rounded-lg">
 
                     <div className="relative bg-primary flex flex-col w-full h-[240px] items-center justify-center rounded-md">
                         <Image
@@ -82,7 +118,7 @@ const DashboardHackathon = () => {
                             width={150}
                             height={50}
                             priority
-                            objectFit="cover"
+                            className={`object-cover`}
                         />
                     </div>
 
@@ -126,30 +162,80 @@ const DashboardHackathon = () => {
 
                 </div>
 
-                <div className='bg-white h-fit w-full flex sm:flex-col items-start gap-8 sm:gap-4 sm:p-4 border rounded-lg'>
-                    <header className='space-y-2 sm:space-y-4'>
-                        <h1 className='font-bold text-sm sm:text-md'>Key Instructions</h1>
-                        <p className="sm:text-md">You are free to schedule the clarification call with the team via this</p>
-                    </header>
+                <div className={`${userType === "admin" && "grid sm:grid-row-2"}`}>
 
-                    <div className="flex sm:flex-col items-start sm:space-y-6">
+                    <div className='bg-white h-fit w-full flex sm:flex-col items-start gap-8 sm:gap-4 sm:p-4 border rounded-lg'>
+                        <header className='space-y-2 sm:space-y-4'>
+                            <h1 className='font-bold text-sm sm:text-md'>Key Instructions</h1>
+                            <p className="sm:text-md">You are free to schedule the clarification call with the team via this</p>
+                        </header>
 
-                        {instructions.map((item, index) => (<div key={index} className="flex sm:flex-row items-center justify-center sm:gap-4">
-                            <div className='bg-[#D0E0FC] flex items-center justify-center h-10 w-10 sm:p-2 rounded-full cursor-pointer'>
-                                {item.icon}
-                            </div>
-                            <div className="flex sm:flex-col">
-                                <p className="text-black text-sm sm:text-md font-bold">{item.title}</p>
-                                <p className="text-black text-sm sm:text-md"> {item.subTitle}</p>
-                            </div>
-                        </div>))}
+                        <div className="flex sm:flex-col items-start sm:space-y-6">
+
+                            {instructions.map((item, index) => (<div key={index} className="flex sm:flex-row items-center justify-center sm:gap-4">
+                                <div className='bg-[#D0E0FC] flex items-center justify-center h-10 w-10 sm:p-2 rounded-full cursor-pointer'>
+                                    {item.icon}
+                                </div>
+                                <div className="flex sm:flex-col">
+                                    <p className="text-black text-sm sm:text-md font-bold">{item.title}</p>
+                                    <p className="text-black text-sm sm:text-md"> {item.subTitle}</p>
+                                </div>
+                            </div>))}
+                        </div>
+
+                        <div className="w-full sm:py-4">
+                            {userType === "participant" ? (<Button classNames={`w-full bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-2`} label={"Submit your work"} onClick={() => console.log("Handle submit your work")} />) : <div className="w-full flex sm:flex-row flex-wrap sm:gap-4">
+                                <Button classNames={`w-[100px] bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-bold p-2`} label={"Delete"} onClick={openDelete} />
+
+                                <Button classNames={`w-[100px] bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-2`} label={"Edit"} onClick={navigateToEdit} />
+                            </div>}
+                        </div>
+
                     </div>
 
-                    <div className="w-full sm:py-4">
-                        <Button classNames={`w-full bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-2`} label={"Submit your work"} onClick={() => console.log("Handle submit your work")} />
-                    </div>
+                    {userType === "admin" && (<div className='row-span-2 bg-white h-fit w-full flex sm:flex-col items-start gap-8 sm:gap-4 sm:p-4 border rounded-lg'>
+                        <header className='space-y-2 sm:space-y-4'>
+                            <h1 className='font-bold text-sm sm:text-md'>Participants</h1>
+                        </header>
+
+                        <div className="flex sm:flex-col items-start sm:space-y-6">
+
+                            {participants.map((item, index) => (<div key={index} className="flex sm:flex-row items-center justify-center sm:gap-4">
+                                <div className='relative bg-[#D0E0FC] flex items-center justify-center h-10 w-10 sm:p-2 rounded-full cursor-pointer'>
+                                    {item.image !== "none" && <Image src={item.image} alt="avatar" objectFit='contain' priority className="rounded-full" width={40} height={40} />}
+                                    <div className='absolute bottom-0 right-0 bg-success h-3 w-3 border border-white rounded-full'></div>
+                                </div>
+                                <div className="flex sm:flex-col">
+                                    <p className="text-black text-sm sm:text-md font-bold">{item.title}</p>
+                                    <p className="text-black text-sm sm:text-md"> {item.subTitle}</p>
+                                </div>
+                            </div>))}
+                        </div>
+
+                        <div className="w-full sm:py-4">
+                            <Button classNames={`w-full bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-2`} label={"View All"} onClick={() => console.log("Handle submit your work")} />
+                        </div>
+
+                    </div>)}
                 </div>
             </div>
+            <Modal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+            // title="Add New Task"
+            >
+                <div className='flex flex-col items-center justify-center sm:gap-4'>
+                    
+                    <p className='text-center'>Are you sure you want to delete {selectedChallenge} Challenge ?</p>
+
+                    <div className="flex items-center sm:gap-3">
+                        <Button classNames="w-[70px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="No" onClick={() => console.log("join community")
+                        } />
+                        <Button classNames="w-[70px] bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-semibold p-2 sm:p-3" label="Yes" onClick={() => console.log("join community")
+                        } />
+                    </div>
+                </div>
+            </Modal>
         </div>
     );
 }

@@ -22,7 +22,7 @@ const Hackathons = () => {
                 </div>
                 <div className="grid gap-4 sm:grid-cols-4 sm:gap-8">
                     {hackathonsData.map((item, index) => (<Card
-status={item.status}
+                        status={item.status}
                         key={index}
                         image={item.image}
                         title={item.title}

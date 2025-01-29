@@ -37,7 +37,7 @@ export const Nav = () => {
                 ))}
             </ul>
             <div className="flex items-center mr-2 sm:mr-8">
-                <Button classNames="bg-secondary text-background hover:bg-secondary/90 font-semibold p-3" label="Join the program" onClick={() => console.log("Joined")} />
+                <Button classNames="bg-secondary text-background hover:bg-secondary/90 font-semibold p-3" label="Join the program" onClick={() => router.push("/dashboard")} />
             </div>
         </nav>
     )

@@ -39,7 +39,7 @@ export const Footer = () => {
                                 width={24}
                                 height={24}
                                 // layout="responsive"
-                                objectFit="cover"
+                                className={`object-cover`}
                             />
                             <span>career@tickets.com</span>
                         </li>
@@ -51,7 +51,7 @@ export const Footer = () => {
                                 width={24}
                                 height={24}
                                 // layout="responsive"
-                                objectFit="cover"
+                                className={`object-cover`}
                             />
                             <span>89 KG 14 Ave, Kigali</span>
                         </li>
@@ -63,7 +63,7 @@ export const Footer = () => {
                                 width={24}
                                 height={24}
                                 // layout="responsive"
-                                objectFit="cover"
+                                className={`object-cover`}
                             />
                             <span>+250 700 000</span>
                         </li>

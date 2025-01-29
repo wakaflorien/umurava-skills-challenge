@@ -14,7 +14,7 @@ export const MiniCard: React.FC<MiniCardProps> = ({ image, name, location, jobTi
                         width={imageWidth}
                         height={imageHeight}
                         priority
-                        objectFit="cover"
+                        className={`object-cover`}
                     />
                 </div>
 

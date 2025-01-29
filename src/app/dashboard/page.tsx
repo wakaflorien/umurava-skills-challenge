@@ -1,9 +1,11 @@
 "use client";
 import * as React from 'react';
 import { Button } from '../components/Button';
-import { ChevronRight, Document, Show } from '../components/svgs';
+import { ChevronRight, Document, Participants, Show } from '../components/svgs';
 import { Metric } from '../components/Metric';
 import { Card } from '../components/Card';
+import { useAuth } from './layout';
+import { AdminMetric } from '../components/AdminMetric';
 
 export const hackathonsData = Array.from({ length: 16 }).map((_, index) => ({
     status: index % 2 === 0 ? 'Open' : index % 3 === 0 ? 'Ongoing' : 'Completed',
@@ -18,7 +20,13 @@ export const hackathonsData = Array.from({ length: 16 }).map((_, index) => ({
     imageHeight: 50
 }));
 
+const userStats = [{ title: "Completed challenges", value: 5 }, { title: "Open challenges", value: 200 }, { title: "Ongoing challenges", value: 250 }];
+
+const adminStats = [{ title: "Total challenges", value: 29405, percentage: " 15%", period: "This Week" }, { title: "Total Participants", value: 29405, percentage: " 15%", period: "This Week" }, { title: "Completed challenges", value: 5837, percentage: " 15%", period: "Last 30 days" }, { title: "Open challenges", value: 5837, percentage: " 15%", period: "Last 30 days" }, { title: "Ongoing challenges", value: 5837, percentage: " 15%", period: "Last 30 days" }];
+
 const DashboardHome = () => {
+    const { userType } = useAuth();
+
     const [showAll, setShowAll] = React.useState(false);
     const [showCount, setShowCount] = React.useState(3);
 
@@ -43,14 +51,26 @@ const DashboardHome = () => {
                         <h1 className='font-bold text-md sm:text-lg'>Welcome back {`Hilaire`},</h1>
                         <p>Build Work Experience through Skills Challenges</p>
                     </div>
-                    <div>
+
+                    {userType === "participant" && (<div>
                         <Button icon={<Show className={`h-4 w-4`} />} classNames="bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-3" label="View profile" onClick={() => viewProfile()} />
-                    </div>
+                    </div>)}
+                    
                 </header>
 
-                <div className='grid sm:grid-cols-3 sm:gap-4'>
-                    {[{ title: "Completed challenges", value: 5 }, { title: "Open challenges", value: 200 }, { title: "Ongoing challenges", value: 250 }].map((item, index) => (<Metric key={index} title={item.title} value={item.value} icon={<Document className={`h-6 w-6 text-primary`} />} />))}
-                </div>
+                {userType === "participant" ? (<div className='grid sm:grid-cols-3 sm:gap-4'>
+                    {userStats.map((item, index) => (<Metric key={index} title={item.title} value={item.value} icon={<Document className={`h-4 w-4 text-primary`} />} />))}
+                </div>) : (<div className='grid sm:grid-row-2 sm:gap-4'>
+
+                    <div className='grid sm:grid-cols-2 sm:gap-4'>
+                        {adminStats.slice(0, 2).map((item, index) => (<AdminMetric key={index} title={item.title} value={item.value} percentage={item.percentage} period={item.period} icon={item.title.toLowerCase().includes("participant") ? <Participants className={`h-4 w-4 text-primary`} /> : <Document className={`h-4 w-4 text-primary`} />} />))}
+                    </div>
+
+                    <div className='grid sm:grid-cols-3 sm:gap-4'>
+                        {adminStats.slice(2, 5).map((item, index) => (<AdminMetric key={index} title={item.title} value={item.value} percentage={item.percentage} period={item.period} icon={item.title.toLowerCase().includes("participant") ? <Participants className={`h-4 w-4 text-primary`} /> : <Document className={`h-4 w-4 text-primary`} />} />))}
+                    </div>
+
+                </div>)}
 
                 <div className='flex items-center justify-start sm:justify-between gap-4'>
                     <h1 className='font-bold text-xs sm:text-sm'>Recent Challenges</h1>

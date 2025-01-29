@@ -16,7 +16,7 @@ export const Card: React.FC<CardProps> = ({ status, image, title, skills = [], s
                         width={imageWidth}
                         height={imageHeight}
                         priority
-                        objectFit="cover"
+                        className={`object-cover`}
                     />
                 </div>
 

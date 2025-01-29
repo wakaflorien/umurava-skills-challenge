@@ -1,17 +1,7 @@
 import * as React from "react";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { workSans } from "@/utils/fonts";
 
 export const metadata: Metadata = {
   title: "Umurava App",
@@ -23,7 +13,7 @@ export default function RootLayout({ children }: React.PropsWithChildren<object>
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${workSans.className} antialiased`}
       >
         {children}
       </body>
