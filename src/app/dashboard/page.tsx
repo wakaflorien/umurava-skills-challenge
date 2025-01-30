@@ -1,11 +1,11 @@
 "use client";
 import * as React from 'react';
-import { Button } from '../components/Button';
-import { ChevronRight, Document, Participants, Show } from '../components/svgs';
-import { Metric } from '../components/Metric';
-import { Card } from '../components/Card';
-import { AdminMetric } from '../components/AdminMetric';
-import { useAuth } from '../providers/AuthProvider';
+import { Button } from '@/components/Button';
+import { ChevronRight, Document, Participants, Show } from '@/components/svgs';
+import { Metric } from '@/components/Metric';
+import { Card } from '@/components/Card';
+import { AdminMetric } from '@/components/AdminMetric';
+import { useAuth } from '../../providers/AuthProvider';
 import { hackathonsData } from '@/utils/data';
 
 

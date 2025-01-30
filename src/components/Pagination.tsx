@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from 'react';
 import {Button} from './Button';
-import { PaginationProps } from '../@types/global';
+import { PaginationProps } from '@/@types/global';
 
 export const Pagination: React.FC<PaginationProps> = ({ currentPage = 1, totalPages = 1, onPageChange }) => {
 

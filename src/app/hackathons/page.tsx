@@ -1,9 +1,9 @@
 "use client";
 import * as React from "react";
-import { Footer } from "../components/Footer";
-import { Nav } from "../components/Nav";
-import { Card } from "../components/Card";
-import { ArrowLeft } from "../components/svgs";
+import { Footer } from "@/components/Footer";
+import { Nav } from "@/components/Nav";
+import { Card } from "@/components/Card";
+import { ArrowLeft } from "@/components/svgs";
 import Link from "next/link";
 import { hackathonsData } from "@/utils/data";
 

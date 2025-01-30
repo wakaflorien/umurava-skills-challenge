@@ -1,6 +1,6 @@
 import * as React from "react";
 import Image from "next/image";
-import { MiniCardProps } from "../@types/global";
+import { MiniCardProps } from "@/@types/global";
 
 export const MiniCard: React.FC<MiniCardProps> = ({ image, name, location, jobTitle, imageWidth, imageHeight }) => {
     return (

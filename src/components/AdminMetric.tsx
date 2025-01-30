@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from 'react';
-import { MetricProps } from '../@types/global';
+import { MetricProps } from '@/@types/global';
 import { ArrowUp, ChevronDown } from './svgs';
 import { numberFormat } from '@/utils/formatNumber';
 

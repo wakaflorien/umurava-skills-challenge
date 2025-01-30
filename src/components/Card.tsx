@@ -1,7 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
-import {Button} from "./Button";
-import { CardProps } from "../@types/global";
+import { Button } from "./Button";
+import { CardProps } from "@/@types/global";
 
 export const Card: React.FC<CardProps> = ({ status, image, title, skills = [], security, timeline, onClick, imageWidth, imageHeight }) => {
     return (

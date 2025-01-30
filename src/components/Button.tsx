@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react"
-import { ButtonProps } from "../@types/global";
+import { ButtonProps } from "@/@types/global";
 
 export const Button: React.FC<ButtonProps> = ({ icon, classNames, label, hasCount, count = 0,  onClick }) => {
     return (

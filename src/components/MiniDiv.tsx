@@ -1,6 +1,6 @@
 import * as React from "react"
 import Image from "next/image"
-import { DivProps } from "../@types/global"
+import { DivProps } from "@/@types/global"
 
 export const MiniDiv: React.FC<DivProps> = ({ icon, iconWidth, iconHeight, title, desc }) => {
     return (

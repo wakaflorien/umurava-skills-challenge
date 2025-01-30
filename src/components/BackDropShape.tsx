@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import * as React from 'react';
-import { ShapeProps } from '../@types/global';
+import { ShapeProps } from '@/@types/global';
 
 export const BackDropShape: React.FC<ShapeProps> = ({ type }) => {
     return (

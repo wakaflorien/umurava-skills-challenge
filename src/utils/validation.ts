@@ -1,4 +1,4 @@
-import { ChallengeFormProps } from "@/app/@types/global";
+import { ChallengeFormProps } from "@/@types/global";
 
 const validateEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

@@ -1,13 +1,14 @@
 "use client";
 
-import { Button } from "@/app/components/Button";
-import { ArrowLeft, Calendar, Case, Dollar, Mail } from "@/app/components/svgs";
-import { decodeUrl } from "@/utils/decodeUrl";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+
+import { Button } from "@/components/Button";
+import { ArrowLeft, Calendar, Case, Dollar, Mail } from "@/components/svgs";
+import { decodeUrl } from "@/utils/decodeUrl";
 import * as React from "react";
-import { Modal } from "@/app/components/Modal";
-import { useAuth } from "@/app/providers/AuthProvider";
+import { Modal } from "@/components/Modal";
+import { useAuth } from "@/providers/AuthProvider";
 
 const instructions = [
     {
@@ -229,9 +230,9 @@ const DashboardHackathon = () => {
                     <p className='text-center'>Are you sure you want to delete {selectedChallenge} Challenge ?</p>
 
                     <div className="flex items-center sm:gap-3">
-                        <Button classNames="w-[70px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="No" onClick={() => console.log("join community")
+                        <Button classNames="w-[70px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="No" onClick={() => setIsOpen(false)
                         } />
-                        <Button classNames="w-[70px] bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-semibold p-2 sm:p-3" label="Yes" onClick={() => console.log("join community")
+                        <Button classNames="w-[70px] bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-semibold p-2 sm:p-3" label="Yes" onClick={() => console.log("deleting challenge") 
                         } />
                     </div>
                 </div>

@@ -1,11 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { ArrowLeft } from "@/app/components/svgs";
 import { useRouter } from "next/navigation";
-import { ChallengeFormProps } from "@/app/@types/global";
+import { ArrowLeft } from "@/components/svgs";
+import { ChallengeFormProps } from "@/@types/global";
 import { validateForm } from "@/utils/validation";
-import { ChallengeForm } from "@/app/components/ChallengesForm";
+import { ChallengeForm } from "@/components/ChallengesForm";
 
 const CreateChallenge = () => {
     const router = useRouter();

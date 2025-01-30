@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Button } from "./Button";
-import { ChallengeFormComponentProps } from "../@types/global";
+import { ChallengeFormComponentProps } from "@/@types/global";
 
 export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitType, handleFormChange, handleClearForm, handleSubmitForm, errors = {}, values = {} }) => {
     return (

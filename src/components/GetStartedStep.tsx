@@ -1,7 +1,7 @@
 import Image from "next/image";
 import * as React from "react";
-import {Button} from "./Button";
-import { StepProps } from "../@types/global";
+import { Button } from "./Button";
+import { StepProps } from "@/@types/global";
 
 export const GetStartedStep: React.FC<StepProps> = ({ stepCount, hasImage, image = "", title, desc, imageWidth, imageHeight }) => {
     return (

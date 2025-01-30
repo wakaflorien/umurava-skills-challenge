@@ -3,13 +3,13 @@
 import * as React from 'react';
 import "./../globals.css";
 import Link from 'next/link';
-import { Bell, DashLogo, File, Gift, HelpCenter, Home, Plane, Search, Settings, Signout, UserPlus } from '../components/svgs';
+import { Bell, DashLogo, File, Gift, HelpCenter, Home, Plane, Search, Settings, Signout, UserPlus } from '@/components/svgs';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Modal } from '../components/Modal';
-import { Button } from '../components/Button';
+import { Modal } from '@/components/Modal';
+import { Button } from '@/components/Button';
 import { workSans } from '@/utils/fonts';
-import { defaultUserProviderProps, UserProvider } from '../providers/AuthProvider';
+import { defaultUserProviderProps, UserProvider } from '../../providers/AuthProvider';
 
 const activeLink = (label: string, pathname: string) => {
 

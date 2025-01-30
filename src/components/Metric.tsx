@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from 'react';
-import { MetricProps } from '../@types/global';
+import { MetricProps } from '@/@types/global';
 import { numberFormat } from '@/utils/formatNumber';
 
 export const Metric: React.FC<MetricProps> = ({ title, value, icon, classNames }) => {

@@ -1,7 +1,9 @@
+"use client";
+
 import Image from "next/image"
-import {Button} from "./Button"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation";
+import { Button } from "./Button"
 
 
 const activeLink = (label: string, pathname: string) => {

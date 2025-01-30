@@ -1,15 +1,15 @@
 "use client";
-import { Nav } from "./components/Nav";
-import { Footer } from "./components/Footer";
-import { Button } from "./components/Button";
+import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
+import { Button } from "@/components/Button";
 import Image from "next/image";
-import { Div } from "./components/Div";
-import { Card } from "./components/Card";
-import { MiniDiv } from "./components/MiniDiv";
-import { GetStartedStep } from "./components/GetStartedStep";
-import { MiniCard } from "./components/MiniCard";
+import { Div } from "@/components/Div";
+import { Card } from "@/components/Card";
+import { MiniDiv } from "@/components/MiniDiv";
+import { GetStartedStep } from "@/components/GetStartedStep";
+import { MiniCard } from "@/components/MiniCard";
 import { useRouter } from "next/navigation";
-import { BackDropShape } from "./components/BackDropShape";
+import { BackDropShape } from "@/components/BackDropShape";
 import { hackathonsData, usersData } from "@/utils/data";
 
 const stats = [{ title: "1", desc: "Year" }, { title: "500 +", desc: "Challenges Completed" }, { title: "10K +", desc: "Users" }, { title: "6+", desc: "Countries" }];
