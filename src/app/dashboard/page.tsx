@@ -7,6 +7,7 @@ import { AdminMetric } from '@/components/AdminMetric';
 import { useAuth } from '../../providers/AuthProvider';
 import { hackathonsData } from '@/utils/data';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 
 const userStats = [{ title: "Completed challenges", value: 5 }, { title: "Open challenges", value: 200 }, { title: "Ongoing challenges", value: 250 }];
@@ -15,21 +16,14 @@ const adminStats = [{ title: "Total challenges", value: 29405, percentage: " 15%
 
 const DashboardHome = () => {
     const { userType } = useAuth();
-
-    const [showAll, setShowAll] = React.useState(false);
-    const [showCount, setShowCount] = React.useState(3);
+    const router = useRouter()
 
     const viewProfile = () => {
         console.log('View profile');
     }
 
     const handleSeeAll = () => {
-        setShowAll(!showAll);
-        if (showAll) {
-            setShowCount(3)
-        } else {
-            setShowCount(16)
-        }
+        router.push("/dashboard/hackathons");
     }
 
     return (
@@ -100,8 +94,7 @@ const DashboardHome = () => {
                 <div className='flex items-center justify-start sm:justify-between gap-4'>
                     <h1 className='font-bold text-xs sm:text-sm'>Recent Challenges</h1>
                     <div className='flex items-center sm:gap-2 gap-1 text-primary cursor-pointer' onClick={() => handleSeeAll()}>
-                        <span>{showAll ? "See less" : "See all"}</span>
-                        {/* <ChevronRight className='h-4 w-4' /> */}
+                        <span>{"See all"}</span>
                         <Image
                             src="/svgs/chevron-right.svg"
                             alt="file"
@@ -114,7 +107,7 @@ const DashboardHome = () => {
 
                 {/* Challeges and Hackathons */}
                 <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
-                    {hackathonsData.slice(0, showCount).map((item, index) => (<Card
+                    {hackathonsData.slice(0, 3).map((item, index) => (<Card
                         status={item.status}
                         key={index}
                         image={item.image}
