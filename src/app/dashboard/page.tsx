@@ -1,12 +1,12 @@
 "use client";
 import * as React from 'react';
 import { Button } from '@/components/Button';
-import { ChevronRight, Document, Participants, Show } from '@/components/svgs';
 import { Metric } from '@/components/Metric';
 import { Card } from '@/components/Card';
 import { AdminMetric } from '@/components/AdminMetric';
 import { useAuth } from '../../providers/AuthProvider';
 import { hackathonsData } from '@/utils/data';
+import Image from 'next/image';
 
 
 const userStats = [{ title: "Completed challenges", value: 5 }, { title: "Open challenges", value: 200 }, { title: "Ongoing challenges", value: 250 }];
@@ -42,21 +42,57 @@ const DashboardHome = () => {
                     </div>
 
                     {userType === "participant" && (<div>
-                        <Button icon={<Show className={`h-4 w-4`} />} classNames="bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-3" label="View profile" onClick={() => viewProfile()} />
+                        <Button icon={<Image
+                            src="/svgs/Show.svg"
+                            alt="file"
+                            width={4}
+                            height={4}
+                            className="h-4 w-4 text-primary"
+                        />} classNames="bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-3" label="View profile" onClick={() => viewProfile()} />
                     </div>)}
-                    
+
                 </header>
 
                 {userType === "participant" ? (<div className='grid sm:grid-cols-3 sm:gap-4'>
-                    {userStats.map((item, index) => (<Metric key={index} title={item.title} value={item.value} icon={<Document className={`h-4 w-4 text-primary`} />} />))}
+                    {userStats.map((item, index) => (<Metric key={index} title={item.title} value={item.value} icon={<Image
+                        src="/svgs/Document.svg"
+                        alt="Document"
+                        width={4}
+                        height={4}
+                        className="h-4 w-4 text-primary"
+                    />} />))}
                 </div>) : (<div className='grid sm:grid-row-2 sm:gap-4'>
 
                     <div className='grid sm:grid-cols-2 sm:gap-4'>
-                        {adminStats.slice(0, 2).map((item, index) => (<AdminMetric key={index} title={item.title} value={item.value} percentage={item.percentage} period={item.period} icon={item.title.toLowerCase().includes("participant") ? <Participants className={`h-4 w-4 text-primary`} /> : <Document className={`h-4 w-4 text-primary`} />} />))}
+                        {adminStats.slice(0, 2).map((item, index) => (<AdminMetric key={index} title={item.title} value={item.value} percentage={item.percentage} period={item.period} icon={item.title.toLowerCase().includes("participant") ? <Image
+                            src="/svgs/3User.svg"
+                            alt="file"
+                            width={4}
+                            height={4}
+                            className="h-4 w-4 text-primary"
+                        /> : <Image
+                            src="/svgs/Document.svg"
+                            alt="Document"
+                            width={4}
+                            height={4}
+                            className="h-4 w-4 text-primary"
+                        />} />))}
                     </div>
 
                     <div className='grid sm:grid-cols-3 sm:gap-4'>
-                        {adminStats.slice(2, 5).map((item, index) => (<AdminMetric key={index} title={item.title} value={item.value} percentage={item.percentage} period={item.period} icon={item.title.toLowerCase().includes("participant") ? <Participants className={`h-4 w-4 text-primary`} /> : <Document className={`h-4 w-4 text-primary`} />} />))}
+                        {adminStats.slice(2, 5).map((item, index) => (<AdminMetric key={index} title={item.title} value={item.value} percentage={item.percentage} period={item.period} icon={item.title.toLowerCase().includes("participant") ? <Image
+                            src="/svgs/3User.svg"
+                            alt="file"
+                            width={4}
+                            height={4}
+                            className="h-4 w-4 text-primary"
+                        /> : <Image
+                            src="/svgs/Document.svg"
+                            alt="Document"
+                            width={4}
+                            height={4}
+                            className="h-4 w-4 text-primary"
+                        />} />))}
                     </div>
 
                 </div>)}
@@ -65,7 +101,14 @@ const DashboardHome = () => {
                     <h1 className='font-bold text-xs sm:text-sm'>Recent Challenges</h1>
                     <div className='flex items-center sm:gap-2 gap-1 text-primary cursor-pointer' onClick={() => handleSeeAll()}>
                         <span>{showAll ? "See less" : "See all"}</span>
-                        <ChevronRight className='h-4 w-4' />
+                        {/* <ChevronRight className='h-4 w-4' /> */}
+                        <Image
+                            src="/svgs/chevron-right.svg"
+                            alt="file"
+                            width={4}
+                            height={4}
+                            className="h-4 w-4"
+                        />
                     </div>
                 </div>
 
@@ -79,7 +122,7 @@ const DashboardHome = () => {
                         skills={item.skills}
                         security={item.security}
                         timeline={item.timeline}
-                        onClick={item.onClick}
+                        onClick={() => console.log("View Challenge")}
                         imageWidth={150}
                         imageHeight={50}
                     />))}

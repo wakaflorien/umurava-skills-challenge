@@ -170,7 +170,7 @@ export default function Home() {
               skills={item.skills}
               security={item.security}
               timeline={item.timeline}
-              onClick={item.onClick}
+              onClick={() => console.log("View Challenge")}
               imageWidth={150}
               imageHeight={50}
             />))}

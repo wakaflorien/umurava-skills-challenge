@@ -2,10 +2,10 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft } from "@/components/svgs";
 import { ChallengeFormProps } from "@/@types/global";
 import { validateForm } from "@/utils/validation";
 import { ChallengeForm } from "@/components/ChallengesForm";
+import Image from "next/image";
 
 const CreateChallenge = () => {
     const router = useRouter();
@@ -58,7 +58,13 @@ const CreateChallenge = () => {
             <div className=" bg-white sm:p-4 border rounded-lg">
                 <div className="flex gap-2 sm:gap-4 cursor-pointer">
                     <div className="flex items-center gap-2 text-tertiaryColor" onClick={() => router.back()}>
-                        <ArrowLeft className={`h-5 w-5 !stroke-[0.1] !stroke-current border`} />
+                        <Image
+                            src="/svgs/arrow-left.svg"
+                            alt="file"
+                            width={4}
+                            height={4}
+                            className="h-4 w-4 text-primary"
+                        />
                         Go back</div>
                     <span className="text-tertiaryColor">/</span>
                     <span className="text-tertiaryColor" onClick={() => router.push('/dashboard/hackathons')}>Challenge & Hackathons</span>

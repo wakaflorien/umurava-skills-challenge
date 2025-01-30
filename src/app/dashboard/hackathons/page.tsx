@@ -2,13 +2,13 @@
 
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
-import { File, Plus } from '@/components/svgs';
 import { Button } from '@/components/Button';
 import { Pagination } from '@/components/Pagination';
 import { Card } from '@/components/Card';
 
 import { useAuth } from '@/providers/AuthProvider';
 import { hackathonsData } from '@/utils/data';
+import Image from 'next/image';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -51,9 +51,23 @@ const DashboardHackathons = () => {
                 </header>
 
                 <div className='flex sm:flex-row flex-wrap flex-col items-center justify-start gap-8 sm:gap-4'>
-                    {tabs.map((item, index) => (<Button key={index} icon={<File className={`h-4 w-4`} />} classNames={`w-fit border ${item.title.split(" ")[0].toLowerCase() === activeTab ? "bg-[#D0E0FC] !border-primary" : "bg-[#F0F2F5]"} hover:bg-[#D0E0FC] text-tertiaryColor hover:text-primary sm:text-sm border-[#D0D5DD] hover:border-primary font-semibold p-2 sm:p-3`} label={item.title} hasCount={true} count={item.value} onClick={() => handleChangeTab(item.title.split(" ")[0])} />))}
+                    {tabs.map((item, index) => (<Button key={index} icon={(<Image
+                        src="/svgs/file.svg"
+                        alt="file"
+                        width={4}
+                        height={4}
+                        className="h-4 w-4 text-primary"
+                        onClick={() => router.push("/")}
+                    />)} classNames={`w-fit border ${item.title.split(" ")[0].toLowerCase() === activeTab ? "bg-[#D0E0FC] !border-primary" : "bg-[#F0F2F5]"} hover:bg-[#D0E0FC] text-tertiaryColor hover:text-primary sm:text-sm border-[#D0D5DD] hover:border-primary font-semibold p-2 sm:p-3`} label={item.title} hasCount={true} count={item.value} onClick={() => handleChangeTab(item.title.split(" ")[0])} />))}
 
-                    {userType === "admin" && (<Button icon={<Plus className={`h-4 w-4`} />} classNames={`w-fit bg-primary text-white sm:text-sm font-semibold p-2 sm:p-4`} label={"Create New Challenge"} onClick={() => navigateToCreate()} />)}
+                    {userType === "admin" && (<Button icon={(<Image
+                        src="/svgs/plus.svg"
+                        alt="file"
+                        width={4}
+                        height={4}
+                        className="h-4 w-4 text-primary"
+                        onClick={() => router.push("/")}
+                    />)} classNames={`w-fit bg-primary text-white sm:text-sm font-semibold p-2 sm:p-4`} label={"Create New Challenge"} onClick={() => navigateToCreate()} />)}
                 </div>
 
                 {/* Challeges and Hackathons */}

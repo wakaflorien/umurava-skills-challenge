@@ -4,7 +4,6 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/Button";
-import { ArrowLeft, Calendar, Case, Dollar, Mail } from "@/components/svgs";
 import { decodeUrl } from "@/utils/decodeUrl";
 import * as React from "react";
 import { Modal } from "@/components/Modal";
@@ -14,22 +13,46 @@ const instructions = [
     {
         title: "talent@umurava.africa",
         subTitle: "Contact Email",
-        icon: <Mail className={`h-4 w-4`} />
+        icon: <Image
+            src="/svgs/Message.svg"
+            alt="file"
+            width={4}
+            height={4}
+            className="h-4 w-4 text-primary"
+        />
     },
     {
         title: "Web Design",
         subTitle: "Challenge Category",
-        icon: <Case className={`h-4 w-4`} />
+        icon: <Image
+            src="/svgs/CaseRound.svg"
+            alt="file"
+            width={4}
+            height={4}
+            className="h-4 w-4 text-primary"
+        />
     },
     {
         title: "7 Days",
         subTitle: "Duration",
-        icon: <Calendar className={`h-4 w-4`} />
+        icon: <Image
+            src="/svgs/Calendar.svg"
+            alt="file"
+            width={4}
+            height={4}
+            className="h-4 w-4 text-primary"
+        />
     },
     {
         title: "$150 - $400",
         subTitle: "Prize Money",
-        icon: <Dollar className={`h-4 w-4`} />
+        icon: <Image
+            src="/svgs/Dollar.svg"
+            alt="file"
+            width={4}
+            height={4}
+            className="h-4 w-4 text-primary"
+        />
     }
 ];
 
@@ -37,7 +60,7 @@ const participants = [
     {
         title: "talent@umurava.africa",
         subTitle: "Contact Email",
-        image: "/.Sidebar/Image.png"
+        image: "/Image.png"
     },
     {
         title: "Web Design",
@@ -101,7 +124,13 @@ const DashboardHackathon = () => {
             <div className=" bg-white sm:p-4 border rounded-lg">
                 <div className="flex gap-2 sm:gap-4 cursor-pointer">
                     <div className="flex items-center gap-2 text-tertiaryColor" onClick={() => router.back()}>
-                        <ArrowLeft className={`h-5 w-5 !stroke-[0.1] !stroke-current border`} />
+                        <Image
+                            src="/svgs/arrow-left.svg"
+                            alt="file"
+                            width={4}
+                            height={4}
+                            className="h-4 w-4 text-primary"
+                        />
                         Go back</div>
                     <span className="text-tertiaryColor">/</span>
                     <span className="text-tertiaryColor" onClick={() => router.push('/dashboard/hackathons')}>Challenge & Hackathons</span>
@@ -203,7 +232,7 @@ const DashboardHackathon = () => {
 
                             {participants.map((item, index) => (<div key={index} className="flex sm:flex-row items-center justify-center sm:gap-4">
                                 <div className='relative bg-[#D0E0FC] flex items-center justify-center h-10 w-10 sm:p-2 rounded-full cursor-pointer'>
-                                    {item.image !== "none" && <Image src={item.image} alt="avatar" objectFit='contain' priority className="rounded-full" width={40} height={40} />}
+                                    {item.image !== "none" && <Image src={item.image} alt="avatar" priority className="rounded-full object-container" width={40} height={40} />}
                                     <div className='absolute bottom-0 right-0 bg-success h-3 w-3 border border-white rounded-full'></div>
                                 </div>
                                 <div className="flex sm:flex-col">
@@ -226,13 +255,13 @@ const DashboardHackathon = () => {
             // title="Add New Task"
             >
                 <div className='flex flex-col items-center justify-center sm:gap-4'>
-                    
+
                     <p className='text-center'>Are you sure you want to delete {selectedChallenge} Challenge ?</p>
 
                     <div className="flex items-center sm:gap-3">
                         <Button classNames="w-[70px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="No" onClick={() => setIsOpen(false)
                         } />
-                        <Button classNames="w-[70px] bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-semibold p-2 sm:p-3" label="Yes" onClick={() => console.log("deleting challenge") 
+                        <Button classNames="w-[70px] bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-semibold p-2 sm:p-3" label="Yes" onClick={() => console.log("deleting challenge")
                         } />
                     </div>
                 </div>

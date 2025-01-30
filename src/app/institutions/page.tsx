@@ -102,6 +102,7 @@ const Institutions = () => {
                     <div className="flex flex-row flex-wrap justify-center gap-4 sm:gap-12">
                         {["Tori 1.png", "Gdg_Kigali 1.png", "EducationCollaborative 2.png", "KeplerLogo 1.png", "HiiL_Logo 1.png", "CIBA 1.png", "Ared 1.png", "IGIHE_LOGO 1.png", "EducationCollaborative 1.png", "HiiL_Logo 2.png", "SokoFund 1.png"].map((logo, index) => (
                             <Image
+                                className="object-container"
                                 key={index}
                                 aria-hidden
                                 src={`/${logo}`}
@@ -109,7 +110,6 @@ const Institutions = () => {
                                 // layout="responsive"
                                 width={140}
                                 height={60}
-                                objectFit="container"
                                 priority
                             />
                         ))}

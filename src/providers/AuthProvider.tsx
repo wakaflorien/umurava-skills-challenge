@@ -1,5 +1,5 @@
 import * as React from "react";
-import { UserProviderProps } from "../@types/global";
+import { UserProviderProps } from "@/@types/global";
 
 export const defaultUserProviderProps: UserProviderProps = {
     id: 1,

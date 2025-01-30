@@ -24,12 +24,12 @@ export const Nav = () => {
         <nav className="sm:flex justify-between sticky top-0 sm:px-16 bg-background hidden z-10">
             <Link href={"/"} className="!cursor-pointer">
                 <Image
+                    className="object-cover"
                     src="/logo.png"
                     alt="Next.js logo"
                     width={150}
                     height={38}
                     priority
-                    objectFit='cover'
                 />
             </Link>
 

@@ -16,7 +16,6 @@ export const usersData = Array.from({ length: 9 }).map((_, index) => ({
       skills: ["UI/UX Design", "User Research", "Product Design"],
       security: '(Junior, Intermediate, Senior)',
       timeline: '15 Days',
-      onClick: () => console.log("View Challenge"),
       imageWidth: 150,
       imageHeight: 50
   }));
