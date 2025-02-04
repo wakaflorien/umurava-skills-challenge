@@ -10,6 +10,7 @@ import { workSans } from '@/utils/fonts';
 import { Providers, useAuth } from '@/providers/AuthProvider';
 import { joinCommunity } from '@/apis';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
 
 const activeLink = (label: string, pathname: string) => {
 
@@ -28,15 +29,15 @@ const nav1 = [{ link: "/dashboard", label: "Dashboard" }, { link: "/dashboard/ha
 const nav2 = [{ link: "/dashboard/settings", label: "Settings" }, { link: "/dashboard/help", label: "Help Center" }, { link: "/dashboard/refer", label: "Refer family & friends" }];
 
 const iconMap = {
-    "/dashboard": "/svgs/home.svg",
-    "/dashboard/hackathons": "/svgs/file.svg",
-    "/dashboard/community": "/svgs/user_plus.svg"
+    "/dashboard": `lineicons:home-2`,
+    "/dashboard/hackathons": `akar-icons:file`,
+    "/dashboard/community": `basil:user-plus-outline`
 };
 
 const iconMap1 = {
-    "/dashboard/settings": "/svgs/settings.svg",
-    "/dashboard/help": "/svgs/headset.svg",
-    "/dashboard/refer": "/svgs/gift.svg"
+    "/dashboard/settings": "ion:settings-outline",
+    "/dashboard/help": "qlementine-icons:headset-16",
+    "/dashboard/refer": "octicon:gift-16"
 };
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -48,10 +49,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     // Providers
     const { data, authenticate, logout } = useAuth();
 
-    const payload: Record<string, string> = data.user ? { phoneNumber: data.user.phoneNumber } : { participant: "" };
+    const payload: Record<string, string> = data.user ? { phoneNumber: data.user.phoneNumber || "" } : { participant: "" };
 
     // In-App data states
     const [isOpen, setIsOpen] = React.useState(false);
+    const [isJoining, setIsJoining] = React.useState(false)
     React.useEffect(() => {
         if (!data.token) {
             const handleAuthentication = async () => {
@@ -70,14 +72,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     // API Queries
     const mutation = useMutation({
         mutationFn: ({ payload }: { payload: Record<string, string> }) => joinCommunity(payload),
-        onSuccess: async () => {
+        onSuccess: async (response) => {
+            console.log(response, "returned response");
+            setIsJoining(false);
+            setIsOpen(false);
             queryClient.invalidateQueries({ queryKey: ['challenges'] })
-            router.back();
         },
     })
 
     // Action Function
     const handleJoinCommunity = () => {
+        console.log("payload to join", payload);
+        setIsJoining(true);
         mutation.mutate({ payload })
     }
 
@@ -109,13 +115,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                                 }
                                             }}>
 
-                                                <Image
+                                                <Icon icon={iconMap[item.link]} className={`stroke-1 ${activeLink(item.label, pathname) ? "text-primary stroke-primary" : "text-white stroke-white"} group-hover:text-primary transition-colors size-5`} />
+                                                {/* <Image
                                                     src={iconMap[item.link]}
                                                     alt="file"
                                                     width={16}
                                                     height={16}
                                                     className="h-4 w-4 text-white group-hover:text-primary transition-colors"
-                                                />
+                                                /> */}
                                                 {item.label}
 
                                             </li>
@@ -128,13 +135,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                         {nav2.map((item, index) => (
                                             <li key={index} className={`group flex items-center gap-1 sm:p-2 cursor-pointer rounded-md ${activeLink(item.label, pathname) ? "bg-white text-primary" : "bg-primary text-white"} hover:bg-white hover:text-primary stroke-white hover:stroke-current`} onClick={() => router.push(item.link)}>
 
-                                                <Image
+                                                <Icon icon={iconMap1[item.link]} className={`stroke-1 ${activeLink(item.label, pathname) ? "text-primary stroke-primary" : "text-white stroke-white"} group-hover:text-primary transition-colors size-5`} />
+                                                {/* <Image
                                                     src={iconMap1[item.link]}
                                                     alt="file"
                                                     width={16}
                                                     height={16}
                                                     className="h-4 w-4 text-white group-hover:text-primary transition-colors"
-                                                />
+                                                /> */}
                                                 {item.label}
 
                                             </li>
@@ -208,7 +216,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                         </div>
                                         <h1 className='font-bold text-sm sm:text-lg text-center'>Join our WhatsApp community</h1>
                                         <p className='text-center'>Get notified on the latest projects and hackathons</p>
-                                        <Button classNames="bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Join" onClick={handleJoinCommunity} />
+
+                                        <button className="flex items-ceter gap-2 bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-3 rounded-md" onClick={handleJoinCommunity}>
+                                            {isJoining && <Icon icon="line-md:loading-twotone-loop" width="18" height="18" />}
+                                            Join Community
+                                        </button>
                                     </div>
                                 </Modal>
                                 {children}

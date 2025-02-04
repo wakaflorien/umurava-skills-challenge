@@ -7,14 +7,11 @@ import { Pagination } from '@/components/Pagination';
 import { Card } from '@/components/Card';
 
 import { useAuth } from '@/providers/AuthProvider';
-import { hackathonsData } from '@/utils/data';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import { getChallenges, getStatistics } from '@/apis';
 
 const ITEMS_PER_PAGE = 6;
-
-const tabs = [{ id: 1, title: "All challenges", value: 500 }, { id: 2, title: "Completed challenges", value: 5 }, { id: 3, title: "Open challenges", value: 200 }, { id: 4, title: "Ongoing challenges", value: 250 }];
 
 const DashboardHackathons = () => {
     const { data, authenticate } = useAuth();
@@ -38,12 +35,12 @@ const DashboardHackathons = () => {
     }, [authenticate, router, data.token]);
 
     const { data: allChallenges, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
-    const { data: dataAggregates, isLoading: isLoadingAggregates, } = useQuery({ queryKey: ['stats'], queryFn: () => getStatistics(data.token) });
+    const { data: dataAggregates, isLoading: isLoadingAggregates, error: aggregatesError } = useQuery({ queryKey: ['stats'], queryFn: () => getStatistics(data.token) });
 
-    const tabs = [{ id: 1, title: "All challenges", value: !isLoadingAggregates && dataAggregates.data.totalChallengesThisWeek }, { id: 2, title: "Completed challenges", value: !isLoadingAggregates && dataAggregates.data.totalCompletedChallenges }, { id: 3, title: "Open challenges", value: !isLoadingAggregates && dataAggregates.data.totalOpenChallenges }, { id: 4, title: "Ongoing challenges", value: !isLoadingAggregates && dataAggregates.data.totalOngoingChallenges }];
+    const tabs = [{ id: 1, title: "All challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalChallengesThisWeek }, { id: 2, title: "Completed challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalCompletedChallenges }, { id: 3, title: "Open challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalOpenChallenges }, { id: 4, title: "Ongoing challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalOngoingChallenges }];
 
     const filteredData = React.useMemo(() => {
-        if (allChallenges) {
+        if (!isLoading && !error && allChallenges) {
             return activeTab.toLowerCase() === "all" ? allChallenges.data.challenges : allChallenges.data.challenges.filter((item: { status: string }) => item.status.toLowerCase() === activeTab.toLowerCase());
         } else {
             return []

@@ -11,25 +11,6 @@ import { useAuth } from "@/providers/AuthProvider";
 import { deleteChallenge, getSingleChallenge } from "@/apis";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-const participants = [
-    {
-        title: "talent@umurava.africa",
-        subTitle: "Contact Email",
-        image: "/Image.png"
-    },
-    {
-        title: "Chris Muhizi",
-        subTitle: "UI/UX Designer",
-        image: "none"
-    },
-
-    {
-        title: "Dr. Samuel Smith",
-        subTitle: "Mental Health Professional",
-        image: "none",
-    }
-];
-
 const productDesign = [
     "User Interface Design for each step",
     "Creating wireframes to outline the basic structure and layout of the web and mobile app.",
@@ -73,7 +54,7 @@ const DashboardHackathon = ({ searchParams }) => {
     }, [authenticate, router, data.token]);
 
     // API Queries
-    const { data: singleChallenge, isLoading } = useQuery({ queryKey: ['challenges'], queryFn: () => getSingleChallenge(data.token, id) })
+    const { data: singleChallenge, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: () => getSingleChallenge(data.token, id) })
 
     const mutation = useMutation({
         mutationFn: ({ token, id }: { token: string, id: string }) => deleteChallenge(token, id),
@@ -261,14 +242,14 @@ const DashboardHackathon = ({ searchParams }) => {
 
                         <div className="flex sm:flex-col items-start sm:space-y-6">
 
-                            {participants.map((item, index) => (<div key={index} className="flex sm:flex-row items-center justify-center sm:gap-4">
+                            {!isLoading && !error && singleChallenge?.data?.participants?.map((item, index) => (<div key={index} className="flex sm:flex-row items-center justify-center sm:gap-4">
                                 <div className='relative bg-[#D0E0FC] flex items-center justify-center h-10 w-10 sm:p-2 rounded-full cursor-pointer'>
-                                    {item.image !== "none" && <Image src={item.image} alt="avatar" priority className="rounded-full object-container" width={40} height={40} />}
+                                    {item.image !== "none" && <Image src={item.profile_url} alt="avatar" priority className="rounded-full object-container" width={40} height={40} />}
                                     <div className='absolute bottom-0 right-0 bg-success h-3 w-3 border border-white rounded-full'></div>
                                 </div>
                                 <div className="flex sm:flex-col">
-                                    <p className="text-black text-sm sm:text-md font-bold">{item.title}</p>
-                                    <p className="text-black text-sm sm:text-md"> {item.subTitle}</p>
+                                    <p className="text-black text-sm sm:text-md font-bold capitalize">{item.names}</p>
+                                    <p className="text-black text-sm sm:text-md"> {item.email}</p>
                                 </div>
                             </div>))}
                         </div>

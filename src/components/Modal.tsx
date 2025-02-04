@@ -24,7 +24,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title = "", child
                     className={`relative w-full max-w-lg transform rounded-lg  p-6 shadow-xl transition-all bg-white`}
                 >
                     {/* Header */}
-                    <div className="mb-4 flex items-center justify-between ">
+                    <div className={`mb-4 flex items-center ${title !== "" ? "justify-between" : "justify-end"}`}>
                         {title !== "" && (<h2
                             className={`text-lg md:text-xl font-semibold  text-primary`}
                         >
@@ -32,7 +32,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title = "", child
                         </h2>)}
                         <button
                             onClick={onClose}
-                            className={` rounded-full h-10 w-10 p-2 text-[#E5533C] hover:bg-primary hover:bg-opacity-10 transition-colors`}
+                            className={` rounded-full h-10 w-10 p-2 text-[#E5533C] bg-primary/20 hover:bg-opacity-10 transition-colors`}
                         >
                             X
                         </button>

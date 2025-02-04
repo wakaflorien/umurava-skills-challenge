@@ -39,7 +39,7 @@ const DashboardHackathon = ({ searchParams }) => {
     // In-App data states
 
     const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
-    const payload: Record<string, string> = data.user ? { participant: data.user.id } : { participant: "" };
+    const payload: Record<string, string> = data.user ? { participant: data.user._id } : { participant: "" };
 
     React.useEffect(() => {
         if (!data.token) {

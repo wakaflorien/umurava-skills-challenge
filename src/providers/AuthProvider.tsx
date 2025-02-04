@@ -8,12 +8,13 @@ import { useRouter } from "next/navigation";
 
 const defaultUser: UserProfile = {
     user: {
-        id: "",
+        _id: "",
         username: "",
         names: "",
         email: "",
         userRole: "",
         profile_url: "",
+        phoneNumber: ""
     },
     token: ""
 };

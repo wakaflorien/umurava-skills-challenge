@@ -71,12 +71,13 @@ export interface ShapeProps {
 }
 
 export interface User {
-  id: string;
+  _id: string;
   username: string;
   names: string;
   email: string;
   userRole: string;
   profile_url: string;
+  phoneNumber?: string;
 }
 
 export type Token = string;

@@ -114,7 +114,7 @@ export const joinCommunity = async (payload: Record<string, string>) => {
         body: JSON.stringify(payload),
       }
     );
-    if (!response.ok) throw new Error("Failed to join community");
+    if (!response.ok) return response;
     return await response.json();
   } catch (error) {
     throw new Error(

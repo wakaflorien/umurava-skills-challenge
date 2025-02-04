@@ -34,13 +34,13 @@ const DashboardHackathons = () => {
         }
     }, [authenticate, router, data.token]);
 
-    const { data: allChallenges, isLoading } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
+    const { data: allChallenges, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
     const { data: dataAggregates, isLoading: isLoadingAggregates, error: aggregatesError } = useQuery({ queryKey: ['stats'], queryFn: () => getStatistics(data.token) });
 
     const tabs = [{ id: 1, title: "All challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalChallengesThisWeek }, { id: 2, title: "Completed challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalCompletedChallenges }, { id: 3, title: "Open challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalOpenChallenges }, { id: 4, title: "Ongoing challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalOngoingChallenges }];
 
     const filteredData = React.useMemo(() => {
-        if (allChallenges) {
+        if (!isLoading && !error && allChallenges) {
             return activeTab.toLowerCase() === "all" ? allChallenges.data.challenges : allChallenges.data.challenges.filter((item: { status: string }) => item.status.toLowerCase() === activeTab.toLowerCase());
         } else {
             return []
