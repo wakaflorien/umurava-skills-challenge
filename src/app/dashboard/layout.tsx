@@ -5,7 +5,6 @@ import "./../globals.css";
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Modal } from '@/components/Modal';
-import { Button } from '@/components/Button';
 import { workSans } from '@/utils/fonts';
 import { Providers, useAuth } from '@/providers/AuthProvider';
 import { joinCommunity } from '@/apis';
