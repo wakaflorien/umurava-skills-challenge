@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  images: {
+    domains: ["localhost", "randomuser.me"],
+  },
   // webpack(config) {
   //   config.module.rules.push({
   //     test: /\.svg$/,

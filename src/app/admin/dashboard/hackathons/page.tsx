@@ -6,15 +6,12 @@ import { Button } from '@/components/Button';
 import { Pagination } from '@/components/Pagination';
 import { Card } from '@/components/Card';
 
-import { useAuth } from '@/providers/AuthProvider';
-import { hackathonsData } from '@/utils/data';
 import Image from 'next/image';
-import { useQuery } from '@tanstack/react-query';
 import { getChallenges, getStatistics } from '@/apis';
+import { useQuery } from '@tanstack/react-query';
+import { useAuth } from '@/providers/AuthProvider';
 
 const ITEMS_PER_PAGE = 6;
-
-const tabs = [{ id: 1, title: "All challenges", value: 500 }, { id: 2, title: "Completed challenges", value: 5 }, { id: 3, title: "Open challenges", value: 200 }, { id: 4, title: "Ongoing challenges", value: 250 }];
 
 const DashboardHackathons = () => {
     const { data, authenticate } = useAuth();
@@ -37,10 +34,10 @@ const DashboardHackathons = () => {
         }
     }, [authenticate, router, data.token]);
 
-    const { data: allChallenges, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
-    const { data: dataAggregates, isLoading: isLoadingAggregates, } = useQuery({ queryKey: ['stats'], queryFn: () => getStatistics(data.token) });
+    const { data: allChallenges, isLoading } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
+    const { data: dataAggregates, isLoading: isLoadingAggregates, error: aggregatesError } = useQuery({ queryKey: ['stats'], queryFn: () => getStatistics(data.token) });
 
-    const tabs = [{ id: 1, title: "All challenges", value: !isLoadingAggregates && dataAggregates.data.totalChallengesThisWeek }, { id: 2, title: "Completed challenges", value: !isLoadingAggregates && dataAggregates.data.totalCompletedChallenges }, { id: 3, title: "Open challenges", value: !isLoadingAggregates && dataAggregates.data.totalOpenChallenges }, { id: 4, title: "Ongoing challenges", value: !isLoadingAggregates && dataAggregates.data.totalOngoingChallenges }];
+    const tabs = [{ id: 1, title: "All challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalChallengesThisWeek }, { id: 2, title: "Completed challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalCompletedChallenges }, { id: 3, title: "Open challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalOpenChallenges }, { id: 4, title: "Ongoing challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalOngoingChallenges }];
 
     const filteredData = React.useMemo(() => {
         if (allChallenges) {
@@ -64,8 +61,12 @@ const DashboardHackathons = () => {
         setActiveTab(tab);
     };
 
+    const navigateToCreate = () => {
+        router.push("/admin/dashboard/hackathons/create");
+    }
+
     const handleViewSingle = (item) => {
-        const url = `/dashboard/hackathons/${item.challengeName}?id=${item._id}`;
+        const url = `/admin/dashboard/hackathons/${item.challengeName}?id=${item._id}`;
         router.push(url);
     };
 
@@ -86,11 +87,20 @@ const DashboardHackathons = () => {
                         className="h-4 w-4 text-primary"
                         onClick={() => router.push("/")}
                     />)} classNames={`w-fit border ${item.title.split(" ")[0].toLowerCase() === activeTab ? "bg-[#D0E0FC] !border-primary" : "bg-[#F0F2F5]"} hover:bg-[#D0E0FC] text-tertiaryColor hover:text-primary sm:text-sm border-[#D0D5DD] hover:border-primary font-semibold p-2 sm:p-3`} label={item.title} hasCount={true} count={item.value} onClick={() => handleChangeTab(item.title.split(" ")[0])} />))}
+
+                    <Button icon={(<Image
+                        src="/svgs/plus.svg"
+                        alt="file"
+                        width={4}
+                        height={4}
+                        className="h-4 w-4 text-primary"
+                        onClick={() => router.push("/")}
+                    />)} classNames={`w-fit bg-primary text-white sm:text-sm font-semibold p-2 sm:p-4`} label={"Create New Challenge"} onClick={() => navigateToCreate()} />
                 </div>)}
 
                 {/* Challeges and Hackathons */}
                 <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
-                    {!isLoading && !error && currentItems?.filter((item: { status: string }) => item.status.toLowerCase() === "open").slice(0, 3).map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
+                    {!isLoading && currentItems.length > 0 && currentItems.map((item: { status: string; challengeName: string; skills: string[]; levels: Array<string>; duration: number; }, index: number) => (<Card
                         status={item.status}
                         key={index}
                         image={`/white_logo.png`}

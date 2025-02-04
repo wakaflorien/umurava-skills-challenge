@@ -17,6 +17,7 @@ export type MetricProps = {
   percentage?: string;
   value: number;
   icon: React.ReactNode;
+  direction?: string;
 };
 
 export interface PaginationProps {
@@ -39,7 +40,7 @@ export type CardProps = {
   image: string;
   title?: string;
   skills?: Array<string>;
-  security?: string;
+  seniority?: Array<string>;
   timeline?: string;
   onClick?: () => void;
   imageWidth: number;
@@ -69,32 +70,50 @@ export interface ShapeProps {
   type: "one" | "two";
 }
 
-export interface UserProviderProps {
-  id?: number;
-  email?: string;
-  name?: string;
-  userType: "admin" | "participant";
+export interface User {
+  id: string;
+  username: string;
+  names: string;
+  email: string;
+  userRole: string;
+  profile_url: string;
+}
+
+export type Token = string;
+
+export interface UserProfile {
+  user: User;
+  token: Token;
+}
+
+export interface AuthContextType {
+  data: UserProfile;
+  authenticate: (payload: Record<string, string>) => Promise<void>;
+  logout: () => void;
 }
 
 export interface ChallengeFormProps {
-  title?: string;
-  deadline?: string;
-  duration?: string;
-  prize?: string;
-  email?: string;
-  description?: string;
-  brief?: string;
-  tasks?: string;
-  deliverables?: string,
+  challengeName?: string;
+  endDate?: string;
+  duration?: number;
+  moneyPrize?: string;
+  contactEmail?: string;
+  projectDescription?: string;
+  projectBrief?: string;
+  projectTasks?: string;
+  deliverables?: string;
+  skills?: Array<string>;
+  seniority?: string;
 }
 
 export interface ChallengeFormComponentProps {
   handleFormChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => void;
   handleClearForm: () => void;
   handleSubmitForm: () => void;
   errors?: ChallengeFormProps;
   values?: ChallengeFormProps;
+  skills: Array<Record<string, string>>;
   submitType: "create" | "edit";
 }

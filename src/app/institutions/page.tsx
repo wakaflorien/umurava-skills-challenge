@@ -152,7 +152,7 @@ const Institutions = () => {
                     <div className="relative bg-primary grid sm:grid-cols-1 gap-4 sm:gap-8 justify-items-center text-white rounded-lg sm:p-8">
                         <h1 className="text-xl sm:text-2xl font-bold">Ready to transform your learning institution?</h1>
 
-                        <Button classNames="w-[200px] bg-white text-primary sm:text-sm p-2 sm:p-3 rounded-md" label={`Let's partner`} onClick={() => router.push('/hackathons')} />
+                        <Button classNames="w-[200px] bg-white text-primary sm:text-sm p-2 sm:p-3 rounded-md" label={`Let's partner`} onClick={() => console.log("router.push('/hackathons')")} />
 
                         <BackDropShape type="two" />
 

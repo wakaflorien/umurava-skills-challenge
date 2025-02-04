@@ -6,7 +6,7 @@ import { ButtonProps } from "@/@types/global";
 export const Button: React.FC<ButtonProps> = ({ icon, classNames, label, hasCount, count = 0,  onClick }) => {
     return (
         <div className="group">
-            <button className={`${classNames} rounded-md capitalize ${icon && "flex sm:gap-2 items-center"}`} onClick={onClick}>
+            <button className={`${classNames} rounded-md capitalize ${icon && "flex sm:gap-2 items-center"}`} onClick={onClick} type="button">
                 {icon && <span>{icon}</span>}
                 <span>
                     {label}

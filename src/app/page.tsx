@@ -10,11 +10,11 @@ import { GetStartedStep } from "@/components/GetStartedStep";
 import { MiniCard } from "@/components/MiniCard";
 import { useRouter } from "next/navigation";
 import { BackDropShape } from "@/components/BackDropShape";
-import { hackathonsData, usersData } from "@/utils/data";
+import { usersData } from "@/utils/data";
+import { useQuery } from "@tanstack/react-query";
+import { getChallenges, getSkills } from "@/apis";
 
 const stats = [{ title: "1", desc: "Year" }, { title: "500 +", desc: "Challenges Completed" }, { title: "10K +", desc: "Users" }, { title: "6+", desc: "Countries" }];
-
-const skills = ["UI/UX Design", "Data science", "Graphic Design", "Data analysis & research", "Animation", "Videography & Photography", "Data science", "AI & Machine learning", "web3", "digital marketing & communications"];
 
 const participation1 = [{ title: "Enhance Your Employment Path", icon: "Case Round.svg", desc: "Network with other talented individuals and learn from their experiences." }, { title: "Personal Growth", icon: "Diploma.svg", desc: "Challenge yourself, learn new skills, and expand your professional network." }];
 
@@ -22,6 +22,10 @@ const participation2 = [{ title: "Earn Recognition and Prizes", icon: "Medal Rib
 
 export default function Home() {
   const router = useRouter();
+
+  const { data: skills, isLoading: skillsLoading, error: skillsError } = useQuery({ queryKey: ['skills'], queryFn: getSkills })
+  const { data: challenges, isLoading: challengesLoading, error: challengesError } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
+
   return (
     <div className="relative flex flex-col zoom-out">
       <Nav />
@@ -112,7 +116,7 @@ export default function Home() {
 
           <div className="flex flex-wrap items-center justify-center text-center gap-4 sm:gap-8 sm:px-8">
 
-            {skills.map((item, index) => (<Button key={index} classNames={`w-fit ${index !== 0 ? "bg-tertiary hover:bg-tertiary/90 text-tertiaryColor" : "bg-primary hover:bg-primary/90 text-white"} text-xs font-semibold p-2 sm:p-3`} label={item} onClick={() => console.log("Get Started")} />
+            {!skillsLoading && !skillsError && skills && skills.data && skills.data.map((item, index) => (<Button key={index} classNames={`w-fit ${index !== 0 ? "bg-tertiary hover:bg-tertiary/90 text-tertiaryColor" : "bg-primary hover:bg-primary/90 text-white"} text-xs font-semibold p-2 sm:p-3`} label={item.skillName} />
             ))}
           </div>
 
@@ -162,15 +166,15 @@ export default function Home() {
             <p className="w-full sm:w-1/2 text-tertiaryColor">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-3 sm:gap-8">
-            {hackathonsData.slice(0, 3).map((item, index) => (<Card
+            {!challengesLoading && !challengesError && challenges && challenges.data && challenges.data.challenges.slice(0, 3).map((item, index) => (<Card
               status={item.status}
               key={index}
-              image={item.image}
-              title={item.title}
+              image={`/white_logo.png`}
+              title={item.challengeName}
               skills={item.skills}
-              security={item.security}
-              timeline={item.timeline}
-              onClick={() => console.log("View Challenge")}
+              seniority={item.levels}
+              timeline={`${item.duration} day(s)`}
+              onClick={() => router.push("/hackathons")}
               imageWidth={150}
               imageHeight={50}
             />))}

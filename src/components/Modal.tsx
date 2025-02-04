@@ -24,7 +24,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title = "", child
                     className={`relative w-full max-w-lg transform rounded-lg  p-6 shadow-xl transition-all bg-white`}
                 >
                     {/* Header */}
-                    <div className="mb-4 flex items-center justify-end ">
+                    <div className="mb-4 flex items-center justify-between ">
                         {title !== "" && (<h2
                             className={`text-lg md:text-xl font-semibold  text-primary`}
                         >

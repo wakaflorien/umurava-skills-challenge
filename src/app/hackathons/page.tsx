@@ -4,10 +4,13 @@ import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { Card } from "@/components/Card";
 import Link from "next/link";
-import { hackathonsData } from "@/utils/data";
 import Image from "next/image";
+import { getChallenges } from "@/apis";
+import { useQuery } from "@tanstack/react-query";
 
 const Hackathons = () => {
+
+    const { data, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
 
     return (
         <div className="bg-backgroundA elative flex flex-col zoom-out">
@@ -28,15 +31,15 @@ const Hackathons = () => {
                     <span className="text-primary">Challenge & Hackathons</span>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-4 sm:gap-8">
-                    {hackathonsData.map((item, index) => (<Card
+                    {!isLoading && !error && data && data.data && data.data.challenges.map((item, index) => (<Card
                         status={item.status}
                         key={index}
-                        image={item.image}
-                        title={item.title}
+                        image={`/white_logo.png`}
+                        title={item.challengeName}
                         skills={item.skills}
-                        security={item.security}
-                        timeline={item.timeline}
-                        onClick={() => console.log("View Challenge")}
+                        seniority={item.levels}
+                        timeline={`${item.duration} day(s)`}
+                        // onClick={() => router.push("/hackathons")}
                         imageWidth={150}
                         imageHeight={50}
                     />))}
