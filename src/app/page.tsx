@@ -180,7 +180,7 @@ export default function Home() {
             />))}
           </div>
 
-          <Button classNames="w-full sm:w-[200px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="View More" onClick={() => router.push("/hackathons")} />
+          {!challengesLoading && !challengesError && challenges && challenges.data && challenges.data.challenges.length > 0 && (<Button classNames="w-full sm:w-[200px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="View More" onClick={() => router.push("/hackathons")} />)}
         </section>
 
         {/* Participate in skills challenge  */}
