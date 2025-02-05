@@ -13,10 +13,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title = "", child
     return (
         <div className="fixed inset-0 z-50 overflow-y-auto">
             {/* Backdrop */}
-            <div
-                className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
-                onClick={onClose}
-            />
+            <div className="fixed inset-0 bg-black/90  transition-opacity" onClick={onClose}/>
 
             {/* Modal */}
             <div className="flex min-h-full items-center justify-center p-4">
@@ -32,7 +29,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title = "", child
                         </h2>)}
                         <button
                             onClick={onClose}
-                            className={` rounded-full h-10 w-10 p-2 text-[#E5533C] bg-primary/20 hover:bg-opacity-10 transition-colors`}
+                            className={` rounded-full h-10 w-10 p-2 text-[#E5533C] bg-red-600/20 hover:bg-red-600/40 transition-colors`}
                         >
                             X
                         </button>
