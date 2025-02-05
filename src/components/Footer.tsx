@@ -73,9 +73,9 @@ export const Footer = () => {
                     <h1 className="text-white text-sm sm:text-lg font-semibold">Quick Links</h1>
                     <ul className="flex flex-col gap-1 sm:gap-2 py-1 sm:py-2 text-tertiary">
                         <li><a href="./">Home</a></li>
-                        <li><a href="./#contact">Program</a></li>
+                        <li><a href="./#">Program</a></li>
                         <li><a href="/about">About</a></li>
-                        <li><a href="./#contact">Contact Us</a></li>
+                        <li><a href="./#">Contact Us</a></li>
                     </ul>
                 </div>
                 <div className="flex flex-col gap-4 ">

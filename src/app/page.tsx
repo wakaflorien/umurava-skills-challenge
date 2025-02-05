@@ -291,7 +291,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="col-span-2 flex flex-col gap-4 sm:gap-8">
+            <div className="col-span-2 flex flex-col gap-4 sm:gap-10">
               <h1 className="text-xl sm:text-3xl font-bold">Ready to Unlock Your Career Potential Today!</h1>
               <p>Join a challenge or a hackathon to gain valuable work experience, build an impressive portofolio and increase your chances to land job opportunities and accelerate your career growth</p>
 
