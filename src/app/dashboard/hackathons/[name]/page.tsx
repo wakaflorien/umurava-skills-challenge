@@ -134,7 +134,7 @@ const DashboardHackathon = ({ searchParams }) => {
         setIsJoining(false);
     }
 
-    const confirmDelete = () => {
+    const confirmJoin = () => {
         setIsJoining(true);
         mutation.mutate({ token: data.token, payload: payload, id });
     }
@@ -236,9 +236,9 @@ const DashboardHackathon = ({ searchParams }) => {
 
                         <div className="w-full sm:py-4">
                             <div className="w-full flex sm:flex-row flex-wrap sm:gap-4">
-                                <Button classNames={` bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-bold p-2`} label={"Join Challenge"} onClick={handleJoinChallenge} />
+                                <Button classNames={`bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-bold p-2`} label={"Join Challenge"} onClick={handleJoinChallenge} />
 
-                                <Button classNames={` bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-2`} label={"Submit your Work"} onClick={() => console.log("Submitted")} />
+                                <Button classNames={`bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-2`} label={"Submit your Work"} onClick={() => console.log("Submitted")} />
                             </div>
                         </div>
 
@@ -256,7 +256,7 @@ const DashboardHackathon = ({ searchParams }) => {
                 </div>
                 <div className="flex gap-3 justify-center sm:mt-8">
                     <Button classNames={` text-primary border border-primary sm:text-sm p-2`} label={"Cancel"} onClick={closeModal} />
-                    <Button classNames={` bg-red-600 hover:bg-red-600/90 text-white sm:text-sm p-2`} label={"Confirm"} onClick={confirmDelete} icon={isJoining && <Icon icon="line-md:loading-twotone-loop" width="18" height="18" />} />
+                    <Button classNames={` bg-red-600 hover:bg-red-600/90 text-white sm:text-sm p-2`} label={"Confirm"} onClick={confirmJoin} icon={isJoining && <Icon icon="line-md:loading-twotone-loop" width="18" height="18" />} />
                 </div>
             </Modal>
         </div>

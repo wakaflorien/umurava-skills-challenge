@@ -52,7 +52,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
 
     const logout = () => {
         setUser(defaultUser);
-        router.replace("/");
+        router.push("/");
     };
 
     return (

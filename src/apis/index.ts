@@ -54,7 +54,7 @@ export const deleteChallenge = async (token: string, id: string) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    if (!response.ok) return response;
+    if (!response.ok) return await response.json();
     return await response.json();
   } catch (error) {
     // throw new Error(

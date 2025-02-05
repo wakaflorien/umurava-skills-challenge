@@ -27,7 +27,7 @@ export default function Home() {
   const { data: challenges, isLoading: challengesLoading, error: challengesError } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
 
   return (
-    <div className="relative flex flex-col zoom-out">
+    <div className={`relative flex flex-col zoom-out`}>
       <Nav />
 
       <main className="flex flex-col sm:items-start space-y-11 mb-4 sm:mb-16">

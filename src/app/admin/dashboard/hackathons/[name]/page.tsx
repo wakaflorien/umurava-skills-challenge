@@ -10,6 +10,7 @@ import { Modal } from "@/components/Modal";
 import { useAuth } from "@/providers/AuthProvider";
 import { deleteChallenge, getSingleChallenge } from "@/apis";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 
 const productDesign = [
     "User Interface Design for each step",
@@ -38,6 +39,7 @@ const DashboardHackathon = ({ searchParams }) => {
 
     // In-App Data 
     const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
+    const [isDeleting, setIsDeleting] = React.useState(false)
     React.useEffect(() => {
         if (!data.token) {
             const handleAuthentication = async () => {
@@ -58,11 +60,16 @@ const DashboardHackathon = ({ searchParams }) => {
 
     const mutation = useMutation({
         mutationFn: ({ token, id }: { token: string, id: string }) => deleteChallenge(token, id),
-        onSuccess: async () => {
+        onSuccess: (response) => {
+            console.log(response);
+            setModal({ ...modal, open: false });
             queryClient.invalidateQueries({ queryKey: ['challenges'] })
+            setIsDeleting(false);
+            router.push("/admin/dashboard/hackathons");
         },
-        onError: () => {
-            setModal({ open: true, message: "Deleting challenge Failed ", title: "Failed" })
+        onError: (error) => {
+            console.log(error);
+            setModal({ open: true, message: error.message, title: "Failed" })
         }
     })
 
@@ -125,7 +132,13 @@ const DashboardHackathon = ({ searchParams }) => {
         setModal({ ...modal, open: true, message: `Are you sure you want to delete ${selectedChallenge} Challenge ?` });
     }
 
-    const handleDelete = async () => {
+    const closeModal = () => {
+        setModal({ ...modal, open: false })
+        setIsDeleting(false);
+    }
+
+    const confirmDelete = () => {
+        setIsDeleting(true);
         mutation.mutate({ token: data.token, id })
     }
 
@@ -265,16 +278,15 @@ const DashboardHackathon = ({ searchParams }) => {
 
             <Modal
                 isOpen={modal.open}
-                onClose={() => setModal({ ...modal, open: false })}
-                title={modal.title || "Delete Confirmation"}
+                onClose={closeModal}
+                title={modal.title}
             >
                 <div className='flex flex-col items-start justify-start sm:gap-4'>
-
                     <p className='text-center'>{modal.message}</p>
-                    {modal.message.toLowerCase().includes("are you sure") &&(<div className="w-full flex items-center justify-center sm:gap-3">
-                        <Button classNames="w-[70px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="No" onClick={() => setModal({ ...modal, open: false })} />
-                        <Button classNames="w-[70px] bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-semibold p-2 sm:p-3" label="Yes" onClick={() => handleDelete()} />
-                    </div>)}
+                </div>
+                <div className="flex gap-3 justify-center sm:mt-8">
+                    <Button classNames={` text-primary border border-primary sm:text-sm p-2`} label={"Cancel"} onClick={closeModal} />
+                    <Button classNames={` bg-red-600 hover:bg-red-600/90 text-white sm:text-sm p-2`} label={"Confirm"} onClick={confirmDelete} icon={isDeleting && <Icon icon="line-md:loading-twotone-loop" width="18" height="18" />} />
                 </div>
             </Modal>
         </div>
