@@ -9,7 +9,6 @@ import Image from "next/image";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { editChallenge, getSingleChallenge, getSkills } from "@/apis";
 import { useAuth } from "@/providers/AuthProvider";
-import { handleClearForm } from "../../create/page";
 import { Modal } from "@/components/Modal";
 
 const EditChallenge = ({ searchParams }) => {
@@ -70,6 +69,8 @@ const EditChallenge = ({ searchParams }) => {
 
     const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
 
+
+    // Action Functions
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData({
@@ -77,6 +78,21 @@ const EditChallenge = ({ searchParams }) => {
             [name]: name === "duration" ? Number(value) : value,
         });
     }
+
+    const handleClearForm = () => {
+        setFormData({
+            challengeName: "",
+            endDate: "",
+            duration: 1,
+            moneyPrize: "",
+            contactEmail: "",
+            projectDescription: "",
+            projectBrief: "",
+            projectTasks: "",
+            skills: [],
+        });
+        setErrors({});
+    };
 
     const handleSubmitForm = async () => {
         if (await validateForm(formData, setErrors)) {
@@ -114,7 +130,7 @@ const EditChallenge = ({ searchParams }) => {
                         <p className="sm:text-sm text-tertiaryColor">Fill out these details to build your broadcast</p>
                     </header>
 
-                    <ChallengeForm skills={isSkillsLoading ? [] : skills.data} submitType="edit" handleFormChange={handleFormChange} handleClearForm={() => handleClearForm(setFormData, setErrors)} handleSubmitForm={handleSubmitForm} errors={errors} values={formData} />
+                    <ChallengeForm skills={isSkillsLoading ? [] : skills.data} submitType="edit" handleFormChange={handleFormChange} handleClearForm={handleClearForm} handleSubmitForm={handleSubmitForm} errors={errors} values={formData} />
 
                 </div>
             </div>

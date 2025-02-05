@@ -87,7 +87,7 @@ export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitTyp
             </div> */}
 
             <div className="w-full flex justify-between">
-                <Button classNames={`w-[200px] bg-white text-primary border border-primary sm:text-sm font-bold p-3`} label={"Cancel"} onClick={handleClearForm} />
+                <Button classNames={`w-[200px] bg-white text-primary border border-primary sm:text-sm font-bold p-3`} label={"Cancel"} onClick={() =>handleClearForm()} />
                 <Button classNames={`w-[200px] bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-3`} label={`${submitType === "create" ? "Create Challenge" : "Update Challenge"}`} onClick={handleSubmitForm} />
             </div>
         </form>

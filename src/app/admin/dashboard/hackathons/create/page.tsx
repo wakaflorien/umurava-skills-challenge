@@ -11,22 +11,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSkills, postChallenge } from "@/apis";
 import { Modal } from "@/components/Modal";
 
-export const handleClearForm = async (setFormData: React.Dispatch<React.SetStateAction<ChallengeFormProps>>, setErrors: React.Dispatch<React.SetStateAction<ChallengeFormProps>>) => {
-    setFormData({
-        challengeName: "",
-        endDate: "",
-        duration: 1,
-        moneyPrize: "",
-        contactEmail: "",
-        projectDescription: "",
-        projectBrief: "",
-        projectTasks: "",
-        skills: [],
-    });
-    setErrors({});
-};
-
-
 const CreateChallenge = () => {
     // In-App imports
     const queryClient = useQueryClient();
@@ -89,6 +73,20 @@ const CreateChallenge = () => {
         });
     }
 
+    const handleClearForm = () => {
+        setFormData({
+            challengeName: "",
+            endDate: "",
+            duration: 1,
+            moneyPrize: "",
+            contactEmail: "",
+            projectDescription: "",
+            projectBrief: "",
+            projectTasks: "",
+            skills: [],
+        });
+        setErrors({});
+    };
 
     const handleSubmitForm = async () => {
         if (await validateForm(formData, setErrors)) {
@@ -127,7 +125,7 @@ const CreateChallenge = () => {
                         <p className="sm:text-sm text-tertiaryColor">Fill out these details to build your broadcast</p>
                     </header>
 
-                    <ChallengeForm submitType="create" handleFormChange={handleFormChange} handleClearForm={() => handleClearForm(setFormData, setErrors)} handleSubmitForm={handleSubmitForm} errors={errors} skills={isLoading ? [] : skills.data} />
+                    <ChallengeForm submitType="create" handleFormChange={handleFormChange} handleClearForm={handleClearForm} handleSubmitForm={handleSubmitForm} errors={errors} skills={isLoading ? [] : skills.data} />
 
                 </div>
             </div>
