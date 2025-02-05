@@ -87,14 +87,16 @@ const DashboardHome = () => {
                 <div className='flex items-center justify-start sm:justify-between gap-4'>
                     <h1 className='font-bold text-xs sm:text-sm'>Recent Challenges</h1>
                     <div className='flex items-center sm:gap-2 gap-1 text-primary cursor-pointer' onClick={() => handleSeeAll()}>
-                        <span>{"See all"}</span>
-                        <Image
-                            src="/svgs/chevron-right.svg"
-                            alt="file"
-                            width={4}
-                            height={4}
-                            className="h-4 w-4"
-                        />
+                        {!isLoading && !error && allChallenges && allChallenges?.data && allChallenges?.data?.challenges?.length > 0 && (<>
+                            <span>{"See all"}</span>
+                            <Image
+                                src="/svgs/chevron-right.svg"
+                                alt="file"
+                                width={4}
+                                height={4}
+                                className="h-4 w-4"
+                            />
+                        </>)}
                     </div>
                 </div>
 

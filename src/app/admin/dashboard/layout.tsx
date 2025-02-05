@@ -110,14 +110,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                             <p className="text-white text-sm sm:text-sm">{data && data.user.names}</p>
                                             <p className="text-white text-sm sm:text-sm"> {data && data.user.email}</p>
                                         </div>
-                                        <Image
-                                            src="/svgs/signout.svg"
-                                            alt="file"
-                                            width={4}
-                                            height={4}
-                                            className="h-4 w-4 text-white cursor-pointer"
-                                            onClick={logout}
-                                        />
+                                        <Icon icon="ic:baseline-logout" className='text-white cursor-pointer size-5' onClick={() => logout()} />
                                     </div>
                                 </div>
                             </nav>

@@ -115,13 +115,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                             }}>
 
                                                 <Icon icon={iconMap[item.link]} className={`stroke-1 ${activeLink(item.label, pathname) ? "text-primary stroke-primary" : "text-white stroke-white"} group-hover:text-primary transition-colors size-5`} />
-                                                {/* <Image
-                                                    src={iconMap[item.link]}
-                                                    alt="file"
-                                                    width={16}
-                                                    height={16}
-                                                    className="h-4 w-4 text-white group-hover:text-primary transition-colors"
-                                                /> */}
+                                                
                                                 {item.label}
 
                                             </li>
@@ -135,13 +129,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                             <li key={index} className={`group flex items-center gap-1 sm:p-2 cursor-pointer rounded-md ${activeLink(item.label, pathname) ? "bg-white text-primary" : "bg-primary text-white"} hover:bg-white hover:text-primary stroke-white hover:stroke-current`} onClick={() => router.push(item.link)}>
 
                                                 <Icon icon={iconMap1[item.link]} className={`stroke-1 ${activeLink(item.label, pathname) ? "text-primary stroke-primary" : "text-white stroke-white"} group-hover:text-primary transition-colors size-5`} />
-                                                {/* <Image
-                                                    src={iconMap1[item.link]}
-                                                    alt="file"
-                                                    width={16}
-                                                    height={16}
-                                                    className="h-4 w-4 text-white group-hover:text-primary transition-colors"
-                                                /> */}
+                                               
                                                 {item.label}
 
                                             </li>
@@ -156,14 +144,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                             <p className="text-white text-sm sm:text-sm">{data && data.user.names}</p>
                                             <p className="text-white text-sm sm:text-sm"> {data && data.user.email}</p>
                                         </div>
-                                        <Image
-                                            src="/svgs/signout.svg"
-                                            alt="file"
-                                            width={4}
-                                            height={4}
-                                            className="h-4 w-4 text-white cursor-pointer"
-                                            onClick={() => logout()}
-                                        />
+                                        
+                                        <Icon icon="ic:baseline-logout" className='text-white cursor-pointer size-5' onClick={() => logout()} />
                                     </div>
                                 </div>
                             </nav>
