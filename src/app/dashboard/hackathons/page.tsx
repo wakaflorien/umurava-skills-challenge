@@ -74,7 +74,8 @@ const DashboardHackathons = () => {
                     <p>Join a challenge or a hackathon to gain valuable work experience</p>
                 </header>
 
-                {isLoadingAggregates ? (<p>Loading ...</p>) : (<div className='flex sm:flex-row flex-wrap flex-col items-center justify-start gap-8 sm:gap-4'>
+                {isLoadingAggregates && (<p>Loading ...</p>)}
+                {!isLoadingAggregates && !error && (<div className='flex sm:flex-row flex-wrap flex-col items-center justify-start gap-8 sm:gap-4'>
                     {tabs.map((item, index) => (<Button key={index} icon={(<Image
                         src="/svgs/file.svg"
                         alt="file"
