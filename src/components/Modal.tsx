@@ -29,7 +29,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title = "", child
                         </h2>)}
                         <button
                             onClick={onClose}
-                            className={` rounded-full h-10 w-10 p-2 text-[#E5533C] bg-red-600/20 hover:bg-red-600/40 transition-colors`}
+                            className={` rounded-full h-10 w-10 p-2 text-red-600 bg-red-600/20 hover:bg-red-600/40 transition-colors`}
                         >
                             X
                         </button>

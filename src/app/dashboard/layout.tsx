@@ -52,7 +52,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
     // In-App data states
     const [isOpen, setIsOpen] = React.useState(false);
-    const [isJoining, setIsJoining] = React.useState(false)
+    const [isJoining, setIsJoining] = React.useState(false);
     React.useEffect(() => {
         if (!data.token) {
             const handleAuthentication = async () => {
@@ -81,7 +81,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
     // Action Function
     const handleJoinCommunity = () => {
-        console.log("payload to join", payload);
         setIsJoining(true);
         mutation.mutate({ payload })
     }

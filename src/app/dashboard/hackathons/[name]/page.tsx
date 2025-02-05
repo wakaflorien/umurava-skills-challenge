@@ -10,6 +10,7 @@ import { Modal } from "@/components/Modal";
 import { useAuth } from "@/providers/AuthProvider";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSingleChallenge, joinChallenge } from "@/apis";
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 
 const productDesign = [
     "User Interface Design for each step",
@@ -35,11 +36,12 @@ const DashboardHackathon = ({ searchParams }) => {
 
     // URL Params
     const { id }: { id: string } = React.use(searchParams);
+    const payload: Record<string, string> = data.user ? { participant: data.user._id } : { participant: "" };
 
     // In-App data states
 
     const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
-    const payload: Record<string, string> = data.user ? { participant: data.user._id } : { participant: "" };
+    const [isJoining, setIsJoining] = React.useState(false)
 
     React.useEffect(() => {
         if (!data.token) {
@@ -61,11 +63,15 @@ const DashboardHackathon = ({ searchParams }) => {
 
     const mutation = useMutation({
         mutationFn: ({ token, payload, id }: { token: string, payload: Record<string, string>, id: string }) => joinChallenge(token, payload, id),
-        onSuccess: async () => {
+        onSuccess: async (response) => {
+            console.log('Delete response', response)
+            setModal({ ...modal, open: false });
             queryClient.invalidateQueries({ queryKey: ['challenges'] })
+            setIsJoining(false);
         },
-        onError: () => {
-            setModal({ open: true, message: "Joining challenge Failed ", title: "Failed" })
+        onError: (error) => {
+            console.log("Errors", error)
+            setModal({ open: true, message: error.message, title: "Failed" })
         }
     })
 
@@ -120,7 +126,17 @@ const DashboardHackathon = ({ searchParams }) => {
     const selectedChallenge = decodeUrl(pathname.split("/dashboard/hackathons/")[1])
 
     const handleJoinChallenge = () => {
-        mutation.mutate({ token: data.token, payload: payload, id })
+        setModal({ ...modal, open: true, message: `Are you sure you want to join ${selectedChallenge} challenge`, title: "Confirm joining" })
+    }
+
+    const closeModal = () => {
+        setModal({ ...modal, open: false })
+        setIsJoining(false);
+    }
+
+    const confirmDelete = () => {
+        setIsJoining(true);
+        mutation.mutate({ token: data.token, payload: payload, id });
     }
 
     return (
@@ -233,12 +249,14 @@ const DashboardHackathon = ({ searchParams }) => {
 
             <Modal
                 isOpen={modal.open}
-                onClose={() => setModal({ ...modal, open: false })}
-                title={modal.title || "Join Confirmation"}
-            >
+                onClose={closeModal}
+                title={modal.title}>
                 <div className='flex flex-col items-start justify-start sm:gap-4'>
-
-                    <p className='text-center'>{modal.message}</p>
+                    <p className="text-sm">{modal.message}</p>
+                </div>
+                <div className="flex gap-3 justify-center sm:mt-8">
+                    <Button classNames={` text-primary border border-primary sm:text-sm p-2`} label={"Cancel"} onClick={closeModal} />
+                    <Button classNames={` bg-red-600 hover:bg-red-600/90 text-white sm:text-sm p-2`} label={"Confirm"} onClick={confirmDelete} icon={isJoining && <Icon icon="line-md:loading-twotone-loop" width="18" height="18" />} />
                 </div>
             </Modal>
         </div>

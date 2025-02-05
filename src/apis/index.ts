@@ -1,4 +1,5 @@
 import { ChallengeFormProps } from "@/@types/global";
+import { Group } from "next/dist/shared/lib/router/utils/route-regex";
 
 const BASE_URL = "http://localhost:3001";
 
@@ -53,12 +54,13 @@ export const deleteChallenge = async (token: string, id: string) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    if (!response.ok) throw new Error("Failed to delete challenge");
+    if (!response.ok) return response;
     return await response.json();
   } catch (error) {
-    throw new Error(
-      error instanceof Error ? error.message : "An unknown error occurred"
-    );
+    // throw new Error(
+    //   error instanceof Error ? error.message : "An unknown error occurred"
+    // );
+    return error;
   }
 };
 
@@ -95,12 +97,10 @@ export const joinChallenge = async (
         body: JSON.stringify(payload),
       }
     );
-    if (!response.ok) throw new Error("Failed to join challenge");
+    if (!response.ok) return await response.json();
     return await response.json();
   } catch (error) {
-    throw new Error(
-      error instanceof Error ? error.message : "An unknown error occurred"
-    );
+    return error;
   }
 };
 
@@ -110,11 +110,11 @@ export const joinCommunity = async (payload: Record<string, string>) => {
       `${BASE_URL}/public/api/join/whatsapp/community`,
       {
         method: "POST",
-        headers: {"Content-Type": "application/json",},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       }
     );
-    if (!response.ok) return response;
+    if (!response.ok) return await response.json();
     return await response.json();
   } catch (error) {
     throw new Error(
