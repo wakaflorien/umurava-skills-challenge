@@ -56,7 +56,7 @@ const DashboardHome = () => {
             <div className='flex sm:flex-col sm:px-4 gap-4 sm:gap-8'>
                 <header className='flex items-center justify-between space-y-2'>
                     <div>
-                        <h1 className='font-bold text-md sm:text-lg'>Welcome back {`Hilaire`},</h1>
+                        <h1 className='font-bold text-md sm:text-lg'>Welcome back {data.user.names},</h1>
                         <p>Build Work Experience through Skills Challenges</p>
                     </div>
 

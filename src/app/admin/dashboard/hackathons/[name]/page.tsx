@@ -204,7 +204,7 @@ const DashboardHackathon = ({ searchParams }) => {
 
                 </div>
 
-                <div className={`grid sm:grid-row-2`}>
+                <div className={`flex sm:flex-col gap-4 sm:gap-8`}>
 
                     <div className='bg-white h-fit w-full flex sm:flex-col items-start gap-8 sm:gap-4 sm:p-4 border rounded-lg'>
                         <header className='space-y-2 sm:space-y-4'>
@@ -235,9 +235,10 @@ const DashboardHackathon = ({ searchParams }) => {
 
                     </div>
 
-                    <div className='row-span-2 bg-white h-fit w-full flex sm:flex-col items-start gap-8 sm:gap-4 sm:p-4 border rounded-lg'>
-                        <header className='space-y-2 sm:space-y-4'>
+                    <div className=' bg-white h-fit w-full flex sm:flex-col items-start gap-8 sm:gap-4 sm:p-4 border rounded-lg'>
+                        <header className='flex items-center gap-2'>
                             <h1 className='font-bold text-sm sm:text-md'>Participants</h1>
+                            <span className="bg-primary text-white px-2 rounded-full">{!isLoading && !error && singleChallenge?.data?.participants?.length}</span>
                         </header>
 
                         <div className="flex sm:flex-col items-start sm:space-y-6">

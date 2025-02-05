@@ -51,7 +51,7 @@ const DashboardHome = () => {
     }
 
     const handleViewSingle = (item) => {
-        const url = `/dashboard/hackathons/${item.challengeName}?id=${item._id}`;
+        const url = `/admin/dashboard/hackathons/${item.challengeName}?id=${item._id}`;
         router.push(url);
     };
 
