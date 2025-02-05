@@ -33,16 +33,16 @@ export default function Home() {
       <main className="flex flex-col sm:items-start space-y-11 mb-16">
 
         {/* Hero section  */}
-        <section className="h-full grid sm:grid-cols-2 sm:px-24" id="hero">
-          <div className="flex flex-col items-start gap-4 sm:gap-8 sm:pt-24">
+        <section className="h-full grid sm:grid-cols-2 px-4 sm:px-24" id="hero">
+          <div className="flex flex-col items-start gap-4 sm:gap-8 pt-8 sm:pt-24">
             <header className="flex flex-col gap-4 sm:gap-8">
-              <h1 className="text-primary text-2xl sm:text-5xl sm:leading-tight font-bold">Build Work Experience through Skills Challenges Program </h1>
+              <h1 className="text-primary text-xl sm:text-5xl sm:leading-tight font-bold">Build Work Experience through Skills Challenges Program </h1>
               <p className="text-black  text-lg leading-8">Enhance your Employability and Accelerate your Career Growth by working on Hands-on projects & hackathons from various businesses & organizations.</p>
             </header>
-            <Button classNames="w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Get Started" onClick={() => router.push('/hackathons')} />
+            <Button classNames="w-full sm:w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Get Started" onClick={() => router.push('/hackathons')} />
           </div>
 
-          <div className="flex gap-4 w-full sm:pt-24">
+          <div className="flex gap-8 sm:gap-4 w-full pt-4 sm:pt-24">
             {["image_2.png", "image_1.png"].map(item => (
               <div key={item} className="flex-1">
                 <Image
@@ -61,7 +61,7 @@ export default function Home() {
         </section>
 
         {/* Career section */}
-        <section className="bg-backgroundA h-full grid gap-24 sm:grid-row-3 sm:px-32 sm:py-16" id="career">
+        <section className="bg-backgroundA h-full grid gap-4 sm:gap-24 sm:grid-row-3 px-4 sm:px-32 py-4 sm:py-16" id="career">
 
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
             <h1 className="text-black text-xl sm:text-4xl sm:leading-tight font-bold">Experience a New Way of Building Work Experience.</h1>
@@ -97,11 +97,11 @@ export default function Home() {
         </section>
 
         {/* Skills section  */}
-        <section className="h-full grid gap-24 sm:grid-row-4 sm:px-24">
+        <section className="h-full grid gap-4 sm:gap-24 sm:grid-row-4 px-4 sm:px-24">
 
-          <div className="relative flex items-center justify-between bg-primary text-white rounded-lg sm-8 sm:p-16">
+          <div className="relative flex items-center justify-between bg-primary text-white rounded-lg p-2 sm:p-16">
             {stats.map(item => (<div key={item.title} className="flex flex-col">
-              <h1 className="text-2xl sm:text-3xl font-bold">{item.title}</h1>
+              <h1 className="text-xl sm:text-3xl font-bold">{item.title}</h1>
               <p>{item.desc} </p>
             </div>))}
 
@@ -120,8 +120,8 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="bg-backgroundA grid gap-8 sm:grid-cols-2 rounded-md">
-            <div className="flex flex-col gap-4 sm:gap-8 rounded-lg text-white px-4 sm:px-8 py-16 sm:py-24">
+          <div className="bg-backgroundA grid gap-2 sm:gap-8 sm:grid-cols-2 rounded-md">
+            <div className="flex flex-col gap-2 sm:gap-8 rounded-lg text-white px-4 sm:px-8 py-4 sm:py-24">
               <Image
                 className="cursor-pointer"
                 aria-hidden
@@ -144,7 +144,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="p-4 sm:p-8">
+            <div className="p-2 sm:p-8">
               <Image
                 aria-hidden
                 src={`/payrolldashboard1.png`}
@@ -160,7 +160,7 @@ export default function Home() {
         </section>
 
         {/* Challenges and Hackathons section  */}
-        <section className="h-full grid gap-24 sm:grid-row-3 justify-items-center sm:px-32" id="hackathons">
+        <section className="h-full grid gap-4 sm:gap-24 sm:grid-row-3 justify-items-center px-4 sm:px-32" id="hackathons">
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
             <h1 className="text-black text-xl sm:text-4xl font-bold">Explore Challenges & Hackathons.</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
@@ -180,11 +180,11 @@ export default function Home() {
             />))}
           </div>
 
-          <Button classNames="w-[200px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="View More" onClick={() => router.push("/hackathons")} />
+          <Button classNames="w-full sm:w-[200px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="View More" onClick={() => router.push("/hackathons")} />
         </section>
 
         {/* Participate in skills challenge  */}
-        <section className="bg-backgroundA h-full grid gap-24 sm:grid-row-2 justify-items-center sm:px-24 sm:py-16" id="participate">
+        <section className="bg-backgroundA h-full grid gap-4 sm:gap-24 sm:grid-row-2 justify-items-center px-4 sm:px-24 py-4 sm:py-16" id="participate">
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
             <h1 className="text-black text-xl sm:text-4xl font-bold">What else can I gain from participating in Skills Challenges ?</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
@@ -222,7 +222,7 @@ export default function Home() {
         </section>
 
         {/* Challenges Program */}
-        <section className="h-full grid gap-24 sm:grid-row-2 sm:px-24 sm:py-16" id="challenges">
+        <section className="h-full grid gap-4 sm:gap-24 sm:grid-row-2 px-4 sm:px-24 sm:py-16" id="challenges">
           <div className="flex flex-col items-start gap-4 sm:gap-8">
             <h1 className="w-full sm:w-1/2 text-black text-xl sm:text-4xl font-bold">Users are in Love with Skills Challenges Program</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor">See what our clients say about working with us. Their success speaks for our dedication and expertise.</p>
@@ -241,7 +241,7 @@ export default function Home() {
         </section>
 
         {/* How to Get started */}
-        <section className="bg-backgroundA h-full w-full grid gap-24 sm:grid-row-2 justify-items-center sm:px-32 sm:py-16" id="getStarted">
+        <section className="bg-backgroundA h-full w-full grid gap-4 sm:gap-24 sm:grid-row-2 justify-items-center px-4 sm:px-32 py-4 sm:py-16" id="getStarted">
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
             <h1 className="text-black text-xl sm:text-4xl font-bold">How to get started</h1>
 
@@ -278,8 +278,8 @@ export default function Home() {
         </section>
 
 
-        <section className="h-full w-full grid sm:grid-row-1 sm:px-24">
-          <div className="relative grid sm:grid-cols-3 bg-primary text-white rounded-lg sm:p-8">
+        <section className="h-full w-full grid sm:grid-row-1 px-4 sm:px-24">
+          <div className="relative grid sm:grid-cols-3 gap-4 bg-primary text-white rounded-lg p-4 sm:p-8">
             <div>
               <Image
                 className="rounded-md object-cover"
@@ -292,10 +292,10 @@ export default function Home() {
             </div>
 
             <div className="col-span-2 flex flex-col gap-4 sm:gap-8">
-              <h1 className="text-2xl sm:text-3xl font-bold">Ready to Unlock Your Career Potential Today!</h1>
+              <h1 className="text-xl sm:text-3xl font-bold">Ready to Unlock Your Career Potential Today!</h1>
               <p>Join a challenge or a hackathon to gain valuable work experience, build an impressive portofolio and increase your chances to land job opportunities and accelerate your career growth</p>
 
-              <Button classNames="w-[200px] bg-white text-primary sm:text-sm p-2 sm:p-3 rounded-md" label={`View Challenge`} onClick={() => router.push('/hackathons')} />
+              <Button classNames="w-full sm:w-[200px] bg-white text-primary sm:text-sm p-2 sm:p-3 rounded-md" label={`View Challenge`} onClick={() => router.push('/hackathons')} />
             </div>
 
             <BackDropShape type="one" />

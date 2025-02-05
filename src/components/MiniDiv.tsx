@@ -4,7 +4,7 @@ import { DivProps } from "@/@types/global"
 
 export const MiniDiv: React.FC<DivProps> = ({ icon, iconWidth, iconHeight, title, desc }) => {
     return (
-        <div className="flex flex-col sm:gap-2">
+        <div className="flex flex-col gap-2 sm:gap-2">
             <div className="bg-primary w-fit p-4 rounded-md">
                 <Image
                     className="cursor-pointer"
