@@ -1,9 +1,9 @@
 import { ChallengeFormProps } from "@/@types/global";
 
-const validateEmail = (email: string): boolean => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
+// const validateEmail = (email: string): boolean => {
+//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   return emailRegex.test(email);
+// };
 
 export const validateForm = async (formData: ChallengeFormProps, setErrors: (errors: ChallengeFormProps) => void) => {
   const newErrors: ChallengeFormProps = {};

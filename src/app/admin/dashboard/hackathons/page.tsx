@@ -45,7 +45,7 @@ const DashboardHackathons = () => {
         } else {
             return []
         }
-    }, [activeTab, allChallenges]);
+    }, [activeTab, allChallenges, error, isLoading]);
 
     const totalPages = filteredData ? Math.ceil(filteredData.length / ITEMS_PER_PAGE) : 0;
 
