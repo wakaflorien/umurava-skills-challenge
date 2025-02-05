@@ -13,11 +13,11 @@ const About = () => {
         <div className="bg-backgroundA elative flex flex-col zoom-out">
             <Nav />
             <main className="flex flex-col sm:space-y-16">
-                <section className="bg-white h-full grid sm:grid-cols-2 gap-8 sm:gap-16 sm:px-24 py-4 sm:py-24" id="videoIntro">
+                <section className="bg-white h-full grid sm:grid-cols-2 gap-8 sm:gap-16 px-4 sm:px-24 py-4 sm:py-24" id="videoIntro">
 
-                    <header className="flex flex-col gap-4 sm:gap-8 sm:pt-24">
+                    <header className="flex flex-col gap-4 sm:gap-8">
                         <h1 className="text-primary text-xl sm:text-4xl sm:leading-tight font-bold">Our story</h1>
-                        <p className="text-black  text-lg leading-8">With 3 years of experience matching African digital talents to local and global job markets, we still remain with a big number of jobs that remain unfilled due to the lack of experienced African Talents. Driven by our mission to place skilled and professional digital talent, we created Skills Challenges as a project-based learning solution for talents to gain real-world experience, solve problems, and build portfolios so that they become ready for global job markets.</p>
+                        <p className="text-black text-md sm:text-lg leading-8">With 3 years of experience matching African digital talents to local and global job markets, we still remain with a big number of jobs that remain unfilled due to the lack of experienced African Talents. Driven by our mission to place skilled and professional digital talent, we created Skills Challenges as a project-based learning solution for talents to gain real-world experience, solve problems, and build portfolios so that they become ready for global job markets.</p>
                     </header>
 
                     <div className="flex gap-2 sm:gap-4 w-full rounded-xl bg-primary">
@@ -29,7 +29,7 @@ const About = () => {
                     </div>
                 </section>
 
-                <section className="bg-backgroundA h-full grid gap-8 sm:gap-16 sm:grid-row-3 sm:px-32 py-4 sm:py-8" id="career">
+                <section className="bg-backgroundA h-full grid gap-4 sm:gap-16 sm:grid-row-3 px-4 sm:px-32 py-4 sm:py-8" id="career">
 
                     <div className="flex flex-col  text-center gap-4 sm:gap-8">
                         <h1 className="text-black text-xl sm:text-4xl sm:leading-tight font-bold">Why we are solving this problem</h1>
@@ -63,8 +63,8 @@ const About = () => {
 
                 </section>
 
-                <section className="bg-background h-full grid gap-4 sm:grid-cols-2 sm:gap-8 sm:px-24 py-4 sm:py-24" id="participate">
-                    <div className="space-y-6 sm:space-y-16">
+                <section className="bg-background h-full grid gap-4 sm:grid-cols-2 sm:gap-8 px-4 sm:px-24 py-4 sm:py-24" id="participate">
+                    <div className="space-y-4 sm:space-y-16">
                         <h1 className="text-xl sm:text-4xl sm:leading-tight font-bold">Skills Challenges Program is built on the Umurava Talent Marketplace Platform</h1>
 
                         <div className="space-y-4 sm:space-y-8">
@@ -73,10 +73,10 @@ const About = () => {
                             <p>Umurava Skills Challenges enables young talents to build a portfolio and experience that increases their readiness to access job opportunities and projects.</p>
                         </div>
 
-                        <Button classNames="w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Get Started" onClick={() => router.push('/hackathons')} />
+                        <Button classNames="w-full sm:w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Get Started" onClick={() => router.push('/hackathons')} />
                     </div>
 
-                    <div>
+                    <div className="my-4 sm:my-0">
                         <Image
                             aria-hidden
                             src={`/dashboard.png`}
