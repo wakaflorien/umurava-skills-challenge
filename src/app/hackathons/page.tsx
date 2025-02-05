@@ -13,12 +13,11 @@ const Hackathons = () => {
     const { data, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
 
     return (
-        <div className="bg-backgroundA elative flex flex-col zoom-out">
+        <div className="bg-backgroundA relative flex flex-col zoom-out">
             <Nav />
-            <main className="flex flex-col sm:px-24 py-16 sm:space-y-16">
-                <div className="flex gap-2 sm:gap-4 cursor-pointer">
+            <main className="flex flex-col px-4 sm:px-24 py-4 sm:py-16 space-y-4 sm:space-y-8">
+                <div className="flex items-center gap-2 sm:gap-4 cursor-pointer">
                     <Link href="./" className="flex items-center gap-2 text-tertiaryColor">
-                        {/* <ArrowLeft className={`h-5 w-5 !stroke-[0.1] !stroke-current border`} /> */}
                         <Image
                             src="/svgs/arrow-left.svg"
                             alt="file"
@@ -26,9 +25,10 @@ const Hackathons = () => {
                             height={4}
                             className="h-4 w-4"
                         />
-                        Go back</Link>
+                        <p className="text-sm sm:text-lg"> Go back</p>
+                    </Link>
                     <span className="text-tertiaryColor">/</span>
-                    <span className="text-primary">Challenge & Hackathons</span>
+                    <p className="text-primary text-sm sm:text-lg">Challenge & Hackathons</p>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-4 sm:gap-8">
                     {!isLoading && !error && data && data.data && data.data.challenges.map((item, index) => (<Card

@@ -30,7 +30,7 @@ export default function Home() {
     <div className="relative flex flex-col zoom-out">
       <Nav />
 
-      <main className="flex flex-col sm:items-start space-y-11 mb-16">
+      <main className="flex flex-col sm:items-start space-y-11 mb-4 sm:mb-16">
 
         {/* Hero section  */}
         <section className="h-full grid sm:grid-cols-2 px-4 sm:px-24" id="hero">
