@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { getChallenges } from '@/apis';
 import { useQuery } from '@tanstack/react-query';
+import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
 
 const DashboardHome = () => {
     // In-App imports
@@ -34,9 +35,11 @@ const DashboardHome = () => {
 
     const formattedAdminStats = [
         { title: "Completed challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalCompletedChallenges },
-        { title: "Open challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOngoingChallenges },
-        { title: "Ongoing challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOpenChallenges }
+        { title: "Open challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOpenChallenges },
+        { title: "Ongoing challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOngoingChallenges }
     ];
+
+    const filteredChallenges = (!isLoading && !error && allChallenges?.data?.challenges?.length > 0) ? allChallenges?.data?.challenges?.filter((item: { status: string }) => item.status.toLowerCase() === "open" || item.status.toLowerCase() === "ongoing") : [];
 
     const viewProfile = () => {
         console.log('View profile');
@@ -60,15 +63,13 @@ const DashboardHome = () => {
                         <p>Build Work Experience through Skills Challenges</p>
                     </div>
 
-                    <div>
-                        <Button icon={<Image
-                            src="/svgs/Show.svg"
-                            alt="file"
-                            width={4}
-                            height={4}
-                            className="h-4 w-4 text-primary"
-                        />} classNames="bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-3" label="View profile" onClick={() => viewProfile()} />
-                    </div>
+                    <Button icon={<Image
+                        src="/svgs/Show.svg"
+                        alt="file"
+                        width={4}
+                        height={4}
+                        className="h-4 w-4 text-primary"
+                    />} classNames="bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-3" label="View profile" onClick={() => viewProfile()} />
 
                 </header>
 
@@ -102,8 +103,8 @@ const DashboardHome = () => {
 
                 {/* Challeges and Hackathons */}
                 {isLoading && (<p>Loading ... </p>)}
-                <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
-                    {!isLoading && !error && allChallenges?.data?.challenges?.filter((item: { status: string }) => item.status.toLowerCase() === "open").slice(0, 3).map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
+                {(filteredChallenges?.length > 0) ? <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
+                    {filteredChallenges.slice(0, 3).map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
                         status={item.status}
                         key={index}
                         image={`/white_logo.png`}
@@ -115,8 +116,10 @@ const DashboardHome = () => {
                         imageWidth={150}
                         imageHeight={50}
                     />))}
-                </div>
-
+                </div> : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
+                    <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
+                    <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
+                </div>)}
             </div>
         </div>
     );

@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { getChallenges, getStatistics } from '@/apis';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '@/providers/AuthProvider';
+import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
 
 const DashboardHome = () => {
     // In-App imports
@@ -45,9 +46,11 @@ const DashboardHome = () => {
         { title: "Ongoing challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalOpenChallenges, percentage: !isLoadingAggregates && dataAggregates?.data?.totalOpenChallengesChange, period: "Last 30 days", direction: !isLoadingAggregates && dataAggregates?.data?.totalOpenChallengesChangeDirection }
     ];
 
+    const filteredChallenges = (!isLoading && !error && allChallenges?.data?.challenges?.length > 0) ? allChallenges?.data?.challenges : [];
+
     // Action Functions
     const handleSeeAll = () => {
-        router.push("/dashboard/hackathons");
+        router.push("/admin/dashboard/hackathons");
     }
 
     const handleViewSingle = (item) => {
@@ -120,8 +123,8 @@ const DashboardHome = () => {
 
                 {/* Challeges and Hackathons */}
                 {isLoading && (<p>Loading ... </p>)}
-                <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
-                    {!isLoading && !error && allChallenges && allChallenges?.data && allChallenges?.data?.challenges.map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
+                {(filteredChallenges?.length > 0) ? <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
+                    {filteredChallenges.slice(0, 3).map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
                         status={item.status}
                         key={index}
                         image={`/white_logo.png`}
@@ -133,7 +136,10 @@ const DashboardHome = () => {
                         imageWidth={150}
                         imageHeight={50}
                     />))}
-                </div>
+                </div> : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
+                    <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
+                    <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
+                </div>)}
 
             </div>
         </div>
