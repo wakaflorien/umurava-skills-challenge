@@ -95,8 +95,8 @@ export interface AuthContextType {
 
 export interface ChallengeFormProps {
   challengeName?: string;
-  endDate?: Date;
-  startDate?: Date;
+  endDate?: string;
+  startDate?: string;
   duration?: number;
   moneyPrize?: string;
   contactEmail?: string;
@@ -104,8 +104,8 @@ export interface ChallengeFormProps {
   projectBrief?: string;
   projectTasks?: string;
   deliverables?: string;
+  levels?: Array<string>;
   skills?: Array<string>;
-  seniority?: Array<string>;
 }
 
 export interface ChallengeFormComponentProps {

@@ -60,6 +60,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
     return (
         <html lang="en">
+            <head>
+                <meta
+                    name="format-detection"
+                    content="telephone=no, date=no, email=no, address=no"
+                />
+            </head>
             <body className={`${workSans.className} antialiased`}>
                 <Providers>
                     <div className="grid sm:grid-cols-5 zoom-out">

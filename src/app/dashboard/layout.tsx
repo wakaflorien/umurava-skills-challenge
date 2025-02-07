@@ -87,6 +87,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
     return (
         <html lang="en">
+            <head>
+                <meta
+                    name="format-detection"
+                    content="telephone=no, date=no, email=no, address=no"
+                />
+            </head>
             <body className={`${workSans.className} antialiased`}>
                 <Providers>
                     <div className="grid sm:grid-cols-5 zoom-out">
@@ -114,7 +120,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                             }}>
 
                                                 <Icon icon={iconMap[item.link]} className={`stroke-1 ${activeLink(item.label, pathname) ? "text-primary stroke-primary" : "text-white stroke-white"} group-hover:text-primary transition-colors size-5`} />
-                                                
+
                                                 {item.label}
 
                                             </li>
@@ -128,7 +134,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                             <li key={index} className={`group flex items-center gap-1 sm:p-2 cursor-pointer rounded-md ${activeLink(item.label, pathname) ? "bg-white text-primary" : "bg-primary text-white"} hover:bg-white hover:text-primary stroke-white hover:stroke-current`} onClick={() => router.push(item.link)}>
 
                                                 <Icon icon={iconMap1[item.link]} className={`stroke-1 ${activeLink(item.label, pathname) ? "text-primary stroke-primary" : "text-white stroke-white"} group-hover:text-primary transition-colors size-5`} />
-                                               
+
                                                 {item.label}
 
                                             </li>
@@ -143,7 +149,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                             <p className="text-white text-sm sm:text-sm">{data && data.user.names}</p>
                                             <p className="text-white text-sm sm:text-sm"> {data && data.user.email}</p>
                                         </div>
-                                        
+
                                         <Icon icon="ic:baseline-logout" className='text-white cursor-pointer size-5' onClick={() => logout()} />
                                     </div>
                                 </div>

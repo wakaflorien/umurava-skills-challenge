@@ -22,16 +22,15 @@ const CreateChallenge = () => {
      const [errors, setErrors] = React.useState<ChallengeFormProps>({});
      const [formData, setFormData] = React.useState<ChallengeFormProps>({
          challengeName: "",
-         endDate: new Date(),
-         startDate: new Date(),
-         duration: 1,
+         endDate: "",
+         startDate: "",
          moneyPrize: "",
          contactEmail: "",
          projectDescription: "",
          projectBrief: "",
          projectTasks: "",
-         skills: [],
-         seniority: []
+         levels: [],
+         skills: []
      })
      const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
     React.useEffect(() => {
@@ -68,6 +67,7 @@ const CreateChallenge = () => {
     // Action Functions
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
+        console.log(" Skills Values", value)
         setFormData({
             ...formData,
             [name]: name === "duration" ? Number(value) : value,
@@ -77,25 +77,24 @@ const CreateChallenge = () => {
     const handleClearForm = () => {
         setFormData({
             challengeName: "",
-            startDate: new Date(),
-            endDate: new Date(),
-            duration: 1,
+            startDate: "",
+            endDate: "",
             moneyPrize: "",
             contactEmail: "",
             projectDescription: "",
             projectBrief: "",
             projectTasks: "",
-            skills: [],
+            levels: [],
+            seniority: []
         });
         setErrors({});
     };
 
     const handleSubmitForm = async () => {
         if (await validateForm(formData, setErrors)) {
-            console.log("formData", formData);
-            // mutation.mutate({ token: data.token, payload: formData })
+            mutation.mutate({ token: data.token, payload: formData })
         } else {
-            setModal({ open: true, message: "Failed to validate", title: "Failed" })
+            setModal({ open: true, message: "Your form have some validation errors", title: "Failed" })
         }
     }
 

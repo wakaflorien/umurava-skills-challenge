@@ -1,12 +1,12 @@
 import { ChallengeFormProps } from "@/@types/global";
 
-// const validateEmail = (email: string): boolean => {
-//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//   return emailRegex.test(email);
-// };
+const validateEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
 
-export const validateForm = async (formData: ChallengeFormProps, setErrors: (errors: ChallengeFormProps) => void) => {
-  const newErrors: ChallengeFormProps = {};
+export const validateForm = async (formData: ChallengeFormProps, setErrors: (errors: ChallengeFormProps) => void): Promise<boolean> => {
+  const newErrors: Partial<ChallengeFormProps> = {};
 
   if (!formData.challengeName || !formData.challengeName.trim()) {
     newErrors.challengeName = "Challenge Name is required";
@@ -15,16 +15,15 @@ export const validateForm = async (formData: ChallengeFormProps, setErrors: (err
   }
 
   if (!formData.endDate || !formData.endDate.trim()) {
-    newErrors.endDate = "End Date is required";
+    newErrors.endDate = "End date is required";
   } else if (formData.endDate.length < 2) {
-    newErrors.endDate = "deadline must be at least 2 characters";
+    newErrors.endDate = "End date must be at least 2 characters";
   }
-
-  // if (!formData.duration || !formData.duration.trim()) {
-  //   newErrors.duration = "Duration is required";
-  // } else if (formData.duration < 2) {
-  //   newErrors.duration = "Duration must be at least 2 characters";
-  // }
+  if (!formData.startDate || !formData.startDate.trim()) {
+    newErrors.startDate = "Start date is required";
+  } else if (formData.startDate.length < 2) {
+    newErrors.startDate = "Start Date must be at least 2 characters";
+  }
   
   if (!formData.projectDescription || !formData.projectDescription.trim()) {
     newErrors.projectDescription = "Description is required";
@@ -44,18 +43,22 @@ export const validateForm = async (formData: ChallengeFormProps, setErrors: (err
     newErrors.projectTasks = "Tasks must be at least 2 characters";
   }
 
-  // if (!formData.deliverables || !formData.deliverables.trim()) {
-  //   newErrors.deliverables = "Deliverables are required";
-  // } else if (formData.deliverables.length < 2) {
-  //   newErrors.deliverables = "Deliverables must be at least 2 characters";
-  // }
-
   if (!formData.contactEmail) {
     newErrors.contactEmail = "Email is required";
   } 
-  // else if (!validateEmail(formData.contactEmail)) {
-  //   newErrors.contactEmail = "Please enter a valid email";
-  // }
+  else if (!validateEmail(formData.contactEmail)) {
+    newErrors.contactEmail = "Please enter a valid email";
+  }
+
+  // Validate Levels (Skills)
+  if (!formData.skills || formData.skills.length === 0) {
+    newErrors.skills = ["At least one skill is required"];
+  }
+
+  // Validate Seniority
+  if (!formData.levels || formData.levels.length === 0) {
+    newErrors.levels = ["At least one seniority level is required"];
+  }
 
   setErrors(newErrors);
   return Object.keys(newErrors).length === 0;

@@ -55,14 +55,15 @@ const EditChallenge = ({ searchParams }) => {
 
     const [formData, setFormData] = React.useState<ChallengeFormProps>({
         challengeName: singleChallenge?.data?.challengeName || "N/A",
+        startDate: singleChallenge?.data?.endDate || "N/A",
         endDate: singleChallenge?.data?.endDate || "N/A",
-        duration: singleChallenge?.data?.duration || 1,
         moneyPrize: singleChallenge?.data?.moneyPrize || "N/A",
         contactEmail: singleChallenge?.data?.contactEmail || "N/A",
         projectDescription: singleChallenge?.data?.projectDescription || "N/A",
         projectBrief: singleChallenge?.data?.projectBrief || "N/A",
         projectTasks: singleChallenge?.data?.projectTasks || "N/A",
-        skills: ["Frontend", "Backend", "UI/UX"],
+        skills: singleChallenge?.data?.skills || [],
+        levels: singleChallenge?.data?.levels || [],
     })
 
     const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
@@ -80,8 +81,8 @@ const EditChallenge = ({ searchParams }) => {
     const handleClearForm = () => {
         setFormData({
             challengeName: "",
+            startDate: "",
             endDate: "",
-            duration: 1,
             moneyPrize: "",
             contactEmail: "",
             projectDescription: "",
