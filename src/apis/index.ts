@@ -27,13 +27,13 @@ export const getChallenges = async () => {
   }
 };
 
-export const getSingleChallenge = async (token: string, id: string) => {
+export const getSingleChallenge = async ( id: string) => {
   try {
     const response = await fetch(`${BASE_URL}/public/api/challenges/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        // Authorization: `Bearer ${token}`,
       },
     });
     if (!response.ok) throw new Error("Failed to fetch challenge");

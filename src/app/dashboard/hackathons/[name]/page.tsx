@@ -1,11 +1,11 @@
 "use client";
 
+import * as React from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/Button";
 import { decodeUrl } from "@/utils/decodeUrl";
-import * as React from "react";
 import { Modal } from "@/components/Modal";
 import { useAuth } from "@/providers/AuthProvider";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -59,7 +59,7 @@ const DashboardHackathon = ({ searchParams }) => {
     }, [authenticate, router, data.token]);
 
     // API Queries
-    const { data: singleChallenge, isLoading } = useQuery({ queryKey: ['challenges'], queryFn: () => getSingleChallenge(data.token, id) })
+    const { data: singleChallenge, isLoading } = useQuery({ queryKey: ['challenges'], queryFn: () => getSingleChallenge( id) })
 
     const mutation = useMutation({
         mutationFn: ({ token, payload, id }: { token: string, payload: Record<string, string>, id: string }) => joinChallenge(token, payload, id),
@@ -159,7 +159,7 @@ const DashboardHackathon = ({ searchParams }) => {
                 </div>
             </div>
             <div className='grid sm:grid-cols-3 gap-2 sm:gap-4'>
-                <div className="col-span-2 bg-white grid sm:space-y-4 sm:p-4 border rounded-lg">
+                {isLoading ? (<p>Loading ...</p>) : (<div className="col-span-2 bg-white grid sm:space-y-4 sm:p-4 border rounded-lg">
 
                     <div className="relative bg-primary flex flex-col w-full h-[240px] items-center justify-center rounded-md">
                         <Image
@@ -211,7 +211,7 @@ const DashboardHackathon = ({ searchParams }) => {
                         </ul>
                     </div>
 
-                </div>
+                </div>)}
 
                 <div>
 

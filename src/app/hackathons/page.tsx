@@ -7,10 +7,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { getChallenges } from "@/apis";
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 const Hackathons = () => {
+    // In-App imports 
+    const router = useRouter();
 
     const { data, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
+
+    const handleViewSingle = (item) => {
+        const url = `/hackathons/${item.challengeName}?id=${item._id}`;
+        router.push(url);
+    };
 
     return (
         <div className="bg-backgroundA relative flex flex-col zoom-out">
@@ -39,7 +47,7 @@ const Hackathons = () => {
                         skills={item.skills}
                         seniority={item.levels}
                         timeline={`${item.duration} day(s)`}
-                        // onClick={() => router.push("/hackathons")}
+                        onClick={() => handleViewSingle(item)}
                         imageWidth={150}
                         imageHeight={50}
                     />))}
