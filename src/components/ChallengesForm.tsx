@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 const seniority: Array<Record<string, string>> = [
     {
         "_id": "67a351ad367bf94c40f6dc67",
-        "name": "Intermediacte",
+        "name": "Intermediate",
         "status": "active"
     },
     {
@@ -33,12 +33,12 @@ export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitTyp
     const { data: skills, isLoading, error } = useQuery({ queryKey: ['skills'], queryFn: getSkills })
 
     const skillsOptions = !isLoading && !error && skills.data.map((item: { _id: string; skillName: string }) => ({
-        value: item._id,
+        value: item.skillName,
         label: item.skillName,
     }));
 
     const seniorityOptions = seniority.map((item) => ({
-        value: item._id,
+        value: item.name,
         label: item.name,
     }));
     return (
@@ -52,12 +52,12 @@ export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitTyp
             <div className="flex sm:flex-row sm:gap-2 font-medium">
                 <div className="w-1/2 flex sm:flex-col sm:gap-2 font-medium">
                     <label htmlFor="startDate" className="text-sm text-[#475367]">Start Date</label>
-                    <input type="date" name="startDate" value={dayjs(values.startDate)} id="startDate" className="inputText" onChange={handleFormChange} />
+                    <input type="date" name="startDate" id="startDate" className="inputText" onChange={handleFormChange} />
                     <small className="text-[#d3302f]">{errors.startDate}</small>
                 </div>
                 <div className="w-1/2 flex sm:flex-col sm:gap-2 font-medium">
                     <label htmlFor="endDate" className="text-sm text-[#475367]">End Date</label>
-                    <input type="date" name="endDate" value={dayjs(values.endDate)} id="endDate" className="inputText" onChange={handleFormChange} />
+                    <input type="date" name="endDate" id="endDate" className="inputText" onChange={handleFormChange} />
                     <small className="text-[#d3302f]">{errors.endDate}</small>
                 </div>
             </div>

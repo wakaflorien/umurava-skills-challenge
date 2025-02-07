@@ -22,16 +22,16 @@ const CreateChallenge = () => {
      const [errors, setErrors] = React.useState<ChallengeFormProps>({});
      const [formData, setFormData] = React.useState<ChallengeFormProps>({
          challengeName: "",
-         endDate: "",
-         startDate: "",
+         endDate: new Date(),
+         startDate: new Date(),
          duration: 1,
          moneyPrize: "",
          contactEmail: "",
          projectDescription: "",
          projectBrief: "",
          projectTasks: "",
-         skills: ["Frontend","Backend", "UI/UX"],
-         seniority: ["Junior","Intemediate", "Senior"]
+         skills: [],
+         seniority: []
      })
      const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
     React.useEffect(() => {
@@ -77,7 +77,8 @@ const CreateChallenge = () => {
     const handleClearForm = () => {
         setFormData({
             challengeName: "",
-            endDate: "",
+            startDate: new Date(),
+            endDate: new Date(),
             duration: 1,
             moneyPrize: "",
             contactEmail: "",
@@ -92,7 +93,7 @@ const CreateChallenge = () => {
     const handleSubmitForm = async () => {
         if (await validateForm(formData, setErrors)) {
             console.log("formData", formData);
-            mutation.mutate({ token: data.token, payload: formData })
+            // mutation.mutate({ token: data.token, payload: formData })
         } else {
             setModal({ open: true, message: "Failed to validate", title: "Failed" })
         }
