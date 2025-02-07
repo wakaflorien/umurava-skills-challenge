@@ -95,7 +95,8 @@ export interface AuthContextType {
 
 export interface ChallengeFormProps {
   challengeName?: string;
-  endDate?: string;
+  endDate?: Date;
+  startDate?: Date;
   duration?: number;
   moneyPrize?: string;
   contactEmail?: string;
@@ -104,7 +105,7 @@ export interface ChallengeFormProps {
   projectTasks?: string;
   deliverables?: string;
   skills?: Array<string>;
-  seniority?: string;
+  seniority?: Array<string>;
 }
 
 export interface ChallengeFormComponentProps {
@@ -115,6 +116,5 @@ export interface ChallengeFormComponentProps {
   handleSubmitForm: () => void;
   errors?: ChallengeFormProps;
   values?: ChallengeFormProps;
-  skills: Array<Record<string, string>>;
   submitType: "create" | "edit";
 }

@@ -7,8 +7,8 @@ import { validateForm } from "@/utils/validation";
 import { ChallengeForm } from "@/components/ChallengesForm";
 import Image from "next/image";
 import { useAuth } from "@/providers/AuthProvider";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getSkills, postChallenge } from "@/apis";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { postChallenge } from "@/apis";
 import { Modal } from "@/components/Modal";
 
 const CreateChallenge = () => {
@@ -23,6 +23,7 @@ const CreateChallenge = () => {
      const [formData, setFormData] = React.useState<ChallengeFormProps>({
          challengeName: "",
          endDate: "",
+         startDate: "",
          duration: 1,
          moneyPrize: "",
          contactEmail: "",
@@ -30,6 +31,7 @@ const CreateChallenge = () => {
          projectBrief: "",
          projectTasks: "",
          skills: ["Frontend","Backend", "UI/UX"],
+         seniority: ["Junior","Intemediate", "Senior"]
      })
      const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
     React.useEffect(() => {
@@ -49,7 +51,6 @@ const CreateChallenge = () => {
 
     
     // API Queries
-    const { data: skills, isLoading } = useQuery({ queryKey: ['skills'], queryFn: getSkills })
     const mutation = useMutation({
         mutationFn: ({ token, payload }: { token: string, payload: ChallengeFormProps }) => postChallenge(token, payload),
         onSuccess: async () => {
@@ -125,7 +126,7 @@ const CreateChallenge = () => {
                         <p className="sm:text-sm text-tertiaryColor">Fill out these details to build your broadcast</p>
                     </header>
 
-                    <ChallengeForm submitType="create" handleFormChange={handleFormChange} handleClearForm={handleClearForm} handleSubmitForm={handleSubmitForm} errors={errors} skills={isLoading ? [] : skills.data} />
+                    <ChallengeForm submitType="create" handleFormChange={handleFormChange} handleClearForm={handleClearForm} handleSubmitForm={handleSubmitForm} errors={errors} />
 
                 </div>
             </div>

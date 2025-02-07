@@ -7,7 +7,7 @@ import { validateForm } from "@/utils/validation";
 import { ChallengeForm } from "@/components/ChallengesForm";
 import Image from "next/image";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { editChallenge, getSingleChallenge, getSkills } from "@/apis";
+import { editChallenge, getSingleChallenge } from "@/apis";
 import { useAuth } from "@/providers/AuthProvider";
 import { Modal } from "@/components/Modal";
 
@@ -35,8 +35,6 @@ const EditChallenge = ({ searchParams }) => {
     }, [authenticate, router, data.token]);
 
     // API Queries
-    const { data: skills, isLoading: isSkillsLoading } = useQuery({ queryKey: ['skills'], queryFn: getSkills })
-
     const { data: singleChallenge } = useQuery({ queryKey: ['challenges'], queryFn: () => getSingleChallenge(data.token, id) })
 
     const mutation = useMutation({
@@ -130,7 +128,7 @@ const EditChallenge = ({ searchParams }) => {
                         <p className="sm:text-sm text-tertiaryColor">Fill out these details to build your broadcast</p>
                     </header>
 
-                    <ChallengeForm skills={isSkillsLoading ? [] : skills.data} submitType="edit" handleFormChange={handleFormChange} handleClearForm={handleClearForm} handleSubmitForm={handleSubmitForm} errors={errors} values={formData} />
+                    <ChallengeForm submitType="edit" handleFormChange={handleFormChange} handleClearForm={handleClearForm} handleSubmitForm={handleSubmitForm} errors={errors} values={formData} />
 
                 </div>
             </div>
