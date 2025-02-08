@@ -8,12 +8,12 @@ interface ModalProps {
     title?: string;
     children: React.ReactNode;
 }
-export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title = "", children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title = "", children }) => {
     if (!isOpen) return null;
     return (
         <div className="fixed inset-0 z-50 overflow-y-auto">
             {/* Backdrop */}
-            <div className="fixed inset-0 bg-black/90  transition-opacity" onClick={onClose}/>
+            <div className="fixed inset-0 bg-black/90  transition-opacity" onClick={onClose} />
 
             {/* Modal */}
             <div className="flex min-h-full items-center justify-center p-4">
@@ -42,3 +42,5 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title = "", child
         </div>
     );
 }
+
+export default Modal;
