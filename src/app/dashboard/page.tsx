@@ -9,7 +9,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { getChallenges } from '@/apis';
 import { useQuery } from '@tanstack/react-query';
-import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
 import Oops from '@/components/Oops';
 
 const DashboardHome = () => {

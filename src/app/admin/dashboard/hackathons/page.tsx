@@ -10,7 +10,6 @@ import Image from 'next/image';
 import { getChallenges, getStatistics } from '@/apis';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '@/providers/AuthProvider';
-import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
 import { CardSkeleton, TabsSkeleton } from '@/components/Skeletons';
 import Oops from '@/components/Oops';
 
