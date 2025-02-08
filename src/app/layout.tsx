@@ -1,4 +1,4 @@
-import { ReactNode, Suspense, useEffect, useState } from "react";
+import { ReactNode, Suspense } from "react";
 import type { Metadata } from "next";
 import "./globals.css";
 import { workSans } from "@/utils/fonts";
@@ -11,15 +11,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) {
-    return null;
-  }
   return (
     <html lang="en">
       <head>
