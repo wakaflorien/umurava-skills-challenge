@@ -79,7 +79,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 <Providers>
                     <div className="grid sm:grid-cols-5 zoom-out">
                         <aside className="bg-primary text-white shadow-md ">
-                            <nav className="flex flex-col justify-between h-full sm:p-4">
+                            <nav className="flex flex-col justify-between h-screen sm:p-4">
                                 <div className='sm:space-y-4'>
 
                                     <Image
