@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { editChallenge, getSingleChallenge } from "@/apis";
 import { useAuth } from "@/providers/AuthProvider";
-import { Modal } from "@/components/Modal";
+const Modal = React.lazy(() => import('@/components/Modal'));
 
 const EditChallenge = ({ searchParams }) => {
     const queryClient = useQueryClient();

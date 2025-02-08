@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useAuth } from "@/providers/AuthProvider";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postChallenge } from "@/apis";
-import { Modal } from "@/components/Modal";
+const Modal = React.lazy(() => import('@/components/Modal'));
 
 const CreateChallenge = () => {
     // In-App imports

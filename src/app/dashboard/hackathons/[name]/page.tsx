@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/Button";
 import { decodeUrl } from "@/utils/decodeUrl";
-import { Modal } from "@/components/Modal";
+const Modal = React.lazy(() => import('@/components/Modal'));
 import { useAuth } from "@/providers/AuthProvider";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSingleChallenge, joinChallenge } from "@/apis";
