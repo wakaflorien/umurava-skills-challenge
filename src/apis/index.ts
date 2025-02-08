@@ -154,7 +154,7 @@ export const editChallenge = async (
       },
       body: JSON.stringify(payload),
     });
-    if (!response.ok) throw new Error("Failed to update challenge");
+    if (!response.ok) return await response.json();
     return await response.json();
   } catch (error) {
     throw new Error(
@@ -175,7 +175,7 @@ export const postChallenge = async (
       },
       body: JSON.stringify(payload),
     });
-    if (!response.ok) throw new Error("Failed to create challenge");
+    if (!response.ok) return await response.json() ;
     return await response.json();
   } catch (error) {
     throw new Error(

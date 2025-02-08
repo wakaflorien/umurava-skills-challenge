@@ -52,11 +52,15 @@ const CreateChallenge = () => {
     // API Queries
     const mutation = useMutation({
         mutationFn: ({ token, payload }: { token: string, payload: ChallengeFormProps }) => postChallenge(token, payload),
-        onSuccess: async () => {
+        onSuccess: async (response) => {
             // Invalidate and refetch
-            queryClient.invalidateQueries({ queryKey: ['challenges'] })
-            // setModal({ open: true, message: "Challenge created successfully", title: "Success" })
-            router.push("/admin/dashboard/hackathons");
+            if(response.status === "error"){
+                setModal({ open: true, message: response.message, title: "Failed" })
+            } else {
+                queryClient.invalidateQueries({ queryKey: ['challenges'] })
+                await handleClearForm();
+                router.push("/admin/dashboard/hackathons");
+            }
         },
         onError: () => {
             setModal({ open: true, message: "Challenge creation Failed ", title: "Failed" })
@@ -75,7 +79,7 @@ const CreateChallenge = () => {
         });
     }
 
-    const handleClearForm = () => {
+    const handleClearForm = async () => {
         setFormState({
             challengeName: "",
             startDate: "",

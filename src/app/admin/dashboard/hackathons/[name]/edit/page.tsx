@@ -39,17 +39,20 @@ const EditChallenge = ({ searchParams }) => {
     const { data: singleChallenge, isLoading, error } = useQuery({
         queryKey: ['challenges', id],
         queryFn: () =>
-        getSingleChallenge(id),
+            getSingleChallenge(id),
         enabled: !!id,
     })
 
     const mutation = useMutation({
         mutationFn: ({ token, id, payload }: { token: string, id: string, payload: ChallengeFormProps }) => editChallenge(token, id, payload),
-        onSuccess: async () => {
-            // Invalidate and refetch
-            queryClient.invalidateQueries({ queryKey: ['challenges'] })
-            // setModal({ open: true, message: "Challenge created successfully", title: "Success" })
-            router.push("/admin/dashboard/hackathons");
+        onSuccess: async (response) => {
+            if (response.status === "error") {
+                setModal({ open: true, message: response.message, title: "Failed" })
+            } else {
+                queryClient.invalidateQueries({ queryKey: ['challenges'] })
+                await handleClearForm();
+                router.push("/admin/dashboard/hackathons");
+            }
         },
         onError: () => {
             setModal({ open: true, message: "Challenge creation Failed ", title: "Failed" })
