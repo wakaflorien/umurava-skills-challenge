@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Button } from '@/components/Button';
 import { Metric } from '@/components/Metric';
+import { CardSkeleton, MetricSkeleton } from '@/components/Skeletons';
 import { Card } from '@/components/Card';
 import { useAuth } from '../../providers/AuthProvider';
 import Image from 'next/image';
@@ -34,12 +35,12 @@ const DashboardHome = () => {
     const { data: allChallenges, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
 
     const formattedAdminStats = [
-        { title: "Completed challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalCompletedChallenges },
-        { title: "Open challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOpenChallenges },
-        { title: "Ongoing challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOngoingChallenges }
+        { title: "Completed challenges", value: allChallenges?.data?.aggregates?.totalCompletedChallenges },
+        { title: "Open challenges", value: allChallenges?.data?.aggregates?.totalOpenChallenges },
+        { title: "Ongoing challenges", value: allChallenges?.data?.aggregates?.totalOngoingChallenges }
     ];
 
-    const filteredChallenges = (!isLoading && !error && allChallenges?.data?.challenges?.length > 0) ? allChallenges?.data?.challenges?.filter((item: { status: string }) => item.status.toLowerCase() === "open" || item.status.toLowerCase() === "ongoing") : [];
+    const filteredChallenges = (allChallenges?.data?.challenges?.length > 0) ? allChallenges?.data?.challenges?.filter((item: { status: string }) => item.status.toLowerCase() === "open" || item.status.toLowerCase() === "ongoing") : [];
 
     const viewProfile = () => {
         console.log('View profile');
@@ -73,7 +74,7 @@ const DashboardHome = () => {
 
                 </header>
 
-                {isLoading || error ? (<p>Loading ... </p>) : (
+                {isLoading || error ? (<MetricSkeleton count={3} />) : (
                     <div className='grid sm:grid-cols-3 sm:gap-4'>
                         {formattedAdminStats.map((item, index) => (<Metric key={index} title={item.title} value={item.value} icon={<Image
                             src="/svgs/Document.svg"
@@ -102,24 +103,25 @@ const DashboardHome = () => {
                 </div>
 
                 {/* Challeges and Hackathons */}
-                {isLoading && (<p>Loading ... </p>)}
-                {(filteredChallenges?.length > 0) ? <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
-                    {filteredChallenges.slice(0, 3).map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
-                        status={item.status}
-                        key={index}
-                        image={`/white_logo.png`}
-                        title={item.challengeName}
-                        skills={item.skills}
-                        seniority={item.levels}
-                        timeline={`${item.duration} day(s)`}
-                        onClick={() => handleViewSingle(item)}
-                        imageWidth={150}
-                        imageHeight={50}
-                    />))}
-                </div> : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
-                    <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
-                    <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
-                </div>)}
+                {isLoading || error ? (<CardSkeleton count={3} />) : (
+                    <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
+                        {filteredChallenges?.length > 0 ? filteredChallenges?.slice(0, 3)?.map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
+                            status={item.status}
+                            key={index}
+                            image={`/white_logo.png`}
+                            title={item.challengeName}
+                            skills={item.skills}
+                            seniority={item.levels}
+                            timeline={`${item.duration} day(s)`}
+                            onClick={() => handleViewSingle(item)}
+                            imageWidth={150}
+                            imageHeight={50}
+                        />)) : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
+                            <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
+                            <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
+                        </div>)}
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -8,6 +8,7 @@ import { getChallenges, getStatistics } from '@/apis';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '@/providers/AuthProvider';
 import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
+import { AdminMetricSkeleton, CardSkeleton } from '@/components/Skeletons';
 
 const DashboardHome = () => {
     // In-App imports
@@ -35,18 +36,18 @@ const DashboardHome = () => {
     const { data: dataAggregates, isLoading: isLoadingAggregates, error: aggregatesError } = useQuery({ queryKey: ['stats'], queryFn: () => getStatistics(data.token) });
 
     const formattedAdminStats = [
-        { title: "Total challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalChallengesThisWeek, percentage: !isLoadingAggregates && dataAggregates?.data?.totalChallengesThisWeekChange, period: "This Week", direction: !isLoadingAggregates && dataAggregates?.data?.totalChallengesThisWeekChangeDirection },
+        { title: "Total challenges", value: dataAggregates?.data?.totalChallengesThisWeek, percentage: !isLoadingAggregates && dataAggregates?.data?.totalChallengesThisWeekChange, period: "This Week", direction: !isLoadingAggregates && dataAggregates?.data?.totalChallengesThisWeekChangeDirection },
 
-        { title: "Total Participants", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalParticipantsThisWeek, percentage: !isLoadingAggregates && dataAggregates?.data?.totalParticipantsThisWeekChange, period: "This Week", direction: !isLoadingAggregates && dataAggregates?.data?.totalParticipantsThisWeekChangeDirection },
+        { title: "Total Participants", value: dataAggregates?.data?.totalParticipantsThisWeek, percentage: !isLoadingAggregates && dataAggregates?.data?.totalParticipantsThisWeekChange, period: "This Week", direction: !isLoadingAggregates && dataAggregates?.data?.totalParticipantsThisWeekChangeDirection },
 
-        { title: "Completed challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalCompletedChallenges, percentage: !isLoadingAggregates && dataAggregates?.data?.totalCompletedChallengesChange, period: "Last 30 days", direction: !isLoadingAggregates && dataAggregates?.data?.totalCompletedChallengesChangeDirection },
+        { title: "Completed challenges", value: dataAggregates?.data?.totalCompletedChallenges, percentage: !isLoadingAggregates && dataAggregates?.data?.totalCompletedChallengesChange, period: "Last 30 days", direction: !isLoadingAggregates && dataAggregates?.data?.totalCompletedChallengesChangeDirection },
 
-        { title: "Open challenges", value: !isLoadingAggregates && !aggregatesError && !isLoadingAggregates && dataAggregates?.data?.totalOngoingChallenges, percentage: !isLoadingAggregates && dataAggregates?.data?.totalOngoingChallengesChange, period: "Last 30 days", direction: !isLoadingAggregates && dataAggregates?.data?.totalOngoingChallengesChangeDirection },
+        { title: "Open challenges", value: !isLoadingAggregates && dataAggregates?.data?.totalOngoingChallenges, percentage: !isLoadingAggregates && dataAggregates?.data?.totalOngoingChallengesChange, period: "Last 30 days", direction: !isLoadingAggregates && dataAggregates?.data?.totalOngoingChallengesChangeDirection },
 
-        { title: "Ongoing challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalOpenChallenges, percentage: !isLoadingAggregates && dataAggregates?.data?.totalOpenChallengesChange, period: "Last 30 days", direction: !isLoadingAggregates && dataAggregates?.data?.totalOpenChallengesChangeDirection }
+        { title: "Ongoing challenges", value: dataAggregates?.data?.totalOpenChallenges, percentage: !isLoadingAggregates && dataAggregates?.data?.totalOpenChallengesChange, period: "Last 30 days", direction: !isLoadingAggregates && dataAggregates?.data?.totalOpenChallengesChangeDirection }
     ];
 
-    const filteredChallenges = (!isLoading && !error && allChallenges?.data?.challenges?.length > 0) ? allChallenges?.data?.challenges : [];
+    const filteredChallenges = ( allChallenges?.data?.challenges?.length > 0) ? allChallenges?.data?.challenges : [];
 
     // Action Functions
     const handleSeeAll = () => {
@@ -68,7 +69,7 @@ const DashboardHome = () => {
                     </div>
                 </header>
 
-                {isLoadingAggregates ? (<p>Loading ...</p>) : <div className='grid sm:grid-row-2 sm:gap-4'>
+                {isLoadingAggregates || aggregatesError ? (<AdminMetricSkeleton />) : <div className='grid sm:grid-row-2 sm:gap-4'>
                     <div className='grid sm:grid-cols-2 sm:gap-4'>
                         {formattedAdminStats.slice(0, 2).map((item, index) => (<AdminMetric key={index} title={item.title} value={item.value} percentage={item.percentage} direction={item.direction} period={item.period} icon={item.title.toLowerCase().includes("participant") ? <Image
                             src="/svgs/3User.svg"
@@ -122,24 +123,25 @@ const DashboardHome = () => {
                 </div>
 
                 {/* Challeges and Hackathons */}
-                {isLoading && (<p>Loading ... </p>)}
-                {(filteredChallenges?.length > 0) ? <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
-                    {filteredChallenges.slice(0, 3).map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
-                        status={item.status}
-                        key={index}
-                        image={`/white_logo.png`}
-                        title={item.challengeName}
-                        skills={item.skills}
-                        seniority={item.levels}
-                        timeline={`${item.duration} day(s)`}
-                        onClick={() => handleViewSingle(item)}
-                        imageWidth={150}
-                        imageHeight={50}
-                    />))}
-                </div> : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
-                    <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
-                    <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
-                </div>)}
+                {isLoading || error ? (<CardSkeleton count={3} />) : (
+                    <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
+                        {filteredChallenges?.length > 0 ? filteredChallenges?.slice(0, 3)?.map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
+                            status={item.status}
+                            key={index}
+                            image={`/white_logo.png`}
+                            title={item.challengeName}
+                            skills={item.skills}
+                            seniority={item.levels}
+                            timeline={`${item.duration} day(s)`}
+                            onClick={() => handleViewSingle(item)}
+                            imageWidth={150}
+                            imageHeight={50}
+                        />)) : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
+                            <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
+                            <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
+                        </div>)}
+                    </div>
+                )}
 
             </div>
         </div>

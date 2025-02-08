@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import { getChallenges } from '@/apis';
 import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
+import { CardSkeleton, TabsSkeleton } from '@/components/Skeletons';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -38,11 +39,11 @@ const DashboardHackathons = () => {
 
     const { data: allChallenges, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges });
 
-    const tabs = [{ id: 1, title: "All challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalChallenges }, { id: 2, title: "Completed challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalCompletedChallenges }, { id: 3, title: "Open challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOpenChallenges }, { id: 4, title: "Ongoing challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOngoingChallenges }];
+    const tabs = [{ id: 1, title: "All challenges", value: allChallenges?.data?.aggregates?.totalChallenges }, { id: 2, title: "Completed challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalCompletedChallenges }, { id: 3, title: "Open challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOpenChallenges }, { id: 4, title: "Ongoing challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOngoingChallenges }];
 
     const filteredData = React.useMemo(() => {
         if (!isLoading && !error && allChallenges) {
-            return activeTab.toLowerCase() === "all" ? allChallenges.data.challenges : allChallenges.data.challenges.filter((item: { status: string }) => item.status.toLowerCase() === activeTab.toLowerCase());
+            return activeTab.toLowerCase() === "all" ? allChallenges?.data?.challenges : allChallenges.data.challenges.filter((item: { status: string }) => item.status.toLowerCase() === activeTab.toLowerCase());
         } else {
             return []
         }
@@ -77,7 +78,7 @@ const DashboardHackathons = () => {
                     <p>Join a challenge or a hackathon to gain valuable work experience</p>
                 </header>
 
-                {isLoading || error ? (<p>Loading ...</p>) : (<div className='flex sm:flex-row flex-wrap flex-col items-center justify-start gap-8 sm:gap-4'>
+                {isLoading || error ? (<TabsSkeleton count={5} />) : (<div className='flex sm:flex-row flex-wrap flex-col items-center justify-start gap-8 sm:gap-4'>
                     {tabs.map((item, index) => (<Button key={index} icon={(<Image
                         src="/svgs/file.svg"
                         alt="file"
@@ -89,24 +90,25 @@ const DashboardHackathons = () => {
                 </div>)}
 
                 {/* Challeges and Hackathons */}
-                {isLoading && (<p>Loading ... </p>)}
-                {(filteredChallenges?.length > 0) ? <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
-                    {filteredChallenges.map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
-                        status={item.status}
-                        key={index}
-                        image={`/white_logo.png`}
-                        title={item.challengeName}
-                        skills={item.skills}
-                        seniority={item.levels}
-                        timeline={`${item.duration} day(s)`}
-                        onClick={() => handleViewSingle(item)}
-                        imageWidth={150}
-                        imageHeight={50}
-                    />))}
-                </div> : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
-                    <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
-                    <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
-                </div>)}
+                {isLoading || error ? (<CardSkeleton count={3} />) : (
+                    <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
+                        {filteredChallenges?.length > 0 ? filteredChallenges.map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
+                            status={item.status}
+                            key={index}
+                            image={`/white_logo.png`}
+                            title={item.challengeName}
+                            skills={item.skills}
+                            seniority={item.levels}
+                            timeline={`${item.duration} day(s)`}
+                            onClick={() => handleViewSingle(item)}
+                            imageWidth={150}
+                            imageHeight={50}
+                        />)) : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
+                            <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
+                            <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
+                        </div>)}
+                    </div>
+                )}
 
                 {filteredChallenges?.length > 0 && (<Pagination
                     currentPage={currentPage}
