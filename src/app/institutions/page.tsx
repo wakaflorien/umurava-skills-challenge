@@ -10,7 +10,7 @@ import { BackDropShape } from "@/components/BackDropShape";
 
 const Institutions = () => {
     return (
-        <div className="bg-backgroundA elative flex flex-col zoom-out">
+        <div className="bg-backgroundA elative flex flex-col zoom-out scroll-smooth">
             <Nav />
             <main className="flex flex-col space-y-4 sm:space-y-16">
                 <section className="bg-white h-full grid sm:grid-cols-2 gap-4 sm:gap-16 px-4 sm:px-24 py-4 sm:py-24" id="partnerWithUs">

@@ -25,7 +25,7 @@ const Hackathons = () => {
     };
 
     return (
-        <div className="bg-backgroundA relative flex flex-col zoom-out">
+        <div className="bg-backgroundA relative flex flex-col zoom-out scroll-smooth">
             <Nav />
             <main className="flex flex-col px-4 sm:px-24 py-4 sm:py-16 space-y-4 sm:space-y-8">
                 <div className="flex items-center gap-2 sm:gap-4 cursor-pointer">
