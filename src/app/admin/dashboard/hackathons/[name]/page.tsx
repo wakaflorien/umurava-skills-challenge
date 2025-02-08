@@ -133,7 +133,7 @@ const DashboardHackathon = ({ searchParams }) => {
     }
 
     const openDelete = () => {
-        setModal({ ...modal, open: true, message: `Are you sure you want to delete ${selectedChallenge} Challenge ?` });
+        setModal({ ...modal, open: true, message: `Are you sure you want to delete ${selectedChallenge} Challenge ?`, title: "Confirm deletion" });
     }
 
     const closeModal = () => {
@@ -189,9 +189,7 @@ const DashboardHackathon = ({ searchParams }) => {
                     <div className="sm:space-y-2">
                         <h1 className="font-bold text-sm sm:text-md">Tasks:</h1>
                         <h1 className="font-bold text-sm sm:text-md capitalize">Product Requirements</h1>
-                        {/* <ul className="sm:text-md list-disc pl-4">
-                            {productRequirements.map(item => (<li key={item}>{item}</li>))}
-                        </ul> */}
+                        
                         <p className="sm:text-md capitalize">{singleChallenge && singleChallenge.data.projectTasks}</p>
                     </div>
 

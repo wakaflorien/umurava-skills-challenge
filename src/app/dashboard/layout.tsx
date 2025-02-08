@@ -10,6 +10,7 @@ import { Providers, useAuth } from '@/providers/AuthProvider';
 import { joinCommunity } from '@/apis';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
+import Loading from '@/components/Loading';
 
 const activeLink = (label: string, pathname: string) => {
 
@@ -53,6 +54,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     // In-App data states
     const [isOpen, setIsOpen] = React.useState(false);
     const [isJoining, setIsJoining] = React.useState(false);
+    const [isClient, setIsClient] = React.useState(false);
+
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
     React.useEffect(() => {
         if (!data.token) {
             const handleAuthentication = async () => {
@@ -83,6 +89,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     const handleJoinCommunity = () => {
         setIsJoining(true);
         mutation.mutate({ payload })
+    }
+
+    if (!isClient) {
+        return null;
     }
 
     return (
@@ -209,7 +219,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                         </button>
                                     </div>
                                 </Modal>
-                                {children}
+                                <React.Suspense fallback={<Loading />}>
+                                    {children}
+                                </React.Suspense>
                             </div>
                         </main>
                     </div>

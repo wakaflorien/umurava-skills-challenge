@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { workSans } from '@/utils/fonts';
 import { Providers, useAuth } from '@/providers/AuthProvider';
 import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
+import Loading from '@/components/Loading';
 
 const activeLink = (label: string, pathname: string) => {
 
@@ -42,7 +43,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     const router = useRouter();
 
     const { data, authenticate, logout } = useAuth();
+    const [isClient, setIsClient] = React.useState(false);
 
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
     React.useEffect(() => {
         if (!data.token) {
             const handleAuthentication = async () => {
@@ -57,6 +62,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             handleAuthentication();
         }
     }, [authenticate, router, data.token]);
+
+    if (!isClient) {
+        return null;
+    }
 
     return (
         <html lang="en">
@@ -150,7 +159,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                         </div>
                                     </div>
                                 </header>
-                                {children}
+                                <React.Suspense fallback={<Loading />}>
+                                    {children}
+                                </React.Suspense>
                             </div>
                         </main>
                     </div>

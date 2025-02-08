@@ -1,7 +1,8 @@
-import * as React from "react";
+import { ReactNode, Suspense, useEffect, useState } from "react";
 import type { Metadata } from "next";
 import "./globals.css";
 import { workSans } from "@/utils/fonts";
+import Loading from "@/components/Loading";
 import { Providers } from "@/providers/AuthProvider";
 
 export const metadata: Metadata = {
@@ -9,7 +10,16 @@ export const metadata: Metadata = {
   description: "Umurava skills challenge ( Landing page and Dashboard )",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
   return (
     <html lang="en">
       <head>
@@ -20,7 +30,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${workSans.className} antialiased`} >
         <Providers>
-          {children}
+          <Suspense fallback={<Loading />}>
+            {children}
+          </Suspense>
         </Providers>
       </body>
     </html>
