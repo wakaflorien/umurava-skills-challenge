@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 
 import { ActionMeta, MultiValue, SingleValue } from 'react-select';
 interface OptionType {
-    value: string; 
+    value: string;
     label: string | undefined;
 }
 
@@ -54,10 +54,8 @@ export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitTyp
     ) => {
         handleFormChange({
             target: {
-                name: actionMeta.name,
-                value: newValue
-                    ? (newValue as MultiValue<OptionType>).map((option) => option.value)
-                    : [],
+                name: actionMeta.name as string,
+                value: newValue ? (newValue as MultiValue<OptionType>).map((option) => option.value) : [],
             },
         });
     };
@@ -112,7 +110,7 @@ export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitTyp
                         isMulti
                         isSearchable
                         isClearable
-                        value={values.levels?.map((level: string) => ({value: level, label: level})) || []}
+                        value={values.levels?.map((level: string) => ({ value: level, label: level })) || []}
                     />
                     <small className="text-[#d3302f]">{errors.levels}</small>
                 </div>

@@ -1,5 +1,4 @@
 import { ChallengeFormProps } from "@/@types/global";
-import { Group } from "next/dist/shared/lib/router/utils/route-regex";
 
 const BASE_URL = "http://localhost:3001";
 
