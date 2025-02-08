@@ -4,7 +4,7 @@ import * as React from "react";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { joinProgram } from "@/apis";
 import { AuthContextType, UserProfile } from "@/@types/global";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const defaultUser: UserProfile = {
     user: {
@@ -29,7 +29,6 @@ export const useAuth = () => React.useContext(AuthContext);
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
     const [queryClient] = React.useState(() => new QueryClient());
-    const router = useRouter();
 
     const [user, setUser] = React.useState<UserProfile>(defaultUser);
 
@@ -52,7 +51,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
 
     const logout = () => {
         setUser(defaultUser);
-        router.replace("/");
+        redirect("/");
     };
 
     return (

@@ -9,12 +9,14 @@ import { Card } from '@/components/Card';
 import { useAuth } from '@/providers/AuthProvider';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
-import { getChallenges, getStatistics } from '@/apis';
+import { getChallenges } from '@/apis';
+import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
 
 const ITEMS_PER_PAGE = 6;
 
 const DashboardHackathons = () => {
     const { data, authenticate } = useAuth();
+
     const router = useRouter();
     const [currentPage, setCurrentPage] = React.useState(1);
     const [activeTab, setActiveTab] = React.useState("all");
@@ -23,7 +25,7 @@ const DashboardHackathons = () => {
         if (!data.token) {
             const handleAuthentication = async () => {
                 try {
-                    await authenticate({ userRole: "admin" });
+                    await authenticate({ userRole: "participant" });
                 } catch (error) {
                     console.error("Failed to authenticate:", error);
                     router.push("/");
@@ -34,10 +36,9 @@ const DashboardHackathons = () => {
         }
     }, [authenticate, router, data.token]);
 
-    const { data: allChallenges, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
-    const { data: dataAggregates, isLoading: isLoadingAggregates, error: aggregatesError } = useQuery({ queryKey: ['stats'], queryFn: () => getStatistics(data.token) });
+    const { data: allChallenges, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges });
 
-    const tabs = [{ id: 1, title: "All challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalChallengesThisWeek }, { id: 2, title: "Completed challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalCompletedChallenges }, { id: 3, title: "Open challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalOpenChallenges }, { id: 4, title: "Ongoing challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalOngoingChallenges }];
+    const tabs = [{ id: 1, title: "All challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalChallenges }, { id: 2, title: "Completed challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalCompletedChallenges }, { id: 3, title: "Open challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOpenChallenges }, { id: 4, title: "Ongoing challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOngoingChallenges }];
 
     const filteredData = React.useMemo(() => {
         if (!isLoading && !error && allChallenges) {
@@ -45,7 +46,7 @@ const DashboardHackathons = () => {
         } else {
             return []
         }
-    }, [activeTab, allChallenges]);
+    }, [activeTab, allChallenges, error, isLoading]);
 
     const totalPages = filteredData ? Math.ceil(filteredData.length / ITEMS_PER_PAGE) : 0;
 
@@ -55,6 +56,8 @@ const DashboardHackathons = () => {
 
     // Get current page items
     const currentItems = filteredData ? filteredData.slice(startIndex, endIndex) : [];
+
+    const filteredChallenges = (!isLoading && !error && allChallenges?.data?.challenges?.length > 0) ? currentItems : [];
 
     const handleChangeTab = (tab: string) => {
         setCurrentPage(1);
@@ -74,7 +77,7 @@ const DashboardHackathons = () => {
                     <p>Join a challenge or a hackathon to gain valuable work experience</p>
                 </header>
 
-                {isLoadingAggregates ? (<p>Loading ...</p>) : (<div className='flex sm:flex-row flex-wrap flex-col items-center justify-start gap-8 sm:gap-4'>
+                {isLoading || error ? (<p>Loading ...</p>) : (<div className='flex sm:flex-row flex-wrap flex-col items-center justify-start gap-8 sm:gap-4'>
                     {tabs.map((item, index) => (<Button key={index} icon={(<Image
                         src="/svgs/file.svg"
                         alt="file"
@@ -86,8 +89,9 @@ const DashboardHackathons = () => {
                 </div>)}
 
                 {/* Challeges and Hackathons */}
-                <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
-                    {!isLoading && !error && currentItems?.filter((item: { status: string }) => item.status.toLowerCase() === "open").slice(0, 3).map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
+                {isLoading && (<p>Loading ... </p>)}
+                {(filteredChallenges?.length > 0) ? <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
+                    {filteredChallenges.map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
                         status={item.status}
                         key={index}
                         image={`/white_logo.png`}
@@ -99,12 +103,15 @@ const DashboardHackathons = () => {
                         imageWidth={150}
                         imageHeight={50}
                     />))}
-                </div>
+                </div> : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
+                    <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
+                    <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
+                </div>)}
 
-                <Pagination
+                {filteredChallenges?.length > 0 && (<Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
-                    onPageChange={setCurrentPage} />
+                    onPageChange={setCurrentPage} />)}
             </div>
         </div>
     );

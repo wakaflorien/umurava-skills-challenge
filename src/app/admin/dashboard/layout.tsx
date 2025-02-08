@@ -6,6 +6,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { workSans } from '@/utils/fonts';
 import { Providers, useAuth } from '@/providers/AuthProvider';
+import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
+import Loading from '@/components/Loading';
 
 const activeLink = (label: string, pathname: string) => {
 
@@ -24,14 +26,15 @@ const nav1 = [{ link: "/admin/dashboard", label: "Dashboard" }, { link: "/admin/
 const nav2 = [{ link: "/admin/dashboard/settings", label: "Settings" }, { link: "/admin/dashboard/help", label: "Help Center" }, { link: "/admin/dashboard/refer", label: "Refer family & friends" }];
 
 const iconMap = {
-    "/admin/dashboard": "/svgs/home.svg",
-    "/admin/dashboard/hackathons": "/svgs/file.svg",
+    "/admin/dashboard": `lineicons:home-2`,
+    "/admin/dashboard/hackathons": `akar-icons:file`,
+    "/admin/dashboard/community": `basil:user-plus-outline`
 };
 
 const iconMap1 = {
-    "/admin/dashboard/settings": "/svgs/settings.svg",
-    "/admin/dashboard/help": "/svgs/headset.svg",
-    "/admin/dashboard/refer": "/svgs/gift.svg"
+    "/admin/dashboard/settings": "ion:settings-outline",
+    "/admin/dashboard/help": "qlementine-icons:headset-16",
+    "/admin/dashboard/refer": "octicon:gift-16"
 };
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -40,7 +43,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     const router = useRouter();
 
     const { data, authenticate, logout } = useAuth();
+    const [isClient, setIsClient] = React.useState(false);
 
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
     React.useEffect(() => {
         if (!data.token) {
             const handleAuthentication = async () => {
@@ -56,8 +63,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         }
     }, [authenticate, router, data.token]);
 
+    if (!isClient) {
+        return null;
+    }
+
     return (
         <html lang="en">
+            <head>
+                <meta
+                    name="format-detection"
+                    content="telephone=no, date=no, email=no, address=no"
+                />
+            </head>
             <body className={`${workSans.className} antialiased`}>
                 <Providers>
                     <div className="grid sm:grid-cols-5 zoom-out">
@@ -78,13 +95,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                         {nav1.map((item, index) => (
                                             <li key={index} className={`group flex items-center gap-1 sm:p-2 cursor-pointer rounded-md ${activeLink(item.label, pathname) ? "bg-white text-primary" : "bg-primary text-white"} hover:bg-white hover:text-primary stroke-white hover:stroke-current`} onClick={() => router.push(item.link)}>
 
-                                                <Image
-                                                    src={iconMap[item.link]}
-                                                    alt="file"
-                                                    width={16}
-                                                    height={16}
-                                                    className="h-4 w-4 text-white group-hover:text-primary transition-colors"
-                                                />
+                                                <Icon icon={iconMap[item.link]} className={`stroke-1 ${activeLink(item.label, pathname) ? "text-primary stroke-primary" : "text-white stroke-white"} group-hover:text-primary transition-colors size-5`} />
+
                                                 {item.label}
 
                                             </li>
@@ -97,13 +109,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                         {nav2.map((item, index) => (
                                             <li key={index} className={`group flex items-center gap-1 sm:p-2 cursor-pointer rounded-md ${activeLink(item.label, pathname) ? "bg-white text-primary" : "bg-primary text-white"} hover:bg-white hover:text-primary stroke-white hover:stroke-current`} onClick={() => router.push(item.link)}>
 
-                                                <Image
-                                                    src={iconMap1[item.link]}
-                                                    alt="file"
-                                                    width={16}
-                                                    height={16}
-                                                    className="h-4 w-4 text-white group-hover:text-primary transition-colors"
-                                                />
+                                                <Icon icon={iconMap1[item.link]} className={`stroke-1 ${activeLink(item.label, pathname) ? "text-primary stroke-primary" : "text-white stroke-white"} group-hover:text-primary transition-colors size-5`} />
+
                                                 {item.label}
 
                                             </li>
@@ -118,14 +125,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                             <p className="text-white text-sm sm:text-sm">{data && data.user.names}</p>
                                             <p className="text-white text-sm sm:text-sm"> {data && data.user.email}</p>
                                         </div>
-                                        <Image
-                                            src="/svgs/signout.svg"
-                                            alt="file"
-                                            width={4}
-                                            height={4}
-                                            className="h-4 w-4 text-white cursor-pointer"
-                                            onClick={logout}
-                                        />
+                                        <Icon icon="ic:baseline-logout" className='text-white cursor-pointer size-5' onClick={() => logout()} />
                                     </div>
                                 </div>
                             </nav>
@@ -159,7 +159,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                         </div>
                                     </div>
                                 </header>
-                                {children}
+                                <React.Suspense fallback={<Loading />}>
+                                    {children}
+                                </React.Suspense>
                             </div>
                         </main>
                     </div>

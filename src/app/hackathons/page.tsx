@@ -7,10 +7,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { getChallenges } from "@/apis";
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 
 const Hackathons = () => {
+    // In-App imports 
+    const router = useRouter();
 
     const { data, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
+
+    const filteredChallenges = (!isLoading && !error && data?.data?.challenges?.length > 0) ? data?.data?.challenges?.filter((item: { status: string }) => item.status.toLowerCase() === "open" || item.status.toLowerCase() === "ongoing") : [];
+
+    const handleViewSingle = (item) => {
+        const url = `/hackathons/${item.challengeName}?id=${item._id}`;
+        router.push(url);
+    };
 
     return (
         <div className="bg-backgroundA relative flex flex-col zoom-out">
@@ -30,8 +41,11 @@ const Hackathons = () => {
                     <span className="text-tertiaryColor">/</span>
                     <p className="text-primary text-sm sm:text-lg">Challenge & Hackathons</p>
                 </div>
-                <div className="grid gap-4 sm:grid-cols-4 sm:gap-8">
-                    {!isLoading && !error && data && data.data && data.data.challenges.map((item, index) => (<Card
+
+                {/* Challeges and Hackathons */}
+                {isLoading && (<p>Loading ... </p>)}
+                {(filteredChallenges?.length > 0) ? <div className="grid gap-4 sm:grid-cols-4 sm:gap-8">
+                    {filteredChallenges.map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
                         status={item.status}
                         key={index}
                         image={`/white_logo.png`}
@@ -39,11 +53,14 @@ const Hackathons = () => {
                         skills={item.skills}
                         seniority={item.levels}
                         timeline={`${item.duration} day(s)`}
-                        // onClick={() => router.push("/hackathons")}
+                        onClick={() => handleViewSingle(item)}
                         imageWidth={150}
                         imageHeight={50}
                     />))}
-                </div>
+                </div> : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
+                    <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
+                    <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
+                </div>)}
             </main>
             <Footer />
         </div>

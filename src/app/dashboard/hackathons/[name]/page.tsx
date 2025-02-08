@@ -1,15 +1,16 @@
 "use client";
 
+import * as React from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/Button";
 import { decodeUrl } from "@/utils/decodeUrl";
-import * as React from "react";
-import { Modal } from "@/components/Modal";
+const Modal = React.lazy(() => import('@/components/Modal'));
 import { useAuth } from "@/providers/AuthProvider";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSingleChallenge, joinChallenge } from "@/apis";
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 
 const productDesign = [
     "User Interface Design for each step",
@@ -35,11 +36,12 @@ const DashboardHackathon = ({ searchParams }) => {
 
     // URL Params
     const { id }: { id: string } = React.use(searchParams);
+    const payload: Record<string, string> = data.user ? { participant: data.user._id } : { participant: "" };
 
     // In-App data states
 
     const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
-    const payload: Record<string, string> = data.user ? { participant: data.user._id } : { participant: "" };
+    const [isJoining, setIsJoining] = React.useState(false)
 
     React.useEffect(() => {
         if (!data.token) {
@@ -57,15 +59,23 @@ const DashboardHackathon = ({ searchParams }) => {
     }, [authenticate, router, data.token]);
 
     // API Queries
-    const { data: singleChallenge, isLoading } = useQuery({ queryKey: ['challenges'], queryFn: () => getSingleChallenge(data.token, id) })
+    const { data: singleChallenge, isLoading, error } = useQuery({
+        queryKey: ['challenges', id],
+        queryFn: () => getSingleChallenge(id),
+        enabled: !!id, 
+    });
 
     const mutation = useMutation({
         mutationFn: ({ token, payload, id }: { token: string, payload: Record<string, string>, id: string }) => joinChallenge(token, payload, id),
-        onSuccess: async () => {
+        onSuccess: async (response) => {
+            console.log('Delete response', response)
+            setModal({ ...modal, open: false });
             queryClient.invalidateQueries({ queryKey: ['challenges'] })
+            setIsJoining(false);
         },
-        onError: () => {
-            setModal({ open: true, message: "Joining challenge Failed ", title: "Failed" })
+        onError: (error) => {
+            console.log("Errors", error)
+            setModal({ open: true, message: error.message, title: "Failed" })
         }
     })
 
@@ -120,7 +130,17 @@ const DashboardHackathon = ({ searchParams }) => {
     const selectedChallenge = decodeUrl(pathname.split("/dashboard/hackathons/")[1])
 
     const handleJoinChallenge = () => {
-        mutation.mutate({ token: data.token, payload: payload, id })
+        setModal({ ...modal, open: true, message: `Are you sure you want to join ${selectedChallenge} challenge`, title: "Confirm joining" })
+    }
+
+    const closeModal = () => {
+        setModal({ ...modal, open: false })
+        setIsJoining(false);
+    }
+
+    const confirmJoin = () => {
+        setIsJoining(true);
+        mutation.mutate({ token: data.token, payload: payload, id });
     }
 
     return (
@@ -143,7 +163,7 @@ const DashboardHackathon = ({ searchParams }) => {
                 </div>
             </div>
             <div className='grid sm:grid-cols-3 gap-2 sm:gap-4'>
-                <div className="col-span-2 bg-white grid sm:space-y-4 sm:p-4 border rounded-lg">
+                {isLoading ? (<p>Loading ...</p>) : (<div className="col-span-2 bg-white grid sm:space-y-4 sm:p-4 border rounded-lg">
 
                     <div className="relative bg-primary flex flex-col w-full h-[240px] items-center justify-center rounded-md">
                         <Image
@@ -195,7 +215,7 @@ const DashboardHackathon = ({ searchParams }) => {
                         </ul>
                     </div>
 
-                </div>
+                </div>)}
 
                 <div>
 
@@ -205,7 +225,7 @@ const DashboardHackathon = ({ searchParams }) => {
                             <p className="sm:text-md">You are free to schedule the clarification call with the team via this</p>
                         </header>
 
-                        {isLoading ? (<p>Loading ...</p>) : (<div className="flex sm:flex-col items-start sm:space-y-6">
+                        {isLoading || error ? (<p>Loading ...</p>) : (<div className="flex sm:flex-col items-start sm:space-y-6">
 
                             {instructions.map((item, index) => (<div key={index} className="flex sm:flex-row items-center justify-center sm:gap-4">
                                 <div className='bg-[#D0E0FC] flex items-center justify-center h-10 w-10 sm:p-2 rounded-full cursor-pointer'>
@@ -220,9 +240,9 @@ const DashboardHackathon = ({ searchParams }) => {
 
                         <div className="w-full sm:py-4">
                             <div className="w-full flex sm:flex-row flex-wrap sm:gap-4">
-                                <Button classNames={` bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-bold p-2`} label={"Join Challenge"} onClick={handleJoinChallenge} />
+                                <Button classNames={`bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-bold p-2`} label={"Join Challenge"} onClick={handleJoinChallenge} />
 
-                                <Button classNames={` bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-2`} label={"Submit your Work"} onClick={() => console.log("Submitted")} />
+                                <Button classNames={`bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-2`} label={"Submit your Work"} onClick={() => console.log("Submitted")} />
                             </div>
                         </div>
 
@@ -233,12 +253,14 @@ const DashboardHackathon = ({ searchParams }) => {
 
             <Modal
                 isOpen={modal.open}
-                onClose={() => setModal({ ...modal, open: false })}
-                title={modal.title || "Join Confirmation"}
-            >
+                onClose={closeModal}
+                title={modal.title}>
                 <div className='flex flex-col items-start justify-start sm:gap-4'>
-
-                    <p className='text-center'>{modal.message}</p>
+                    <p className="text-sm">{modal.message}</p>
+                </div>
+                <div className="flex gap-3 justify-center sm:mt-8">
+                    <Button classNames={` text-primary border border-primary sm:text-sm p-2`} label={"Cancel"} onClick={closeModal} />
+                    <Button classNames={` bg-red-600 hover:bg-red-600/90 text-white sm:text-sm p-2`} label={"Confirm"} onClick={confirmJoin} icon={isJoining && <Icon icon="line-md:loading-twotone-loop" width="18" height="18" />} />
                 </div>
             </Modal>
         </div>

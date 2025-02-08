@@ -2,15 +2,15 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { ChallengeFormProps } from "@/@types/global";
+import { ChallengeFormProps, CustomChangeEvent } from "@/@types/global";
 import { validateForm } from "@/utils/validation";
 import { ChallengeForm } from "@/components/ChallengesForm";
 import Image from "next/image";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { editChallenge, getSingleChallenge, getSkills } from "@/apis";
+import { editChallenge, getSingleChallenge } from "@/apis";
 import { useAuth } from "@/providers/AuthProvider";
-import { handleClearForm } from "../../create/page";
-import { Modal } from "@/components/Modal";
+import dayjs from "dayjs";
+const Modal = React.lazy(() => import('@/components/Modal'));
 
 const EditChallenge = ({ searchParams }) => {
     const queryClient = useQueryClient();
@@ -36,9 +36,12 @@ const EditChallenge = ({ searchParams }) => {
     }, [authenticate, router, data.token]);
 
     // API Queries
-    const { data: skills, isLoading: isSkillsLoading } = useQuery({ queryKey: ['skills'], queryFn: getSkills })
-
-    const { data: singleChallenge } = useQuery({ queryKey: ['challenges'], queryFn: () => getSingleChallenge(data.token, id) })
+    const { data: singleChallenge, isLoading, error } = useQuery({
+        queryKey: ['challenges', id],
+        queryFn: () =>
+        getSingleChallenge(id),
+        enabled: !!id,
+    })
 
     const mutation = useMutation({
         mutationFn: ({ token, id, payload }: { token: string, id: string, payload: ChallengeFormProps }) => editChallenge(token, id, payload),
@@ -56,31 +59,54 @@ const EditChallenge = ({ searchParams }) => {
     // Form and Error States
     const [errors, setErrors] = React.useState<ChallengeFormProps>({});
 
-    const [formData, setFormData] = React.useState<ChallengeFormProps>({
-        challengeName: singleChallenge?.data?.challengeName || "N/A",
-        endDate: singleChallenge?.data?.endDate || "N/A",
-        duration: singleChallenge?.data?.duration || 1,
-        moneyPrize: singleChallenge?.data?.moneyPrize || "N/A",
-        contactEmail: singleChallenge?.data?.contactEmail || "N/A",
-        projectDescription: singleChallenge?.data?.projectDescription || "N/A",
-        projectBrief: singleChallenge?.data?.projectBrief || "N/A",
-        projectTasks: singleChallenge?.data?.projectTasks || "N/A",
-        skills: ["Frontend", "Backend", "UI/UX"],
+    const [formState, setFormState] = React.useState<ChallengeFormProps>({
+        challengeName: singleChallenge?.data?.challengeName || "",
+        startDate: dayjs(singleChallenge?.data?.startDate).format("YYYY-MM-DD") || "",
+        endDate: dayjs(singleChallenge?.data?.endDate).format("YYYY-MM-DD") || "",
+        moneyPrize: singleChallenge?.data?.moneyPrize || "",
+        contactEmail: singleChallenge?.data?.contactEmail || "",
+        projectDescription: singleChallenge?.data?.projectDescription || "",
+        projectBrief: singleChallenge?.data?.projectBrief || "",
+        projectTasks: singleChallenge?.data?.projectTasks || "",
+        skills: singleChallenge?.data?.skills || [],
+        levels: singleChallenge?.data?.levels || [],
     })
 
     const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
 
-    const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+
+    // Action Functions
+    const handleFormChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement> | CustomChangeEvent
+    ) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: name === "duration" ? Number(value) : value,
+        setFormState({
+            ...formState,
+            [name]: value,
         });
     }
 
+    const handleClearForm = async (): Promise<void> => {
+        setFormState({
+            challengeName: "",
+            startDate: "",
+            endDate: "",
+            moneyPrize: "",
+            contactEmail: "",
+            projectDescription: "",
+            projectBrief: "",
+            projectTasks: "",
+            skills: [],
+            levels: []
+        });
+        setErrors({});
+    };
+
     const handleSubmitForm = async () => {
-        if (await validateForm(formData, setErrors)) {
-            mutation.mutate({ token: data.token, id, payload: formData })
+        if (await validateForm(formState, setErrors)) {
+            console.log("formState", formState);
+            mutation.mutate({ token: data.token, id, payload: formState })
+            await handleClearForm();
         } else {
             setModal({ open: true, message: "Failed to validate", title: "Failed" })
         }
@@ -114,7 +140,7 @@ const EditChallenge = ({ searchParams }) => {
                         <p className="sm:text-sm text-tertiaryColor">Fill out these details to build your broadcast</p>
                     </header>
 
-                    <ChallengeForm skills={isSkillsLoading ? [] : skills.data} submitType="edit" handleFormChange={handleFormChange} handleClearForm={() => handleClearForm(setFormData, setErrors)} handleSubmitForm={handleSubmitForm} errors={errors} values={formData} />
+                    {isLoading || error ? (<p>Loading ...</p>) : (<ChallengeForm submitType="edit" handleFormChange={handleFormChange} handleClearForm={handleClearForm} handleSubmitForm={handleSubmitForm} errors={errors} values={formState} />)}
 
                 </div>
             </div>
@@ -130,7 +156,7 @@ const EditChallenge = ({ searchParams }) => {
                 </div>
             </Modal>
 
-        </div>
+        </div >
     )
 }
 

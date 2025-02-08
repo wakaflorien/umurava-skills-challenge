@@ -1,6 +1,5 @@
 "use client";
 import * as React from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
@@ -10,7 +9,6 @@ import { Button } from "@/components/Button";
 import { BackDropShape } from "@/components/BackDropShape";
 
 const Institutions = () => {
-    const router = useRouter();
     return (
         <div className="bg-backgroundA elative flex flex-col zoom-out">
             <Nav />
@@ -21,7 +19,7 @@ const Institutions = () => {
                         <h1 className="text-primary text-xl sm:text-3xl sm:leading-tight font-bold">Accelerate Your Students and Traineess Employability and Career Growth through Project-based Learning Solution</h1>
                         <p className="text-black text-md sm:text-lg leading-8">We partner with Universities, Schools, and Trainining Institutions to build the work experience of their students and trainees through project based learning challenges and hackathons.</p>
 
-                        <Button classNames="w-full sm:w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Partner With Us" onClick={() => router.push('/hackathons')} />
+                        <Button classNames="w-full sm:w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Partner With Us" />
 
                     </header>
 

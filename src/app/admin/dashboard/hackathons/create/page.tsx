@@ -2,30 +2,14 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { ChallengeFormProps } from "@/@types/global";
+import { ChallengeFormProps, CustomChangeEvent } from "@/@types/global";
 import { validateForm } from "@/utils/validation";
 import { ChallengeForm } from "@/components/ChallengesForm";
 import Image from "next/image";
 import { useAuth } from "@/providers/AuthProvider";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getSkills, postChallenge } from "@/apis";
-import { Modal } from "@/components/Modal";
-
-export const handleClearForm = async (setFormData: React.Dispatch<React.SetStateAction<ChallengeFormProps>>, setErrors: React.Dispatch<React.SetStateAction<ChallengeFormProps>>) => {
-    setFormData({
-        challengeName: "",
-        endDate: "",
-        duration: 1,
-        moneyPrize: "",
-        contactEmail: "",
-        projectDescription: "",
-        projectBrief: "",
-        projectTasks: "",
-        skills: [],
-    });
-    setErrors({});
-};
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { postChallenge } from "@/apis";
+const Modal = React.lazy(() => import('@/components/Modal'));
 
 const CreateChallenge = () => {
     // In-App imports
@@ -34,20 +18,21 @@ const CreateChallenge = () => {
     const { data, authenticate } = useAuth();
 
 
-     // In-App Data states
-     const [errors, setErrors] = React.useState<ChallengeFormProps>({});
-     const [formData, setFormData] = React.useState<ChallengeFormProps>({
-         challengeName: "",
-         endDate: "",
-         duration: 1,
-         moneyPrize: "",
-         contactEmail: "",
-         projectDescription: "",
-         projectBrief: "",
-         projectTasks: "",
-         skills: ["Frontend","Backend", "UI/UX"],
-     })
-     const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
+    // In-App Data states
+    const [errors, setErrors] = React.useState<ChallengeFormProps>({});
+    const [formState, setFormState] = React.useState<ChallengeFormProps>({
+        challengeName: "",
+        endDate: "",
+        startDate: "",
+        moneyPrize: "",
+        contactEmail: "",
+        projectDescription: "",
+        projectBrief: "",
+        projectTasks: "",
+        levels: [],
+        skills: []
+    })
+    const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
     React.useEffect(() => {
         if (!data.token) {
             const handleAuthentication = async () => {
@@ -63,9 +48,8 @@ const CreateChallenge = () => {
         }
     }, [authenticate, router, data.token]);
 
-    
+
     // API Queries
-    const { data: skills, isLoading } = useQuery({ queryKey: ['skills'], queryFn: getSkills })
     const mutation = useMutation({
         mutationFn: ({ token, payload }: { token: string, payload: ChallengeFormProps }) => postChallenge(token, payload),
         onSuccess: async () => {
@@ -81,21 +65,37 @@ const CreateChallenge = () => {
 
 
     // Action Functions
-    const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const handleFormChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement> | CustomChangeEvent
+    ) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: name === "duration" ? Number(value) : value,
+        setFormState({
+            ...formState,
+            [name]: value,
         });
     }
 
+    const handleClearForm = () => {
+        setFormState({
+            challengeName: "",
+            startDate: "",
+            endDate: "",
+            moneyPrize: "",
+            contactEmail: "",
+            projectDescription: "",
+            projectBrief: "",
+            projectTasks: "",
+            levels: [],
+            skills: []
+        });
+        setErrors({});
+    };
 
     const handleSubmitForm = async () => {
-        if (await validateForm(formData, setErrors)) {
-            console.log("formData", formData);
-            mutation.mutate({ token: data.token, payload: formData })
+        if (await validateForm(formState, setErrors)) {
+            mutation.mutate({ token: data.token, payload: formState })
         } else {
-            setModal({ open: true, message: "Failed to validate", title: "Failed" })
+            setModal({ open: true, message: "Your form have some validation errors", title: "Failed" })
         }
     }
 
@@ -127,7 +127,7 @@ const CreateChallenge = () => {
                         <p className="sm:text-sm text-tertiaryColor">Fill out these details to build your broadcast</p>
                     </header>
 
-                    <ChallengeForm submitType="create" handleFormChange={handleFormChange} handleClearForm={() => handleClearForm(setFormData, setErrors)} handleSubmitForm={handleSubmitForm} errors={errors} skills={isLoading ? [] : skills.data} />
+                    <ChallengeForm submitType="create" handleFormChange={handleFormChange} handleClearForm={handleClearForm} handleSubmitForm={handleSubmitForm} values={formState} errors={errors} />
 
                 </div>
             </div>

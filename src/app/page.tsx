@@ -27,7 +27,7 @@ export default function Home() {
   const { data: challenges, isLoading: challengesLoading, error: challengesError } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
 
   return (
-    <div className="relative flex flex-col zoom-out">
+    <div className={`relative flex flex-col zoom-out`}>
       <Nav />
 
       <main className="flex flex-col sm:items-start space-y-11 mb-4 sm:mb-16">
@@ -180,7 +180,7 @@ export default function Home() {
             />))}
           </div>
 
-          <Button classNames="w-full sm:w-[200px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="View More" onClick={() => router.push("/hackathons")} />
+          {!challengesLoading && !challengesError && challenges && challenges.data && challenges.data.challenges.length > 0 && (<Button classNames="w-full sm:w-[200px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="View More" onClick={() => router.push("/hackathons")} />)}
         </section>
 
         {/* Participate in skills challenge  */}
@@ -291,7 +291,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="col-span-2 flex flex-col gap-4 sm:gap-8">
+            <div className="col-span-2 flex flex-col gap-4 sm:gap-10">
               <h1 className="text-xl sm:text-3xl font-bold">Ready to Unlock Your Career Potential Today!</h1>
               <p>Join a challenge or a hackathon to gain valuable work experience, build an impressive portofolio and increase your chances to land job opportunities and accelerate your career growth</p>
 

@@ -17,7 +17,7 @@ export const BackToTop: React.FC = () => {
         return () => {
             window.removeEventListener('scroll', toggleVisibility);
         };
-    });
+    }, [toggleVisibility]);
 
     const scrollToTop = () => {
         window.scrollTo({

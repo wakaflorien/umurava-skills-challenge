@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { getChallenges, getStatistics } from '@/apis';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '@/providers/AuthProvider';
+import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -45,7 +46,7 @@ const DashboardHackathons = () => {
         } else {
             return []
         }
-    }, [activeTab, allChallenges]);
+    }, [activeTab, allChallenges, error, isLoading]);
 
     const totalPages = filteredData ? Math.ceil(filteredData.length / ITEMS_PER_PAGE) : 0;
 
@@ -55,6 +56,8 @@ const DashboardHackathons = () => {
 
     // Get current page items
     const currentItems = filteredData ? filteredData.slice(startIndex, endIndex) : [];
+
+    const filteredChallenges = (!isLoading && !error && allChallenges?.data?.challenges?.length > 0) ? currentItems : [];
 
     const handleChangeTab = (tab: string) => {
         setCurrentPage(1);
@@ -99,8 +102,9 @@ const DashboardHackathons = () => {
                 </div>)}
 
                 {/* Challeges and Hackathons */}
-                <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
-                    {!isLoading && currentItems.length > 0 && currentItems.map((item: { status: string; challengeName: string; skills: string[]; levels: Array<string>; duration: number; }, index: number) => (<Card
+                {isLoading && (<p>Loading ... </p>)}
+                {(filteredChallenges?.length > 0) ? <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
+                    {filteredChallenges.map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
                         status={item.status}
                         key={index}
                         image={`/white_logo.png`}
@@ -112,12 +116,15 @@ const DashboardHackathons = () => {
                         imageWidth={150}
                         imageHeight={50}
                     />))}
-                </div>
+                </div> : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
+                    <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
+                    <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
+                </div>)}
 
-                <Pagination
+                {filteredChallenges?.length > 0 && (<Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
-                    onPageChange={setCurrentPage} />
+                    onPageChange={setCurrentPage} />)}
             </div>
         </div>
     );

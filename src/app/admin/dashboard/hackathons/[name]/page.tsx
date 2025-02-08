@@ -6,10 +6,11 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/Button";
 import { decodeUrl } from "@/utils/decodeUrl";
-import { Modal } from "@/components/Modal";
+const Modal = React.lazy(() => import('@/components/Modal'));
 import { useAuth } from "@/providers/AuthProvider";
 import { deleteChallenge, getSingleChallenge } from "@/apis";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 
 const productDesign = [
     "User Interface Design for each step",
@@ -38,6 +39,7 @@ const DashboardHackathon = ({ searchParams }) => {
 
     // In-App Data 
     const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
+    const [isDeleting, setIsDeleting] = React.useState(false)
     React.useEffect(() => {
         if (!data.token) {
             const handleAuthentication = async () => {
@@ -54,15 +56,24 @@ const DashboardHackathon = ({ searchParams }) => {
     }, [authenticate, router, data.token]);
 
     // API Queries
-    const { data: singleChallenge, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: () => getSingleChallenge(data.token, id) })
+    const { data: singleChallenge, isLoading, error } = useQuery({ 
+        queryKey: ['challenges', id], 
+        queryFn: () => getSingleChallenge(id),
+        enabled: !!id,
+    })
 
     const mutation = useMutation({
         mutationFn: ({ token, id }: { token: string, id: string }) => deleteChallenge(token, id),
-        onSuccess: async () => {
+        onSuccess: (response) => {
+            console.log(response);
+            setModal({ ...modal, open: false });
             queryClient.invalidateQueries({ queryKey: ['challenges'] })
+            setIsDeleting(false);
+            router.push("/admin/dashboard/hackathons");
         },
-        onError: () => {
-            setModal({ open: true, message: "Deleting challenge Failed ", title: "Failed" })
+        onError: (error) => {
+            console.log(error);
+            setModal({ open: true, message: error.message, title: "Failed" })
         }
     })
 
@@ -122,10 +133,16 @@ const DashboardHackathon = ({ searchParams }) => {
     }
 
     const openDelete = () => {
-        setModal({ ...modal, open: true, message: `Are you sure you want to delete ${selectedChallenge} Challenge ?` });
+        setModal({ ...modal, open: true, message: `Are you sure you want to delete ${selectedChallenge} Challenge ?`, title: "Confirm deletion" });
     }
 
-    const handleDelete = async () => {
+    const closeModal = () => {
+        setModal({ ...modal, open: false })
+        setIsDeleting(false);
+    }
+
+    const confirmDelete = () => {
+        setIsDeleting(true);
         mutation.mutate({ token: data.token, id })
     }
 
@@ -172,9 +189,7 @@ const DashboardHackathon = ({ searchParams }) => {
                     <div className="sm:space-y-2">
                         <h1 className="font-bold text-sm sm:text-md">Tasks:</h1>
                         <h1 className="font-bold text-sm sm:text-md capitalize">Product Requirements</h1>
-                        {/* <ul className="sm:text-md list-disc pl-4">
-                            {productRequirements.map(item => (<li key={item}>{item}</li>))}
-                        </ul> */}
+                        
                         <p className="sm:text-md capitalize">{singleChallenge && singleChallenge.data.projectTasks}</p>
                     </div>
 
@@ -204,7 +219,7 @@ const DashboardHackathon = ({ searchParams }) => {
 
                 </div>
 
-                <div className={`grid sm:grid-row-2`}>
+                <div className={`flex sm:flex-col gap-4 sm:gap-8`}>
 
                     <div className='bg-white h-fit w-full flex sm:flex-col items-start gap-8 sm:gap-4 sm:p-4 border rounded-lg'>
                         <header className='space-y-2 sm:space-y-4'>
@@ -235,9 +250,10 @@ const DashboardHackathon = ({ searchParams }) => {
 
                     </div>
 
-                    <div className='row-span-2 bg-white h-fit w-full flex sm:flex-col items-start gap-8 sm:gap-4 sm:p-4 border rounded-lg'>
-                        <header className='space-y-2 sm:space-y-4'>
+                    <div className=' bg-white h-fit w-full flex sm:flex-col items-start gap-8 sm:gap-4 sm:p-4 border rounded-lg'>
+                        <header className='flex items-center gap-2'>
                             <h1 className='font-bold text-sm sm:text-md'>Participants</h1>
+                            <span className="bg-primary text-white px-2 rounded-full">{!isLoading && !error && singleChallenge?.data?.participants?.length}</span>
                         </header>
 
                         <div className="flex sm:flex-col items-start sm:space-y-6">
@@ -264,16 +280,15 @@ const DashboardHackathon = ({ searchParams }) => {
 
             <Modal
                 isOpen={modal.open}
-                onClose={() => setModal({ ...modal, open: false })}
-                title={modal.title || "Delete Confirmation"}
+                onClose={closeModal}
+                title={modal.title}
             >
                 <div className='flex flex-col items-start justify-start sm:gap-4'>
-
                     <p className='text-center'>{modal.message}</p>
-                    {modal.message.toLowerCase().includes("are you sure") &&(<div className="w-full flex items-center justify-center sm:gap-3">
-                        <Button classNames="w-[70px] bg-white text-primary border border-primary sm:text-sm font-semibold p-2 sm:p-3" label="No" onClick={() => setModal({ ...modal, open: false })} />
-                        <Button classNames="w-[70px] bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-semibold p-2 sm:p-3" label="Yes" onClick={() => handleDelete()} />
-                    </div>)}
+                </div>
+                <div className="flex gap-3 justify-center sm:mt-8">
+                    <Button classNames={` text-primary border border-primary sm:text-sm p-2`} label={"Cancel"} onClick={closeModal} />
+                    <Button classNames={` bg-red-600 hover:bg-red-600/90 text-white sm:text-sm p-2`} label={"Confirm"} onClick={confirmDelete} icon={isDeleting && <Icon icon="line-md:loading-twotone-loop" width="18" height="18" />} />
                 </div>
             </Modal>
         </div>

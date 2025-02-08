@@ -96,6 +96,7 @@ export interface AuthContextType {
 export interface ChallengeFormProps {
   challengeName?: string;
   endDate?: string;
+  startDate?: string;
   duration?: number;
   moneyPrize?: string;
   contactEmail?: string;
@@ -103,18 +104,26 @@ export interface ChallengeFormProps {
   projectBrief?: string;
   projectTasks?: string;
   deliverables?: string;
+  levels?: Array<string>;
   skills?: Array<string>;
-  seniority?: string;
+}
+
+export interface CustomChangeEvent {
+  target: {
+      name: string;
+      value: string | string[];
+  };
+}
+export interface OptionType {
+  label: string;
+  value: string;
 }
 
 export interface ChallengeFormComponentProps {
-  handleFormChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => void;
+  handleFormChange: (e: CustomChangeEvent | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   handleClearForm: () => void;
   handleSubmitForm: () => void;
   errors?: ChallengeFormProps;
   values?: ChallengeFormProps;
-  skills: Array<Record<string, string>>;
   submitType: "create" | "edit";
 }
