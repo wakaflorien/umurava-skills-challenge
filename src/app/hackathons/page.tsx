@@ -9,6 +9,7 @@ import { getChallenges } from "@/apis";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import { CardSkeleton } from "@/components/Skeletons";
 
 const Hackathons = () => {
     // In-App imports 
@@ -43,24 +44,25 @@ const Hackathons = () => {
                 </div>
 
                 {/* Challeges and Hackathons */}
-                {isLoading && (<p>Loading ... </p>)}
-                {(filteredChallenges?.length > 0) ? <div className="grid gap-4 sm:grid-cols-4 sm:gap-8">
-                    {filteredChallenges.map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
-                        status={item.status}
-                        key={index}
-                        image={`/white_logo.png`}
-                        title={item.challengeName}
-                        skills={item.skills}
-                        seniority={item.levels}
-                        timeline={`${item.duration} day(s)`}
-                        onClick={() => handleViewSingle(item)}
-                        imageWidth={150}
-                        imageHeight={50}
-                    />))}
-                </div> : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
-                    <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
-                    <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
-                </div>)}
+                {isLoading || error ? (<CardSkeleton count={3} />) : (
+                    <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
+                        {filteredChallenges?.length > 0 ? filteredChallenges?.slice(0, 3)?.map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
+                            status={item.status}
+                            key={index}
+                            image={`/white_logo.png`}
+                            title={item.challengeName}
+                            skills={item.skills}
+                            seniority={item.levels}
+                            timeline={`${item.duration} day(s)`}
+                            onClick={() => handleViewSingle(item)}
+                            imageWidth={150}
+                            imageHeight={50}
+                        />)) : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
+                            <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
+                            <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
+                        </div>)}
+                    </div>
+                )}
             </main>
             <Footer />
         </div>
