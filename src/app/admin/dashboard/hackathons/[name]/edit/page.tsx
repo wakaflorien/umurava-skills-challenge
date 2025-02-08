@@ -89,6 +89,7 @@ const EditChallenge = ({ searchParams }) => {
             projectBrief: "",
             projectTasks: "",
             skills: [],
+            levels: []
         });
         setErrors({});
     };

@@ -85,7 +85,7 @@ const CreateChallenge = () => {
             projectBrief: "",
             projectTasks: "",
             levels: [],
-            seniority: []
+            skills: []
         });
         setErrors({});
     };
