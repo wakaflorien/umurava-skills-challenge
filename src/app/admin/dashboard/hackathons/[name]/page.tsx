@@ -56,7 +56,11 @@ const DashboardHackathon = ({ searchParams }) => {
     }, [authenticate, router, data.token]);
 
     // API Queries
-    const { data: singleChallenge, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: () => getSingleChallenge(id) })
+    const { data: singleChallenge, isLoading, error } = useQuery({ 
+        queryKey: ['challenges', id], 
+        queryFn: () => getSingleChallenge(id),
+        enabled: !!id,
+    })
 
     const mutation = useMutation({
         mutationFn: ({ token, id }: { token: string, id: string }) => deleteChallenge(token, id),

@@ -4,7 +4,7 @@ import * as React from 'react';
 import "./../globals.css";
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Modal } from '@/components/Modal';
+const Modal = React.lazy(() => import('@/components/Modal'));
 import { workSans } from '@/utils/fonts';
 import { Providers, useAuth } from '@/providers/AuthProvider';
 import { joinCommunity } from '@/apis';

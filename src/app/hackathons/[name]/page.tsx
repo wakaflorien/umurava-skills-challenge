@@ -37,7 +37,11 @@ const SingleHackathon = ({ searchParams }) => {
     // In-App data states
 
     // API Queries
-    const { data: singleChallenge, isLoading } = useQuery({ queryKey: ['challenges'], queryFn: () => getSingleChallenge(id) })
+    const { data: singleChallenge, isLoading } = useQuery({ 
+        queryKey: ['challenges', id], 
+        queryFn: () => getSingleChallenge(id),
+        enabled: !!id,
+    })
 
     // Action Functions
     const selectedChallenge = decodeUrl(pathname.split("/hackathons/")[1])

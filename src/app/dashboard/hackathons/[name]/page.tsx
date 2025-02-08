@@ -59,7 +59,11 @@ const DashboardHackathon = ({ searchParams }) => {
     }, [authenticate, router, data.token]);
 
     // API Queries
-    const { data: singleChallenge, isLoading } = useQuery({ queryKey: ['challenges'], queryFn: () => getSingleChallenge(id) })
+    const { data: singleChallenge, isLoading, error } = useQuery({
+        queryKey: ['challenges', id],
+        queryFn: () => getSingleChallenge(id),
+        enabled: !!id, 
+    });
 
     const mutation = useMutation({
         mutationFn: ({ token, payload, id }: { token: string, payload: Record<string, string>, id: string }) => joinChallenge(token, payload, id),
@@ -221,7 +225,7 @@ const DashboardHackathon = ({ searchParams }) => {
                             <p className="sm:text-md">You are free to schedule the clarification call with the team via this</p>
                         </header>
 
-                        {isLoading ? (<p>Loading ...</p>) : (<div className="flex sm:flex-col items-start sm:space-y-6">
+                        {isLoading || error ? (<p>Loading ...</p>) : (<div className="flex sm:flex-col items-start sm:space-y-6">
 
                             {instructions.map((item, index) => (<div key={index} className="flex sm:flex-row items-center justify-center sm:gap-4">
                                 <div className='bg-[#D0E0FC] flex items-center justify-center h-10 w-10 sm:p-2 rounded-full cursor-pointer'>

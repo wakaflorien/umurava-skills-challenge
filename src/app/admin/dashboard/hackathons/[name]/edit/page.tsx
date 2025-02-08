@@ -36,7 +36,12 @@ const EditChallenge = ({ searchParams }) => {
     }, [authenticate, router, data.token]);
 
     // API Queries
-    const { data: singleChallenge, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: () => getSingleChallenge( id) })
+    const { data: singleChallenge, isLoading, error } = useQuery({
+        queryKey: ['challenges', id],
+        queryFn: () =>
+        getSingleChallenge(id),
+        enabled: !!id,
+    })
 
     const mutation = useMutation({
         mutationFn: ({ token, id, payload }: { token: string, id: string, payload: ChallengeFormProps }) => editChallenge(token, id, payload),

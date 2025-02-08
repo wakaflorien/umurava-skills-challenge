@@ -9,13 +9,14 @@ import { Card } from '@/components/Card';
 import { useAuth } from '@/providers/AuthProvider';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
-import { getChallenges, getStatistics } from '@/apis';
+import { getChallenges } from '@/apis';
 import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
 
 const ITEMS_PER_PAGE = 6;
 
 const DashboardHackathons = () => {
     const { data, authenticate } = useAuth();
+    
     const router = useRouter();
     const [currentPage, setCurrentPage] = React.useState(1);
     const [activeTab, setActiveTab] = React.useState("all");
@@ -24,7 +25,7 @@ const DashboardHackathons = () => {
         if (!data.token) {
             const handleAuthentication = async () => {
                 try {
-                    await authenticate({ userRole: "admin" });
+                    await authenticate({ userRole: "participant" });
                 } catch (error) {
                     console.error("Failed to authenticate:", error);
                     router.push("/");
@@ -35,10 +36,9 @@ const DashboardHackathons = () => {
         }
     }, [authenticate, router, data.token]);
 
-    const { data: allChallenges, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
-    const { data: dataAggregates, isLoading: isLoadingAggregates, error: aggregatesError } = useQuery({ queryKey: ['stats'], queryFn: () => getStatistics(data.token) });
+    const { data: allChallenges, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges });
 
-    const tabs = [{ id: 1, title: "All challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalChallengesThisWeek }, { id: 2, title: "Completed challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalCompletedChallenges }, { id: 3, title: "Open challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalOpenChallenges }, { id: 4, title: "Ongoing challenges", value: !isLoadingAggregates && !aggregatesError && dataAggregates?.data?.totalOngoingChallenges }];
+    const tabs = [{ id: 1, title: "All challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalChallenges }, { id: 2, title: "Completed challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalCompletedChallenges }, { id: 3, title: "Open challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOpenChallenges }, { id: 4, title: "Ongoing challenges", value: !isLoading && !error && allChallenges?.data?.aggregates?.totalOngoingChallenges }];
 
     const filteredData = React.useMemo(() => {
         if (!isLoading && !error && allChallenges) {
@@ -77,8 +77,8 @@ const DashboardHackathons = () => {
                     <p>Join a challenge or a hackathon to gain valuable work experience</p>
                 </header>
 
-                {isLoadingAggregates && (<p>Loading ...</p>)}
-                {!isLoadingAggregates && !error && (<div className='flex sm:flex-row flex-wrap flex-col items-center justify-start gap-8 sm:gap-4'>
+                {isLoading && (<p>Loading ...</p>)}
+                {!isLoading && !error && (<div className='flex sm:flex-row flex-wrap flex-col items-center justify-start gap-8 sm:gap-4'>
                     {tabs.map((item, index) => (<Button key={index} icon={(<Image
                         src="/svgs/file.svg"
                         alt="file"
