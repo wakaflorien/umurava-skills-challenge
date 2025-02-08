@@ -12,6 +12,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '@/providers/AuthProvider';
 import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
 import { CardSkeleton, TabsSkeleton } from '@/components/Skeletons';
+import Oops from '@/components/Oops';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -120,10 +121,7 @@ const DashboardHackathons = () => {
                             onClick={() => handleViewSingle(item)}
                             imageWidth={150}
                             imageHeight={50}
-                        />)) : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
-                            <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
-                            <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
-                        </div>)}
+                        />)) : (<Oops desc={"Oops!, No Challenges available"} />)}
                     </div>
                 )}
 

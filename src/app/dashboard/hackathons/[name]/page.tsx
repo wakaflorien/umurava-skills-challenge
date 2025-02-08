@@ -240,9 +240,9 @@ const DashboardHackathon = ({ searchParams }) => {
 
                         <div className="w-full sm:py-4">
                             <div className="w-full flex sm:flex-row flex-wrap sm:gap-4">
-                                <Button classNames={`bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-bold p-2`} label={"Join Challenge"} onClick={handleJoinChallenge} />
+                                <Button classNames={`bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-bold p-3`} label={"Join Challenge"} onClick={handleJoinChallenge} />
 
-                                <Button classNames={`bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-2`} label={"Submit your Work"} onClick={() => console.log("Submitted")} />
+                                <Button classNames={`bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-3`} label={"Submit your Work"} onClick={() => console.log("Submitted")} />
                             </div>
                         </div>
 

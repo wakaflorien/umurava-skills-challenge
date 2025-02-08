@@ -8,8 +8,8 @@ import Image from "next/image";
 import { getChallenges } from "@/apis";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { CardSkeleton } from "@/components/Skeletons";
+import Oops from "@/components/Oops";
 
 const Hackathons = () => {
     // In-App imports 
@@ -57,10 +57,7 @@ const Hackathons = () => {
                             onClick={() => handleViewSingle(item)}
                             imageWidth={150}
                             imageHeight={50}
-                        />)) : (<div className='h-[40vh] flex items-center justify-center sm:gap-4'>
-                            <Icon icon="tabler:mood-empty" width="34" height="34" className="text-primary" />
-                            <p className='text-primary font-bold'>Oops!, No Open Challenges available</p>
-                        </div>)}
+                        />)) : (<Oops desc={"Oops!, No Open Challenges available at the moment"} />)}
                     </div>
                 )}
             </main>

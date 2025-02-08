@@ -11,6 +11,7 @@ import { useAuth } from "@/providers/AuthProvider";
 import { deleteChallenge, getSingleChallenge } from "@/apis";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import Oops from "@/components/Oops";
 
 const productDesign = [
     "User Interface Design for each step",
@@ -56,8 +57,8 @@ const DashboardHackathon = ({ searchParams }) => {
     }, [authenticate, router, data.token]);
 
     // API Queries
-    const { data: singleChallenge, isLoading, error } = useQuery({ 
-        queryKey: ['challenges', id], 
+    const { data: singleChallenge, isLoading, error } = useQuery({
+        queryKey: ['challenges', id],
         queryFn: () => getSingleChallenge(id),
         enabled: !!id,
     })
@@ -166,7 +167,7 @@ const DashboardHackathon = ({ searchParams }) => {
                 </div>
             </div>
 
-            {isLoading ? (<p>Loading ...</p>) : (<div className='grid sm:grid-cols-3 gap-2 sm:gap-4'>
+            {isLoading || error ? (<p>Loading ...</p>) : (<div className='grid sm:grid-cols-3 gap-2 sm:gap-4'>
                 <div className="col-span-2 bg-white grid sm:space-y-4 sm:p-4 border rounded-lg">
 
                     <div className="relative bg-primary flex flex-col w-full h-[240px] items-center justify-center rounded-md">
@@ -189,7 +190,7 @@ const DashboardHackathon = ({ searchParams }) => {
                     <div className="sm:space-y-2">
                         <h1 className="font-bold text-sm sm:text-md">Tasks:</h1>
                         <h1 className="font-bold text-sm sm:text-md capitalize">Product Requirements</h1>
-                        
+
                         <p className="sm:text-md capitalize">{singleChallenge && singleChallenge.data.projectTasks}</p>
                     </div>
 
@@ -242,23 +243,23 @@ const DashboardHackathon = ({ searchParams }) => {
 
                         <div className="w-full sm:py-4">
                             <div className="w-full flex sm:flex-row flex-wrap sm:gap-4">
-                                <Button classNames={`w-[100px] bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-bold p-2`} label={"Delete"} onClick={openDelete} />
+                                <Button classNames={`w-[100px] bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-bold p-3`} label={"Delete"} onClick={openDelete} />
 
-                                <Button classNames={`w-[100px] bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-2`} label={"Edit"} onClick={navigateToEdit} />
+                                <Button classNames={`w-[100px] bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-3`} label={"Edit"} onClick={navigateToEdit} />
                             </div>
                         </div>
 
                     </div>
 
-                    <div className=' bg-white h-fit w-full flex sm:flex-col items-start gap-8 sm:gap-4 sm:p-4 border rounded-lg'>
+                    {singleChallenge?.data?.participants?.length > 0 ? (<div className=' bg-white h-fit w-full flex sm:flex-col items-start gap-8 sm:gap-4 sm:p-4 border rounded-lg'>
                         <header className='flex items-center gap-2'>
                             <h1 className='font-bold text-sm sm:text-md'>Participants</h1>
-                            <span className="bg-primary text-white px-2 rounded-full">{!isLoading && !error && singleChallenge?.data?.participants?.length}</span>
+                            <span className="bg-primary text-white px-2 rounded-full">{singleChallenge?.data?.participants?.length}</span>
                         </header>
 
                         <div className="flex sm:flex-col items-start sm:space-y-6">
 
-                            {!isLoading && !error && singleChallenge?.data?.participants?.map((item, index) => (<div key={index} className="flex sm:flex-row items-center justify-center sm:gap-4">
+                            {singleChallenge?.data?.participants?.map((item, index) => (<div key={index} className="flex sm:flex-row items-center justify-center sm:gap-4">
                                 <div className='relative bg-[#D0E0FC] flex items-center justify-center h-10 w-10 sm:p-2 rounded-full cursor-pointer'>
                                     {item.image !== "none" && <Image src={item.profile_url} alt="avatar" priority className="rounded-full object-container" width={40} height={40} />}
                                     <div className='absolute bottom-0 right-0 bg-success h-3 w-3 border border-white rounded-full'></div>
@@ -271,10 +272,10 @@ const DashboardHackathon = ({ searchParams }) => {
                         </div>
 
                         <div className="w-full sm:py-4">
-                            <Button classNames={`w-full bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-2`} label={"View All"} onClick={() => console.log("Handle submit your work")} />
+                            <Button classNames={`w-full bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-3`} label={"View All"} onClick={() => console.log("Handle submit your work")} />
                         </div>
 
-                    </div>
+                    </div>) : (<Oops desc={"Oops!, No Perticipants available yet"} />)}
                 </div>
             </div>)}
 
