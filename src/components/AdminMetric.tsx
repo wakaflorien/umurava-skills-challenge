@@ -14,9 +14,9 @@ export const AdminMetric: React.FC<MetricProps> = ({ title, value, icon, period,
                     {icon}
                 </div>
                 <div className=' flex sm:flex-col sm:gap-1  sm:pl-3'>
-                    <p className='text-black text-sm'>{title}</p>
+                    <p className='text-secondary text-sm'>{title}</p>
                     <div className='flex sm:gap-4'>
-                        <p className='text-black sm:text-md font-bold'>{numberFormat(value)}</p>
+                        <p className='text-secondary sm:text-md font-bold'>{numberFormat(value)}</p>
                         {direction === "positive" ? (<div className='text-primary font-semibold bg-[#E7F6EC] flex items-center sm:text-sm sm:py-1 sm:px-2 rounded-full '>
                             <Image
                                 src="/svgs/arrow-up.svg"

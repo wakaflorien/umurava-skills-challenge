@@ -12,7 +12,7 @@ export const GetStartedStep: React.FC<StepProps> = ({ stepCount, hasImage, image
             </div>
 
             <div className="flex sm:flex-col gap-2 sm:gap-1 pl-4 sm:pl-8">
-                <p className="text-black text-sm sm:text-lg font-bold">{title}</p>
+                <p className="text-secondary text-sm sm:text-lg font-bold">{title}</p>
                 <p className="text-tertiaryColor text-xs sm:text-sm">{desc}</p>
             </div>
 

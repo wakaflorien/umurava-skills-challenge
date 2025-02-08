@@ -21,7 +21,7 @@ export const MiniCard: React.FC<MiniCardProps> = ({ image, name, location, jobTi
                 <div className="flex sm:flex-row gap-2 sm:gap-4">
                     <div className="bg-primary h-12 w-12 rounded-full"></div>
                     <div className="flex flex-col gap-1 sm:gap-1">
-                        <p className="text-black text-sm sm:text-md font-bold">{name}</p>
+                        <p className="text-secondary text-sm sm:text-md font-bold">{name}</p>
                         <p className="text-tertiaryColor text-sm sm:text-md">{jobTitle}, {location}</p>
                     </div>
                 </div>

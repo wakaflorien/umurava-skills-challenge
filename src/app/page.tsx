@@ -38,7 +38,7 @@ export default function Home() {
           <div className="flex flex-col items-start gap-4 sm:gap-8 pt-8 sm:pt-24">
             <header className="flex flex-col gap-4 sm:gap-8">
               <h1 className="text-primary text-xl sm:text-5xl sm:leading-tight font-bold">Build Work Experience through Skills Challenges Program </h1>
-              <p className="text-black  text-lg leading-8">Enhance your Employability and Accelerate your Career Growth by working on Hands-on projects & hackathons from various businesses & organizations.</p>
+              <p className="text-secondary  text-lg leading-8">Enhance your Employability and Accelerate your Career Growth by working on Hands-on projects & hackathons from various businesses & organizations.</p>
             </header>
             <Button classNames="w-full sm:w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Get Started" onClick={() => router.push('/hackathons')} />
           </div>
@@ -65,7 +65,7 @@ export default function Home() {
         <section className="bg-backgroundA h-full grid gap-4 sm:gap-24 sm:grid-row-3 px-4 sm:px-32 py-4 sm:py-16" id="career">
 
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
-            <h1 className="text-black text-xl sm:text-4xl sm:leading-tight font-bold">Experience a New Way of Building Work Experience.</h1>
+            <h1 className="text-secondary text-xl sm:text-4xl sm:leading-tight font-bold">Experience a New Way of Building Work Experience.</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor line-clamp-2">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
           </div>
 
@@ -111,7 +111,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8 sm:px-8">
-            <h1 className="text-black text-xl sm:text-4xl sm:leading-tight font-bold">Skills Challenges Cover various in-demand skills and Careers for the digital economy.</h1>
+            <h1 className="text-secondary text-xl sm:text-4xl sm:leading-tight font-bold">Skills Challenges Cover various in-demand skills and Careers for the digital economy.</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor line-clamp-2">Explore the projects that various talents are working on.</p>
           </div>
 
@@ -163,7 +163,7 @@ export default function Home() {
         {/* Challenges and Hackathons section  */}
         <section className="h-full grid gap-4 sm:gap-24 sm:grid-row-3 justify-items-center px-4 sm:px-32" id="hackathons">
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
-            <h1 className="text-black text-xl sm:text-4xl font-bold">Explore Challenges & Hackathons.</h1>
+            <h1 className="text-secondary text-xl sm:text-4xl font-bold">Explore Challenges & Hackathons.</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-3 sm:gap-8">
@@ -187,7 +187,7 @@ export default function Home() {
         {/* Participate in skills challenge  */}
         <section className="bg-backgroundA h-full grid gap-4 sm:gap-24 sm:grid-row-2 justify-items-center px-4 sm:px-24 py-4 sm:py-16" id="participate">
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
-            <h1 className="text-black text-xl sm:text-4xl font-bold">What else can I gain from participating in Skills Challenges ?</h1>
+            <h1 className="text-secondary text-xl sm:text-4xl font-bold">What else can I gain from participating in Skills Challenges ?</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-3 sm:gap-8">
@@ -225,7 +225,7 @@ export default function Home() {
         {/* Challenges Program */}
         <section className="h-full grid gap-4 sm:gap-24 sm:grid-row-2 px-4 sm:px-24 sm:py-16" id="challenges">
           <div className="flex flex-col items-start gap-4 sm:gap-8">
-            <h1 className="w-full sm:w-1/2 text-black text-xl sm:text-4xl font-bold">Users are in Love with Skills Challenges Program</h1>
+            <h1 className="w-full sm:w-1/2 text-secondary text-xl sm:text-4xl font-bold">Users are in Love with Skills Challenges Program</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor">See what our clients say about working with us. Their success speaks for our dedication and expertise.</p>
           </div>
           <div className="flex sm:flex-row gap-4 sm:gap-8 w-full overflow-x-auto no-scrollbar z-0">
@@ -244,7 +244,7 @@ export default function Home() {
         {/* How to Get started */}
         <section className="bg-backgroundA h-full w-full grid gap-4 sm:gap-24 sm:grid-row-2 justify-items-center px-4 sm:px-32 py-4 sm:py-16" id="getStarted">
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
-            <h1 className="text-black text-xl sm:text-4xl font-bold">How to get started</h1>
+            <h1 className="text-secondary text-xl sm:text-4xl font-bold">How to get started</h1>
 
           </div>
 

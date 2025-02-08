@@ -50,7 +50,7 @@ export const Nav = () => {
 
                 <ul className="flex items-center gap-4 sm:gap-8 cursor-pointer">
                     {[{ link: "/", label: "Home" }, { link: "/hackathons", label: "Challenges & Hackathons" }, { link: "/institutions", label: "For Learning Institutions" }, { link: "/about", label: "About Us" }, { link: "/#contact", label: "Contact Us" }].map((item, index) => (
-                        <li key={index} className={`${activeLink(item.label, pathname) ? "text-primary" : "text-black"} hover:text-primary cursor-pointer`} onClick={() => router.push(item.link)}>{item.label}</li>
+                        <li key={index} className={`${activeLink(item.label, pathname) ? "text-primary" : "text-secondary"} hover:text-primary cursor-pointer`} onClick={() => router.push(item.link)}>{item.label}</li>
                     ))}
                 </ul>
                 <div className="flex items-center mr-2 sm:mr-8">
@@ -74,7 +74,7 @@ export const Nav = () => {
             {openNav && (<nav className={`w-full bg-transparent flex flex-col px-12 py-4`} id="mobileNav">
                 <ul className={`flex flex-col items-start gap-2 cursor-pointer`}>
                     {[{ link: "/", label: "Home" }, { link: "/hackathons", label: "Challenges & Hackathons" }, { link: "/institutions", label: "For Learning Institutions" }, { link: "/about", label: "About Us" }, { link: "/#contact", label: "Contact Us" }].map((item, index) => (
-                        <li key={index} className={`${activeLink(item.label, pathname) ? "text-primary" : "text-black"} hover:text-primary cursor-pointer`} onClick={() => router.push(item.link)}>{item.label}</li>
+                        <li key={index} className={`${activeLink(item.label, pathname) ? "text-primary" : "text-secondary"} hover:text-primary cursor-pointer`} onClick={() => router.push(item.link)}>{item.label}</li>
                     ))}
                 </ul>
                 <div className="flex items-center my-2">

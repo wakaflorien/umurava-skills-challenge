@@ -17,7 +17,7 @@ const Institutions = () => {
 
                     <header className="flex flex-col gap-4 sm:gap-8">
                         <h1 className="text-primary text-xl sm:text-3xl sm:leading-tight font-bold">Accelerate Your Students and Traineess Employability and Career Growth through Project-based Learning Solution</h1>
-                        <p className="text-black text-md sm:text-lg leading-8">We partner with Universities, Schools, and Trainining Institutions to build the work experience of their students and trainees through project based learning challenges and hackathons.</p>
+                        <p className="text-secondary text-md sm:text-lg leading-8">We partner with Universities, Schools, and Trainining Institutions to build the work experience of their students and trainees through project based learning challenges and hackathons.</p>
 
                         <Button classNames="w-full sm:w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Partner With Us" />
 
@@ -39,7 +39,7 @@ const Institutions = () => {
                 <section className="bg-backgroundA h-full grid  sm:grid-row-3 gap-4 sm:gap-16 px-4 sm:px-32" id="offerings">
 
                     <div className="flex flex-col text-center">
-                        <h1 className="text-black text-xl sm:text-3xl sm:leading-tight font-bold">Key Offerings & Benefits:
+                        <h1 className="text-secondary text-xl sm:text-3xl sm:leading-tight font-bold">Key Offerings & Benefits:
                         </h1>
                     </div>
 

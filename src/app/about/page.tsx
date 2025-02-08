@@ -17,7 +17,7 @@ const About = () => {
 
                     <header className="flex flex-col gap-4 sm:gap-8">
                         <h1 className="text-primary text-xl sm:text-4xl sm:leading-tight font-bold">Our story</h1>
-                        <p className="text-black text-md sm:text-lg leading-8">With 3 years of experience matching African digital talents to local and global job markets, we still remain with a big number of jobs that remain unfilled due to the lack of experienced African Talents. Driven by our mission to place skilled and professional digital talent, we created Skills Challenges as a project-based learning solution for talents to gain real-world experience, solve problems, and build portfolios so that they become ready for global job markets.</p>
+                        <p className="text-secondary text-md sm:text-lg leading-8">With 3 years of experience matching African digital talents to local and global job markets, we still remain with a big number of jobs that remain unfilled due to the lack of experienced African Talents. Driven by our mission to place skilled and professional digital talent, we created Skills Challenges as a project-based learning solution for talents to gain real-world experience, solve problems, and build portfolios so that they become ready for global job markets.</p>
                     </header>
 
                     <div className="flex gap-2 sm:gap-4 w-full rounded-xl bg-primary">
@@ -32,7 +32,7 @@ const About = () => {
                 <section className="bg-backgroundA h-full grid gap-4 sm:gap-16 sm:grid-row-3 px-4 sm:px-32 py-4 sm:py-8" id="career">
 
                     <div className="flex flex-col  text-center gap-4 sm:gap-8">
-                        <h1 className="text-black text-xl sm:text-4xl sm:leading-tight font-bold">Why we are solving this problem</h1>
+                        <h1 className="text-secondary text-xl sm:text-4xl sm:leading-tight font-bold">Why we are solving this problem</h1>
                     </div>
 
                     <div className="grid gap-2 sm:gap-4 sm:grid-row-2">

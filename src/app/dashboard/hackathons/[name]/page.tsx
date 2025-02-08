@@ -232,8 +232,8 @@ const DashboardHackathon = ({ searchParams }) => {
                                     {item.icon}
                                 </div>
                                 <div className="flex sm:flex-col">
-                                    <p className="text-black text-sm sm:text-md font-bold">{item.title}</p>
-                                    <p className="text-black text-sm sm:text-md"> {item.subTitle}</p>
+                                    <p className="text-secondary text-sm sm:text-md font-bold">{item.title}</p>
+                                    <p className="text-secondary text-sm sm:text-md"> {item.subTitle}</p>
                                 </div>
                             </div>))}
                         </div>)}

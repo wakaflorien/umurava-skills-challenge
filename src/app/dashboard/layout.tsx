@@ -178,7 +178,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                                 height={4}
                                                 className="h-4 w-4 text-primary"
                                             />
-                                            <input className="bg-tertiary w-full text-black outline-none sm:p-2 rounded-md" placeholder="Search here ..." />
+                                            <input className="bg-tertiary w-full text-secondary outline-none sm:p-2 rounded-md" placeholder="Search here ..." />
                                         </form>
                                         <div className='flex items-center gap-2'>
                                             <div className='bg-tertiary flex items-center justify-center h-10 w-10 p-2 rounded-full cursor-pointer'>

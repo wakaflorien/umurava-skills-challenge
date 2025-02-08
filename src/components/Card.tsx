@@ -20,16 +20,16 @@ export const Card: React.FC<CardProps> = ({ status, image, title, skills = [], s
                     />
                 </div>
 
-                <p className="text-black text-sm sm:text-md font-bold capitalize">{title}</p>
+                <p className="text-secondary text-sm sm:text-md font-bold capitalize">{title}</p>
 
-                <p className="text-black text-xs sm:text-sm font-semibold capitalize">Skills Needed:</p>
+                <p className="text-secondary text-xs sm:text-sm font-semibold capitalize">Skills Needed:</p>
 
                 <div className="flex flex-wrap gap-1 sm:gap-2">
                     {skills.map(item => (<Button key={item} classNames="w-fit bg-white text-primary text-xs border border-primary p-1 !rounded-lg" label={item} onClick={() => console.log("View item")} />))}
                 </div>
 
-                <p className="text-black text-sm sm:text-md font-bold sm:space-x-2">Seniority Level : <span className="sm:tex-xs text-tertiaryColor font-normal">( {seniority?.join(", ")} )</span></p>
-                <p className="text-black text-sm sm:text-md font-bold">Timeline : <span className="sm:tex-xs text-tertiaryColor font-normal">{timeline}</span></p>
+                <p className="text-secondary text-sm sm:text-md font-bold sm:space-x-2">Seniority Level : <span className="sm:tex-xs text-tertiaryColor font-normal">( {seniority?.join(", ")} )</span></p>
+                <p className="text-secondary text-sm sm:text-md font-bold">Timeline : <span className="sm:tex-xs text-tertiaryColor font-normal">{timeline}</span></p>
 
             </div>
 
