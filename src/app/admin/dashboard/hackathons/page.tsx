@@ -104,7 +104,7 @@ const DashboardHackathons = () => {
                 {/* Challeges and Hackathons */}
                 {isLoading && (<p>Loading ... </p>)}
                 {(filteredChallenges?.length > 0) ? <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
-                    {filteredChallenges.slice(0, 3).map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
+                    {filteredChallenges.map((item: { status: string, index: string, challengeName: string, skills: Array<string>, levels: Array<string>, duration: number }, index: number) => (<Card
                         status={item.status}
                         key={index}
                         image={`/white_logo.png`}

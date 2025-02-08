@@ -28,7 +28,7 @@ export const Card: React.FC<CardProps> = ({ status, image, title, skills = [], s
                     {skills.map(item => (<Button key={item} classNames="w-fit bg-white text-primary text-xs border border-primary p-1 !rounded-lg" label={item} onClick={() => console.log("View item")} />))}
                 </div>
 
-                <p className="text-black text-sm sm:text-md font-bold sm:space-x-2">Seniority Level : {seniority?.map(item => (<span key={item} className="sm:tex-xs text-tertiaryColor font-normal">{item}</span>))}</p>
+                <p className="text-black text-sm sm:text-md font-bold sm:space-x-2">Seniority Level : <span className="sm:tex-xs text-tertiaryColor font-normal">( {seniority?.join(", ")} )</span></p>
                 <p className="text-black text-sm sm:text-md font-bold">Timeline : <span className="sm:tex-xs text-tertiaryColor font-normal">{timeline}</span></p>
 
             </div>

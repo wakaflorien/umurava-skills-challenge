@@ -6,34 +6,32 @@ import { ChallengeFormComponentProps } from "@/@types/global";
 import Select from "react-select";
 import { getSkills } from "@/apis";
 import { useQuery } from "@tanstack/react-query";
-import dayjs from "dayjs";
 
 import { ActionMeta, MultiValue, SingleValue } from 'react-select';
+import { useRouter } from "next/navigation";
 interface OptionType {
     value: string;
     label: string | undefined;
 }
 
-const seniority = [
+const seniorityOptions = [
     {
-        "_id": "67a351ad367bf94c40f6dc67",
-        "name": "Intermediate",
-        "status": "active"
+        "value": "Intermediate",
+        "label": "Intermediate",
     },
     {
-        "_id": "67a351ad367bf94c40f6dc68",
-        "name": "Junior",
-        "status": "active"
+        "value": "Junior",
+        "label": "Junior",
     },
     {
-        "_id": "67a351ad367bf94c40f6dc69",
-        "name": "Senior",
-        "status": "active"
+        "value": "Senior",
+        "label": "Senior",
     }
 ]
 
-
 export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitType, handleFormChange, handleClearForm, handleSubmitForm, errors = {}, values = {} }) => {
+
+    const router = useRouter();
 
     // API Queries
     const { data: skills, isLoading, error } = useQuery({ queryKey: ['skills'], queryFn: getSkills })
@@ -41,11 +39,6 @@ export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitTyp
     const skillsOptions = !isLoading && !error && skills.data.map((item: { _id: string; skillName: string }) => ({
         value: item.skillName,
         label: item.skillName,
-    }));
-
-    const seniorityOptions = seniority.map((item) => ({
-        value: item.name,
-        label: item.name,
     }));
 
     const handleSelectChange = (
@@ -71,12 +64,12 @@ export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitTyp
             <div className="flex sm:flex-row sm:gap-2 font-medium">
                 <div className="w-1/2 flex sm:flex-col sm:gap-2 font-medium">
                     <label htmlFor="startDate" className="text-sm text-[rgb(71,83,103)]">Start Date</label>
-                    <input type="date" value={dayjs(values.startDate).format("YYYY-MM-DD")} name="startDate" id="startDate" className="inputText" onChange={handleFormChange} />
+                    <input type="date" value={values.startDate} name="startDate" id="startDate" className="inputText" onChange={handleFormChange} />
                     <small className="text-[#d3302f]">{errors.startDate}</small>
                 </div>
                 <div className="w-1/2 flex sm:flex-col sm:gap-2 font-medium">
                     <label htmlFor="endDate" className="text-sm text-[#475367]">End Date</label>
-                    <input type="date" value={dayjs(values.endDate).format("YYYY-MM-DD")} name="endDate" id="endDate" className="inputText" onChange={handleFormChange} />
+                    <input type="date" value={values.endDate} name="endDate" id="endDate" className="inputText" onChange={handleFormChange} />
                     <small className="text-[#d3302f]">{errors.endDate}</small>
                 </div>
             </div>
@@ -94,7 +87,7 @@ export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitTyp
                         isMulti
                         isSearchable
                         isClearable
-                        value={values.skills?.map((skill: string) => ({ value: skill, label: skill })) || []}
+                        value={values.skills ? values.skills?.map((skill: string) => ({ value: skill, label: skill })) : []}
                     />
                     <small className="text-[#d3302f]">{errors.skills}</small>
                 </div>
@@ -110,7 +103,7 @@ export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitTyp
                         isMulti
                         isSearchable
                         isClearable
-                        value={values.levels?.map((level: string) => ({ value: level, label: level })) || []}
+                        value={values.levels ? values.levels?.map((level: string) => ({ value: level, label: level })) : []}
                     />
                     <small className="text-[#d3302f]">{errors.levels}</small>
                 </div>
@@ -151,7 +144,7 @@ export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitTyp
             </div>
 
             <div className="w-full flex justify-between">
-                <Button classNames={`w-[200px] bg-white text-primary border border-primary sm:text-sm font-bold p-3`} label={"Cancel"} onClick={() => handleClearForm()} />
+                <Button classNames={`w-[200px] bg-white text-primary border border-primary sm:text-sm font-bold p-3`} label={`${submitType === "create" ? "Clear" : "Cancel"}`} onClick={() => submitType === "create" ? handleClearForm() : router.back()} />
                 <Button classNames={`w-[200px] bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-3`} label={`${submitType === "create" ? "Create Challenge" : "Update Challenge"}`} onClick={handleSubmitForm} />
             </div>
         </form>

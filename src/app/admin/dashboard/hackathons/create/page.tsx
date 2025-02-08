@@ -20,7 +20,7 @@ const CreateChallenge = () => {
 
      // In-App Data states
      const [errors, setErrors] = React.useState<ChallengeFormProps>({});
-     const [formData, setFormData] = React.useState<ChallengeFormProps>({
+     const [formState, setFormState] = React.useState<ChallengeFormProps>({
          challengeName: "",
          endDate: "",
          startDate: "",
@@ -68,14 +68,14 @@ const CreateChallenge = () => {
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         console.log(" Skills Values", value)
-        setFormData({
-            ...formData,
+        setFormState({
+            ...formState,
             [name]: name === "duration" ? Number(value) : value,
         });
     }
 
     const handleClearForm = () => {
-        setFormData({
+        setFormState({
             challengeName: "",
             startDate: "",
             endDate: "",
@@ -91,8 +91,8 @@ const CreateChallenge = () => {
     };
 
     const handleSubmitForm = async () => {
-        if (await validateForm(formData, setErrors)) {
-            mutation.mutate({ token: data.token, payload: formData })
+        if (await validateForm(formState, setErrors)) {
+            mutation.mutate({ token: data.token, payload: formState })
         } else {
             setModal({ open: true, message: "Your form have some validation errors", title: "Failed" })
         }
@@ -126,7 +126,7 @@ const CreateChallenge = () => {
                         <p className="sm:text-sm text-tertiaryColor">Fill out these details to build your broadcast</p>
                     </header>
 
-                    <ChallengeForm submitType="create" handleFormChange={handleFormChange} handleClearForm={handleClearForm} handleSubmitForm={handleSubmitForm} errors={errors} />
+                    <ChallengeForm submitType="create" handleFormChange={handleFormChange} handleClearForm={handleClearForm} handleSubmitForm={handleSubmitForm} values={formState} errors={errors} />
 
                 </div>
             </div>
