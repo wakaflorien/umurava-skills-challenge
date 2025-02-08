@@ -73,7 +73,7 @@ const DashboardHome = () => {
 
                 </header>
 
-                {isLoading ? (<p>Loading ... </p>) : (
+                {isLoading || error ? (<p>Loading ... </p>) : (
                     <div className='grid sm:grid-cols-3 sm:gap-4'>
                         {formattedAdminStats.map((item, index) => (<Metric key={index} title={item.title} value={item.value} icon={<Image
                             src="/svgs/Document.svg"

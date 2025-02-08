@@ -16,7 +16,7 @@ const ITEMS_PER_PAGE = 6;
 
 const DashboardHackathons = () => {
     const { data, authenticate } = useAuth();
-    
+
     const router = useRouter();
     const [currentPage, setCurrentPage] = React.useState(1);
     const [activeTab, setActiveTab] = React.useState("all");
@@ -77,8 +77,7 @@ const DashboardHackathons = () => {
                     <p>Join a challenge or a hackathon to gain valuable work experience</p>
                 </header>
 
-                {isLoading && (<p>Loading ...</p>)}
-                {!isLoading && !error && (<div className='flex sm:flex-row flex-wrap flex-col items-center justify-start gap-8 sm:gap-4'>
+                {isLoading || error ? (<p>Loading ...</p>) : (<div className='flex sm:flex-row flex-wrap flex-col items-center justify-start gap-8 sm:gap-4'>
                     {tabs.map((item, index) => (<Button key={index} icon={(<Image
                         src="/svgs/file.svg"
                         alt="file"
