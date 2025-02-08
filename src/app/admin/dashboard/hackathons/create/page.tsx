@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { ChallengeFormProps } from "@/@types/global";
+import { ChallengeFormProps, CustomChangeEvent } from "@/@types/global";
 import { validateForm } from "@/utils/validation";
 import { ChallengeForm } from "@/components/ChallengesForm";
 import Image from "next/image";
@@ -18,21 +18,21 @@ const CreateChallenge = () => {
     const { data, authenticate } = useAuth();
 
 
-     // In-App Data states
-     const [errors, setErrors] = React.useState<ChallengeFormProps>({});
-     const [formState, setFormState] = React.useState<ChallengeFormProps>({
-         challengeName: "",
-         endDate: "",
-         startDate: "",
-         moneyPrize: "",
-         contactEmail: "",
-         projectDescription: "",
-         projectBrief: "",
-         projectTasks: "",
-         levels: [],
-         skills: []
-     })
-     const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
+    // In-App Data states
+    const [errors, setErrors] = React.useState<ChallengeFormProps>({});
+    const [formState, setFormState] = React.useState<ChallengeFormProps>({
+        challengeName: "",
+        endDate: "",
+        startDate: "",
+        moneyPrize: "",
+        contactEmail: "",
+        projectDescription: "",
+        projectBrief: "",
+        projectTasks: "",
+        levels: [],
+        skills: []
+    })
+    const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
     React.useEffect(() => {
         if (!data.token) {
             const handleAuthentication = async () => {
@@ -48,7 +48,7 @@ const CreateChallenge = () => {
         }
     }, [authenticate, router, data.token]);
 
-    
+
     // API Queries
     const mutation = useMutation({
         mutationFn: ({ token, payload }: { token: string, payload: ChallengeFormProps }) => postChallenge(token, payload),
@@ -65,12 +65,13 @@ const CreateChallenge = () => {
 
 
     // Action Functions
-    const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const handleFormChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement> | CustomChangeEvent
+    ) => {
         const { name, value } = e.target;
-        console.log(" Skills Values", value)
         setFormState({
             ...formState,
-            [name]: name === "duration" ? Number(value) : value,
+            [name]: value,
         });
     }
 

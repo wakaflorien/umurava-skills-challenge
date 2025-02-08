@@ -2,17 +2,13 @@
 
 import * as React from "react";
 import { Button } from "./Button";
-import { ChallengeFormComponentProps } from "@/@types/global";
 import Select from "react-select";
 import { getSkills } from "@/apis";
 import { useQuery } from "@tanstack/react-query";
 
 import { ActionMeta, MultiValue, SingleValue } from 'react-select';
 import { useRouter } from "next/navigation";
-interface OptionType {
-    value: string;
-    label: string | undefined;
-}
+import { ChallengeFormComponentProps, CustomChangeEvent, OptionType } from "@/@types/global";
 
 const seniorityOptions = [
     {
@@ -36,7 +32,7 @@ export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitTyp
     // API Queries
     const { data: skills, isLoading, error } = useQuery({ queryKey: ['skills'], queryFn: getSkills })
 
-    const skillsOptions = !isLoading && !error && skills.data.map((item: { _id: string; skillName: string }) => ({
+    const skillsOptions = !isLoading && !error && skills.data.map((item: { skillName: string }) => ({
         value: item.skillName,
         label: item.skillName,
     }));
@@ -45,12 +41,13 @@ export const ChallengeForm: React.FC<ChallengeFormComponentProps> = ({ submitTyp
         newValue: MultiValue<OptionType> | SingleValue<OptionType>,
         actionMeta: ActionMeta<OptionType>
     ) => {
-        handleFormChange({
+        const customEvent: CustomChangeEvent = {
             target: {
                 name: actionMeta.name as string,
                 value: newValue ? (newValue as MultiValue<OptionType>).map((option) => option.value) : [],
             },
-        });
+        };
+        handleFormChange(customEvent);
     };
 
     return (

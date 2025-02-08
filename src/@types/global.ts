@@ -108,10 +108,19 @@ export interface ChallengeFormProps {
   skills?: Array<string>;
 }
 
+export interface CustomChangeEvent {
+  target: {
+      name: string;
+      value: string | string[];
+  };
+}
+export interface OptionType {
+  label: string;
+  value: string;
+}
+
 export interface ChallengeFormComponentProps {
-  handleFormChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => void;
+  handleFormChange: (e: CustomChangeEvent | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   handleClearForm: () => void;
   handleSubmitForm: () => void;
   errors?: ChallengeFormProps;

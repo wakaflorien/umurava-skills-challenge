@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { ChallengeFormProps } from "@/@types/global";
+import { ChallengeFormProps, CustomChangeEvent } from "@/@types/global";
 import { validateForm } from "@/utils/validation";
 import { ChallengeForm } from "@/components/ChallengesForm";
 import Image from "next/image";
@@ -76,11 +76,13 @@ const EditChallenge = ({ searchParams }) => {
 
 
     // Action Functions
-    const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const handleFormChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement> | CustomChangeEvent
+    ) => {
         const { name, value } = e.target;
         setFormState({
             ...formState,
-            [name]: name === "duration" ? Number(value) : value,
+            [name]: value,
         });
     }
 
