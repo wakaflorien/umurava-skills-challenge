@@ -26,21 +26,27 @@ export const validateForm = async (formData: ChallengeFormProps, setErrors: (err
   }
   
   if (!formData.projectDescription || !formData.projectDescription.trim()) {
-    newErrors.projectDescription = "Description is required";
+    newErrors.projectDescription = "Project description is required";
   } else if (formData.projectDescription.length < 2) {
-    newErrors.projectDescription = "Description must be at least 2 characters";
+    newErrors.projectDescription = "Project description must be at least 2 characters";
+  } else if (formData.projectDescription.length > 250 ) {
+    newErrors.projectBrief = "Project description characters should not exceed 250";
   }
 
   if (!formData.projectBrief || !formData.projectBrief.trim()) {
-    newErrors.projectBrief = "Brief is required";
+    newErrors.projectBrief = "Project brief is required";
   } else if (formData.projectBrief.length < 2) {
-    newErrors.projectBrief = "Brief must be at least 2 characters";
+    newErrors.projectBrief = "Project brief must be at least 2 characters";
+  } else if (formData.projectBrief.length > 250 ) {
+    newErrors.projectBrief = "Project brief characters should not exceed 250";
   }
 
   if (!formData.projectTasks || !formData.projectTasks.trim()) {
-    newErrors.projectTasks = "Tasks are required";
+    newErrors.projectTasks = "Project tasks are required";
   } else if (formData.projectTasks.length < 2) {
-    newErrors.projectTasks = "Tasks must be at least 2 characters";
+    newErrors.projectTasks = "Project tasks must be at least 2 characters";
+  } else if (formData.projectTasks.length > 250 ) {
+    newErrors.projectBrief = "Project tasks characters should not exceed 250";
   }
 
   if (!formData.contactEmail) {
