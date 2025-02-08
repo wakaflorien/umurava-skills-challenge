@@ -68,7 +68,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     }
 
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <head>
                 <meta
                     name="format-detection"

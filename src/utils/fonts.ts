@@ -5,4 +5,7 @@ export const workSans = Work_Sans({
     weight: ['400', '500', '600', '700'],
     display: 'swap',
     variable: '--font-work-sans',
+    preload: true,
+    fallback: ['system-ui', 'arial'],
+    adjustFontFallback: true,
   });
