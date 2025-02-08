@@ -34,7 +34,7 @@ export default function Home() {
       <main className="flex flex-col sm:items-start space-y-11 mb-4 sm:mb-16">
 
         {/* Hero section  */}
-        <section className="h-full grid sm:grid-cols-2 px-4 sm:px-24" id="hero">
+        <section className="w-full h-full grid sm:grid-cols-2 justify-items-center px-4 sm:px-24" id="hero">
           <div className="flex flex-col items-start gap-4 sm:gap-8 pt-8 sm:pt-24">
             <header className="flex flex-col gap-4 sm:gap-8">
               <h1 className="text-primary text-xl sm:text-5xl sm:leading-tight font-bold">Build Work Experience through Skills Challenges Program </h1>
@@ -62,7 +62,7 @@ export default function Home() {
         </section>
 
         {/* Career section */}
-        <section className="bg-backgroundA h-full grid gap-4 sm:gap-24 sm:grid-row-3 px-4 sm:px-32 py-4 sm:py-16" id="career">
+        <section className="bg-backgroundA w-full h-full grid gap-4 sm:gap-24 sm:grid-row-3 justify-items-center px-4 sm:px-32 py-4 sm:py-16" id="career">
 
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
             <h1 className="text-secondary text-xl sm:text-4xl sm:leading-tight font-bold">Experience a New Way of Building Work Experience.</h1>
@@ -98,7 +98,7 @@ export default function Home() {
         </section>
 
         {/* Skills section  */}
-        <section className="h-full grid gap-4 sm:gap-24 sm:grid-row-4 px-4 sm:px-24">
+        <section className="w-full h-full grid gap-4 sm:gap-24 sm:grid-row-4 justify-items-center px-4 sm:px-24">
 
           <div className="relative flex items-center justify-between bg-primary text-white rounded-lg p-2 sm:p-16">
             {stats.map(item => (<div key={item.title} className="flex flex-col">
@@ -161,7 +161,7 @@ export default function Home() {
         </section>
 
         {/* Challenges and Hackathons section  */}
-        <section className="h-full grid gap-4 sm:gap-24 sm:grid-row-3 justify-items-center px-4 sm:px-32" id="hackathons">
+        <section className="w-full h-full grid gap-4 sm:gap-24 sm:grid-row-3 justify-items-center px-4 sm:px-32" id="hackathons">
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
             <h1 className="text-secondary text-xl sm:text-4xl font-bold">Explore Challenges & Hackathons.</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
@@ -185,7 +185,7 @@ export default function Home() {
         </section>
 
         {/* Participate in skills challenge  */}
-        <section className="bg-backgroundA h-full grid gap-4 sm:gap-24 sm:grid-row-2 justify-items-center px-4 sm:px-24 py-4 sm:py-16" id="participate">
+        <section className="bg-backgroundA w-full h-full grid gap-4 sm:gap-24 sm:grid-row-2 justify-items-center px-4 sm:px-24 py-4 sm:py-16" id="participate">
           <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-8">
             <h1 className="text-secondary text-xl sm:text-4xl font-bold">What else can I gain from participating in Skills Challenges ?</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor">Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals.</p>
@@ -223,7 +223,7 @@ export default function Home() {
         </section>
 
         {/* Challenges Program */}
-        <section className="h-full grid gap-4 sm:gap-24 sm:grid-row-2 px-4 sm:px-24 sm:py-16" id="challenges">
+        <section className="w-full h-full grid gap-4 sm:gap-24 sm:grid-row-2 justify-items-center px-4 sm:px-24 sm:py-16" id="challenges">
           <div className="flex flex-col items-start gap-4 sm:gap-8">
             <h1 className="w-full sm:w-1/2 text-secondary text-xl sm:text-4xl font-bold">Users are in Love with Skills Challenges Program</h1>
             <p className="w-full sm:w-1/2 text-tertiaryColor">See what our clients say about working with us. Their success speaks for our dedication and expertise.</p>
@@ -279,7 +279,7 @@ export default function Home() {
         </section>
 
 
-        <section className="h-full w-full grid sm:grid-row-1 px-4 sm:px-24">
+        <section className="h-full w-full grid sm:grid-row-1 justify-items-center px-4 sm:px-24">
           <div className="relative grid sm:grid-cols-3 gap-4 bg-primary text-white rounded-lg p-4 sm:p-8">
             <div>
               <Image

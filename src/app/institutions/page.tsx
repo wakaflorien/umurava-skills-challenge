@@ -13,7 +13,7 @@ const Institutions = () => {
         <div className="bg-backgroundA elative flex flex-col zoom-out scroll-smooth">
             <Nav />
             <main className="flex flex-col space-y-4 sm:space-y-16">
-                <section className="bg-white h-full grid sm:grid-cols-2 gap-4 sm:gap-16 px-4 sm:px-24 py-4 sm:py-24" id="partnerWithUs">
+                <section className="bg-white w-full h-full grid sm:grid-cols-2 justify-items-center gap-4 sm:gap-16 px-4 sm:px-24 py-4 sm:py-24" id="partnerWithUs">
 
                     <header className="flex flex-col gap-4 sm:gap-8">
                         <h1 className="text-primary text-xl sm:text-3xl sm:leading-tight font-bold">Accelerate Your Students and Traineess Employability and Career Growth through Project-based Learning Solution</h1>
@@ -36,7 +36,7 @@ const Institutions = () => {
 
                 </section>
 
-                <section className="bg-backgroundA h-full grid  sm:grid-row-3 gap-4 sm:gap-16 px-4 sm:px-32" id="offerings">
+                <section className="bg-backgroundA w-full h-full grid  sm:grid-row-3 justify-items-center gap-4 sm:gap-16 px-4 sm:px-32" id="offerings">
 
                     <div className="flex flex-col text-center">
                         <h1 className="text-secondary text-xl sm:text-3xl sm:leading-tight font-bold">Key Offerings & Benefits:
@@ -92,7 +92,7 @@ const Institutions = () => {
 
                 </section>
 
-                <section className="bg-background h-full grid sm:grid-row-2 gap-8 sm:gap-16 justify-items-center px-4 sm:px-24 py-4 sm:py-8" id="partners">
+                <section className="bg-background w-full h-full grid sm:grid-row-2 gap-8 sm:gap-16 justify-items-center px-4 sm:px-24 py-4 sm:py-8" id="partners">
                     <div className="text-left sm:text-center w-full sm:w-3/4">
                         <h1 className="text-xl sm:text-3xl sm:leading-tight font-bold">Join a few Educational Institutions using Skills Challenges by Umurava</h1>
                     </div>
@@ -115,7 +115,7 @@ const Institutions = () => {
 
                 </section>
 
-                <section className="bg-backgroundA h-full grid gap-4 sm:gap-16 sm:grid-row-2 justify-items-center px-4 sm:px-24 py-4 sm:py-8" id="participate">
+                <section className="bg-backgroundA w-full h-full grid gap-4 sm:gap-16 sm:grid-row-2 justify-items-center px-4 sm:px-24 py-4 sm:py-8" id="participate">
                     <div className="flex flex-col items-center justify-center sm:text-center w-full sm:w-3/4 gap-4 sm:gap-8">
                         <h1 className="text-xl sm:text-4xl sm:leading-tight font-bold">How Skills Challenges Program can Be Integrated into your Learning Institution</h1>
 

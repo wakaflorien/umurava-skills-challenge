@@ -13,7 +13,7 @@ const About = () => {
         <div className="bg-backgroundA elative flex flex-col zoom-out scroll-smooth">
             <Nav />
             <main className="flex flex-col sm:space-y-16">
-                <section className="bg-white h-full grid sm:grid-cols-2 gap-8 sm:gap-16 px-4 sm:px-24 py-4 sm:py-24" id="videoIntro">
+                <section className="bg-white w-full h-full grid sm:grid-cols-2 justify-items-center gap-8 sm:gap-16 px-4 sm:px-24 py-4 sm:py-24" id="videoIntro">
 
                     <header className="flex flex-col gap-4 sm:gap-8">
                         <h1 className="text-primary text-xl sm:text-4xl sm:leading-tight font-bold">Our story</h1>
@@ -29,7 +29,7 @@ const About = () => {
                     </div>
                 </section>
 
-                <section className="bg-backgroundA h-full grid gap-4 sm:gap-16 sm:grid-row-3 px-4 sm:px-32 py-4 sm:py-8" id="career">
+                <section className="bg-backgroundA w-full h-full grid gap-4 sm:gap-16 sm:grid-row-3 justify-items-center px-4 sm:px-32 py-4 sm:py-8" id="career">
 
                     <div className="flex flex-col  text-center gap-4 sm:gap-8">
                         <h1 className="text-secondary text-xl sm:text-4xl sm:leading-tight font-bold">Why we are solving this problem</h1>
@@ -63,7 +63,7 @@ const About = () => {
 
                 </section>
 
-                <section className="bg-background h-full grid gap-4 sm:grid-cols-2 sm:gap-8 px-4 sm:px-24 py-4 sm:py-24" id="participate">
+                <section className="bg-background w-full h-full grid gap-4 sm:grid-cols-2 justify-items-center sm:gap-8 px-4 sm:px-24 py-4 sm:py-24" id="participate">
                     <div className="space-y-4 sm:space-y-16">
                         <h1 className="text-xl sm:text-4xl sm:leading-tight font-bold">Skills Challenges Program is built on the Umurava Talent Marketplace Platform</h1>
 
