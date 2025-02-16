@@ -100,7 +100,7 @@ export default function Home() {
         {/* Skills section  */}
         <section className="w-full h-full grid gap-4 sm:gap-24 sm:grid-row-4 justify-items-center px-4 sm:px-24">
 
-          <div className="relative flex items-center justify-between bg-primary text-white rounded-lg p-2 sm:p-16">
+          <div className="relative w-full flex items-center justify-between bg-primary text-white rounded-lg p-2 sm:p-16">
             {stats.map(item => (<div key={item.title} className="flex flex-col">
               <h1 className="text-xl sm:text-3xl font-bold">{item.title}</h1>
               <p>{item.desc} </p>
