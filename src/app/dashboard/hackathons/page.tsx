@@ -6,7 +6,6 @@ import { Button } from '@/components/Button';
 import { Pagination } from '@/components/Pagination';
 import { Card } from '@/components/Card';
 
-import { useAuth } from '@/providers/AuthProvider';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import { getChallenges } from '@/apis';
@@ -16,26 +15,10 @@ import { CardSkeleton, TabsSkeleton } from '@/components/Skeletons';
 const ITEMS_PER_PAGE = 6;
 
 const DashboardHackathons = () => {
-    const { data, authenticate } = useAuth();
 
     const router = useRouter();
     const [currentPage, setCurrentPage] = React.useState(1);
     const [activeTab, setActiveTab] = React.useState("all");
-
-    React.useEffect(() => {
-        if (!data.token) {
-            const handleAuthentication = async () => {
-                try {
-                    await authenticate({ userRole: "participant" });
-                } catch (error) {
-                    console.error("Failed to authenticate:", error);
-                    router.push("/");
-                }
-            };
-
-            handleAuthentication();
-        }
-    }, [authenticate, router, data.token]);
 
     const { data: allChallenges, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges });
 

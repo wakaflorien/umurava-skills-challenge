@@ -11,6 +11,7 @@ import { joinCommunity } from '@/apis';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
 import Loading from '@/components/Loading';
+import { LuLogOut } from 'react-icons/lu';
 
 const activeLink = (label: string, pathname: string) => {
 
@@ -47,7 +48,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     const router = useRouter();
 
     // Providers
-    const { data, authenticate, logout } = useAuth();
+    const { data, logout, isAuthenticated, isLoading } = useAuth();
 
     const payload: Record<string, string> = data.user ? { phoneNumber: data.user.phoneNumber || "" } : { participant: "" };
 
@@ -59,20 +60,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     React.useEffect(() => {
         setIsClient(true);
     }, []);
-    React.useEffect(() => {
-        if (!data.token) {
-            const handleAuthentication = async () => {
-                try {
-                    await authenticate({ userRole: "admin" });
-                } catch (error) {
-                    console.error("Failed to authenticate:", error);
-                    router.push("/");
-                }
-            };
-
-            handleAuthentication();
-        }
-    }, [authenticate, router, data.token]);
 
     // API Queries
     const mutation = useMutation({
@@ -89,6 +76,27 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     const handleJoinCommunity = () => {
         setIsJoining(true);
         mutation.mutate({ payload })
+    }
+
+    if (isLoading) {
+        return (
+            <div className="flex items-center justify-center h-screen">
+                <div className="text-center">
+                    <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                    <p className="mt-4 text-lg">Loading dashboard...</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (!isAuthenticated) {
+        return null; 
+    }
+
+    // 
+    if (data.user.userRole !== "participant") {
+        router.push("/unauthorized");
+        return null;
     }
 
     if (!isClient) {
@@ -160,7 +168,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                             <p className="text-white text-sm sm:text-sm"> {data && data.user.email}</p>
                                         </div>
 
-                                        <Icon icon="ic:baseline-logout" className='text-white cursor-pointer size-5' onClick={() => logout()} />
+                                        <LuLogOut  className='text-white cursor-pointer size-5' onClick={logout} />
                                     </div>
                                 </div>
                             </nav>

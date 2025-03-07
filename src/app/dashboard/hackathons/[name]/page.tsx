@@ -11,6 +11,8 @@ import { useAuth } from "@/providers/AuthProvider";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSingleChallenge, joinChallenge } from "@/apis";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import { toast, ToastContainer } from "react-toastify";
+import { LuBriefcase, LuCalendar, LuDollarSign, LuMail } from "react-icons/lu";
 
 const productDesign = [
     "User Interface Design for each step",
@@ -32,7 +34,7 @@ const DashboardHackathon = ({ searchParams }) => {
     const queryClient = useQueryClient();
     const pathname = usePathname();
     const router = useRouter();
-    const { data, authenticate } = useAuth();
+    const { data } = useAuth();
 
     // URL Params
     const { id }: { id: string } = React.use(searchParams);
@@ -43,39 +45,27 @@ const DashboardHackathon = ({ searchParams }) => {
     const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
     const [isJoining, setIsJoining] = React.useState(false)
 
-    React.useEffect(() => {
-        if (!data.token) {
-            const handleAuthentication = async () => {
-                try {
-                    await authenticate({ userRole: "admin" });
-                } catch (error) {
-                    console.error("Failed to authenticate:", error);
-                    router.push("/");
-                }
-            };
 
-            handleAuthentication();
-        }
-    }, [authenticate, router, data.token]);
 
     // API Queries
     const { data: singleChallenge, isLoading, error } = useQuery({
         queryKey: ['challenges', id],
         queryFn: () => getSingleChallenge(id),
-        enabled: !!id, 
+        enabled: !!id,
     });
 
     const mutation = useMutation({
         mutationFn: ({ token, payload, id }: { token: string, payload: Record<string, string>, id: string }) => joinChallenge(token, payload, id),
         onSuccess: async (response) => {
-            console.log('Delete response', response)
             setModal({ ...modal, open: false });
+            toast.success(response.message);
             queryClient.invalidateQueries({ queryKey: ['challenges'] })
             setIsJoining(false);
         },
         onError: (error) => {
             console.log("Errors", error)
             setModal({ open: true, message: error.message, title: "Failed" })
+            toast.error(error.message);
         }
     })
 
@@ -83,46 +73,22 @@ const DashboardHackathon = ({ searchParams }) => {
         {
             title: singleChallenge?.data?.contactEmail || "N/A",
             subTitle: "Contact Email",
-            icon: <Image
-                src="/svgs/Message.svg"
-                alt="file"
-                width={4}
-                height={4}
-                className="h-4 w-4 text-primary"
-            />
+            icon: <LuMail className="size-4 text-primary" />
         },
         {
             title: singleChallenge?.data?.skills?.[0] || "N/A",
             subTitle: "Challenge Category",
-            icon: <Image
-                src="/svgs/CaseRound.svg"
-                alt="file"
-                width={4}
-                height={4}
-                className="h-4 w-4 text-primary"
-            />
+            icon: <LuBriefcase className="size-4 text-primary" />
         },
         {
             title: `${singleChallenge?.data?.duration || "N/A"} day(s)`,
             subTitle: "Duration",
-            icon: <Image
-                src="/svgs/Calendar.svg"
-                alt="file"
-                width={4}
-                height={4}
-                className="h-4 w-4 text-primary"
-            />
+            icon: <LuCalendar className="size-4 text-primary" />
         },
         {
             title: singleChallenge?.data?.moneyPrize || "N/A",
             subTitle: "Prize Money",
-            icon: <Image
-                src="/svgs/Dollar.svg"
-                alt="file"
-                width={4}
-                height={4}
-                className="h-4 w-4 text-primary"
-            />
+            icon: <LuDollarSign className="size-4 text-primary" />
         }
     ];
 
@@ -263,6 +229,7 @@ const DashboardHackathon = ({ searchParams }) => {
                     <Button classNames={` bg-red-600 hover:bg-red-600/90 text-white sm:text-sm p-2`} label={"Confirm"} onClick={confirmJoin} icon={isJoining && <Icon icon="line-md:loading-twotone-loop" width="18" height="18" />} />
                 </div>
             </Modal>
+            <ToastContainer />
         </div>
     );
 }

@@ -33,7 +33,7 @@ const DashboardHackathon = ({ searchParams }) => {
     const queryClient = useQueryClient();
     const pathname = usePathname();
     const router = useRouter();
-    const { data, authenticate } = useAuth();
+    const { data } = useAuth();
 
     // URL Params
     const { id }: { id: string } = React.use(searchParams);
@@ -41,20 +41,7 @@ const DashboardHackathon = ({ searchParams }) => {
     // In-App Data 
     const [modal, setModal] = React.useState({ open: false, message: "", title: "" })
     const [isDeleting, setIsDeleting] = React.useState(false)
-    React.useEffect(() => {
-        if (!data.token) {
-            const handleAuthentication = async () => {
-                try {
-                    await authenticate({ userRole: "admin" });
-                } catch (error) {
-                    console.error("Failed to authenticate:", error);
-                    router.push("/");
-                }
-            };
-
-            handleAuthentication();
-        }
-    }, [authenticate, router, data.token]);
+    
 
     // API Queries
     const { data: singleChallenge, isLoading, error } = useQuery({

@@ -1,3 +1,4 @@
+import { FormikErrors } from "formik";
 import * as React from "react";
 
 export type ButtonProps = {
@@ -89,6 +90,8 @@ export interface UserProfile {
 
 export interface AuthContextType {
   data: UserProfile;
+  isAuthenticated: boolean;
+  isLoading: boolean;
   authenticate: (payload: Record<string, string>) => Promise<void>;
   logout: () => void;
 }
@@ -110,8 +113,8 @@ export interface ChallengeFormProps {
 
 export interface CustomChangeEvent {
   target: {
-      name: string;
-      value: string | string[];
+    name: string;
+    value: string | string[];
   };
 }
 export interface OptionType {
@@ -120,10 +123,16 @@ export interface OptionType {
 }
 
 export interface ChallengeFormComponentProps {
-  handleFormChange: (e: CustomChangeEvent | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
+  handleFormChange: (
+    e:
+      | CustomChangeEvent
+      | React.ChangeEvent<
+          HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+        >
+  ) => void;
   handleClearForm: () => void;
   handleSubmitForm: () => void;
-  errors?: ChallengeFormProps;
+  errors?: FormikErrors<ChallengeFormProps>;
   values?: ChallengeFormProps;
   submitType: "create" | "edit";
 }

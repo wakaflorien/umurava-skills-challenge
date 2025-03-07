@@ -13,24 +13,8 @@ import Oops from '@/components/Oops';
 
 const DashboardHome = () => {
     // In-App imports
-    const { data, authenticate } = useAuth();
+    const { data } = useAuth();
     const router = useRouter();
-
-    // In-App States
-    React.useEffect(() => {
-        if (!data.token) {
-            const handleAuthentication = async () => {
-                try {
-                    await authenticate({ userRole: "participant" });
-                } catch (error) {
-                    console.error("Failed to authenticate:", error);
-                    router.push("/");
-                }
-            };
-
-            handleAuthentication();
-        }
-    }, [authenticate, router, data.token]);
 
     const { data: allChallenges, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
 

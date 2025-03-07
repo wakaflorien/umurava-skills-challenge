@@ -16,25 +16,12 @@ import Oops from '@/components/Oops';
 const ITEMS_PER_PAGE = 6;
 
 const DashboardHackathons = () => {
-    const { data, authenticate } = useAuth();
+    const { data } = useAuth();
     const router = useRouter();
     const [currentPage, setCurrentPage] = React.useState(1);
     const [activeTab, setActiveTab] = React.useState("all");
 
-    React.useEffect(() => {
-        if (!data.token) {
-            const handleAuthentication = async () => {
-                try {
-                    await authenticate({ userRole: "admin" });
-                } catch (error) {
-                    console.error("Failed to authenticate:", error);
-                    router.push("/");
-                }
-            };
-
-            handleAuthentication();
-        }
-    }, [authenticate, router, data.token]);
+    
 
     const { data: allChallenges, isLoading, error } = useQuery({ queryKey: ['challenges'], queryFn: getChallenges })
     const { data: dataAggregates, isLoading: isLoadingAggregates, error: aggregatesError } = useQuery({ queryKey: ['stats'], queryFn: () => getStatistics(data.token) });
