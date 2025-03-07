@@ -43,25 +43,22 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     const pathname = usePathname();
     const router = useRouter();
 
-    const [isClient, setIsClient] = React.useState(false);
+    const [mounted, setMounted] = React.useState(false);
     React.useEffect(() => {
-        setIsClient(true);
+        setMounted(true);
     }, []);
 
-    if (isLoading) {
+    if (!mounted || isLoading) {
         return (
             <div className="flex items-center justify-center h-screen">
                 <div className="text-center">
                     <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
                     <p className="mt-4 text-lg">Loading admin dashboard...</p>
-                    </div>
+                </div>
             </div>
         );
     }
 
-    if (!isClient) {
-        return null;
-    }
     if (!isAuthenticated) {
         return null;
     }
