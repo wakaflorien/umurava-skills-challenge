@@ -28,13 +28,16 @@
     @apply rounded-[5px] sm:p-2 ring-1 ring-[#D0D5DD] outline-1 outline-[#FA9874] outline-offset-0 !important;
   }
   .primary-btn {
-    @apply w-full sm:w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3 rounded !important;
+    @apply w-fit flex items-center gap-2  bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:px-3 rounded !important;
   }
   .secondary-btn {
-    @apply bg-secondary text-background hover:bg-secondary/90 sm:text-base text-sm font-semibold sm:p-3 p-2 rounded !important;
+    @apply flex items-center gap-2  bg-secondary text-background hover:bg-secondary/90 sm:text-base text-sm font-semibold sm:px-3 p-2 rounded !important;
+  }
+  .tertiary-btn {
+    @apply w-fit bg-[#D0E0FC] text-primary sm:text-base text-sm hover:bg-primary/20 font-semibold p-2 sm:px-3 rounded !important;
   }
   .pending-btn {
-    @apply bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-base text-sm font-semibold sm:p-3 p-2 rounded !important;
+    @apply flex items-center gap-2  bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-base text-sm font-semibold sm:px-3 p-2 rounded !important;
   }
 }
 

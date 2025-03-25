@@ -1,6 +1,5 @@
 "use client";
 import * as React from 'react';
-import { Button } from '@/components/Button';
 import { Metric } from '@/components/Metric';
 import { CardSkeleton, MetricSkeleton } from '@/components/Skeletons';
 import { Card } from '@/components/Card';
@@ -10,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import { getChallenges } from '@/apis';
 import { useQuery } from '@tanstack/react-query';
 import Oops from '@/components/Oops';
+import Button from '@/components/Button';
+import { LuEye } from 'react-icons/lu';
 
 const DashboardHome = () => {
     // In-App imports
@@ -48,13 +49,7 @@ const DashboardHome = () => {
                         <p>Build Work Experience through Skills Challenges</p>
                     </div>
 
-                    <Button icon={<Image
-                        src="/svgs/Show.svg"
-                        alt="file"
-                        width={4}
-                        height={4}
-                        className="h-4 w-4 text-primary"
-                    />} classNames="bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-2 sm:p-3" label="View profile" onClick={() => viewProfile()} />
+                    <Button className="primary-btn" onClick={() => viewProfile()} ><LuEye />View profile</Button>
 
                 </header>
 
