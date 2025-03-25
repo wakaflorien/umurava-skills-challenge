@@ -98,11 +98,11 @@ const DashboardHackathons = () => {
     };
 
     return (
-        <div className="flex-1 sm:pb-24 sm:px-4">
-            <div className="flex sm:flex-col gap-4 sm:gap-8">
+        <div className="flex-1 p-4 sm:pb-24 sm:px-4">
+            <div className="flex flex-col gap-4 sm:gap-8">
                 <header className="space-y-2">
-                    <h1 className="font-bold text-md sm:text-lg">Challenges</h1>
-                    <p>
+                    <h1 className="font-bold text-xl sm:text-2xl">Challenges</h1>
+                    <p className="text-sm sm:text-base">
                         Join a challenge or a hackathon to gain valuable work experience
                     </p>
                 </header>
@@ -110,24 +110,24 @@ const DashboardHackathons = () => {
                 {isLoading || error ? (
                     <TabsSkeleton count={5} />
                 ) : (
-                    <div className="flex sm:flex-row flex-wrap flex-col items-center justify-start gap-8 sm:gap-4">
+                    <div className="flex flex-col sm:flex-row flex-wrap items-start justify-start gap-3 sm:gap-4 w-full overflow-x-auto">
                         {tabs.map((item, index) => (
                             <div
                                 key={index}
-                                className={`w-fit flex items-center gap-2 cursor-pointer border rounded ${item.title.split(" ")[0].toLowerCase() === activeTab
+                                className={`w-full sm:w-auto flex items-center gap-2 cursor-pointer border rounded ${item.title.split(" ")[0].toLowerCase() === activeTab
                                     ? "bg-[#D0E0FC] !border-primary"
                                     : "bg-[#F0F2F5]"
-                                    } hover:bg-[#D0E0FC] text-tertiaryColor hover:text-primary sm:text-sm border-[#D0D5DD] hover:border-primary font-semibold p-2 sm:p-3`}
+                                    } hover:bg-[#D0E0FC] text-tertiaryColor hover:text-primary text-xs sm:text-sm border-[#D0D5DD] hover:border-primary font-semibold p-2 sm:p-3`}
                                 onClick={() => handleChangeTab(item.title.split(" ")[0])}
                             >
                                 <LuFileText
-                                    className="size-4 text-primary"
+                                    className="size-4 text-primary flex-shrink-0"
                                     onClick={() => router.push("/")}
                                 />
-                                {item.title}
+                                <span className="truncate">{item.title}</span>
                                 {
                                     <span
-                                        className={`text-inherit group-hover:text-white bg-[#E4E7EC] group-hover:bg-primary px-1 sm:px-2 rounded-full`}
+                                        className={`text-inherit group-hover:text-white bg-[#E4E7EC] group-hover:bg-primary px-1 sm:px-2 rounded-full ml-auto flex-shrink-0`}
                                     >
                                         {item.value}
                                     </span>
@@ -141,9 +141,9 @@ const DashboardHackathons = () => {
                 {isLoading || error ? (
                     <CardSkeleton count={3} />
                 ) : (
-                    <div className="grid gap-2 sm:grid-cols-3 sm:gap-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
                         {filteredChallenges?.length > 0 ? (
-                            filteredChallenges.map(
+                            filteredChallenges?.map(
                                 (
                                     item: {
                                         status: string;
@@ -170,31 +170,23 @@ const DashboardHackathons = () => {
                                 )
                             )
                         ) : (
-                            <div className="h-[40vh] flex items-center justify-center sm:gap-4">
-                                <Icon
-                                    icon="tabler:mood-empty"
-                                    width="34"
-                                    height="34"
-                                    className="text-primary"
-                                />
-                                <p className="text-primary font-bold">
-                                    Oops!, No Open Challenges available
-                                </p>
+                            <div className="flex items-center justify-center w-full h-64">
+                                <p className="text-primary text-lg">No challenges available</p>
                             </div>
                         )}
                     </div>
                 )}
-
-                {filteredChallenges?.length > 0 && (
+                <div className="mt-4 sm:mt-8">
                     <Pagination
                         currentPage={currentPage}
                         totalPages={totalPages}
                         onPageChange={setCurrentPage}
                     />
-                )}
+                </div>
+
             </div>
-        </div>
-    );
+        </div >
+    )
 };
 
 export default DashboardHackathons;
