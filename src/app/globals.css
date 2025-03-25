@@ -33,6 +33,9 @@
   .secondary-btn {
     @apply bg-secondary text-background hover:bg-secondary/90 sm:text-base text-sm font-semibold sm:p-3 p-2 rounded !important;
   }
+  .pending-btn {
+    @apply bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-base text-sm font-semibold sm:p-3 p-2 rounded !important;
+  }
 }
 
 :root {
