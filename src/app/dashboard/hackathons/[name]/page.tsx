@@ -184,16 +184,14 @@ const DashboardHackathon = ({ searchParams }) => {
                 </div>)}
 
                 <div>
-
-                    <div className='bg-white h-fit w-full flex sm:flex-col items-start gap-8 sm:gap-4 sm:p-4 border rounded-lg'>
+                    <div className='bg-white h-fit w-full flex flex-col items-start gap-2 sm:gap-4 p-4 sm:p-6 border rounded-lg'>
                         <header className='space-y-2 sm:space-y-4'>
                             <h1 className='font-bold text-sm sm:text-md'>Key Instructions</h1>
                             <p className="sm:text-md">You are free to schedule the clarification call with the team via this</p>
                         </header>
 
-                        {isLoading || error ? (<p>Loading ...</p>) : (<div className="flex sm:flex-col items-start sm:space-y-6">
-
-                            {instructions.map((item, index) => (<div key={index} className="flex sm:flex-row items-center justify-center sm:gap-4">
+                        {(<div className="flexflex-col items-start space-y-3 sm:space-y-6">
+                            {instructions.map((item, index) => (<div key={index} className="flex items-center  sm:justify-start gap-2 sm:gap-4">
                                 <div className='bg-[#D0E0FC] flex items-center justify-center h-10 w-10 sm:p-2 rounded-full cursor-pointer'>
                                     {item.icon}
                                 </div>
@@ -205,15 +203,14 @@ const DashboardHackathon = ({ searchParams }) => {
                         </div>)}
 
                         <div className="w-full sm:py-4">
-                            <div className="w-full flex sm:flex-row flex-wrap sm:gap-4">
-                                <Button classNames={`bg-[#E5533C] hover:bg-[#E5533C]/90 text-white sm:text-sm font-bold p-3`} label={"Join Challenge"} onClick={handleJoinChallenge} />
+                            <div className="w-full flex flex-wrap gap-2 ">
+                                <Button className={`pending-btn`} onClick={handleJoinChallenge} >Join Challenge</Button>
 
-                                <Button classNames={`bg-primary hover:bg-primary/90 text-white sm:text-sm font-bold p-3`} label={"Submit your Work"} onClick={() => console.log("Submitted")} />
+                                <Button className={`primary-btn !w-fit`} onClick={() => console.log("Submitted")} > Submit your Work</Button>
                             </div>
                         </div>
 
                     </div>
-
                 </div>
             </div>
 
