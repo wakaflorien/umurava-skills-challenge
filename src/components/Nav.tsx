@@ -4,10 +4,10 @@ import * as React from "react";
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation";
-import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import Button from "./Button";
 import { motion } from "motion/react";
 import { divVariants } from "@/@types/global";
+import { LuAlignRight, LuX } from "react-icons/lu";
 
 
 const activeLink = (label: string, pathname: string) => {
@@ -26,15 +26,20 @@ export const Nav = () => {
 
     const [openNav, setOpenNav] = React.useState(false);
 
-    React.useEffect(() => {
-        window.addEventListener("resize", () => {
-            if (window.innerWidth >= 960) {
-                setOpenNav(false);
-            } else {
-                setOpenNav(true);
-            }
-        });
+    const toggleOpenNav = React.useCallback(() => {
+        if (window.innerWidth < 960) {
+            setOpenNav(true);
+        } else {
+            setOpenNav(false);
+        }
     }, []);
+
+    React.useEffect(() => {
+        window.addEventListener("resize", toggleOpenNav);
+        return () => {
+            window.removeEventListener("resize", toggleOpenNav);
+        }
+    }, [toggleOpenNav]);
 
     return (
         <>
@@ -75,8 +80,8 @@ export const Nav = () => {
                     height={38}
                     priority
                 />
-                {openNav ? (<Icon icon="ic:sharp-close" width="24" height="24" className="text-primary" onClick={() => setOpenNav(!openNav)} />
-                ) : (<Icon icon="heroicons-solid:menu-alt-1" width="24" height="24" className="text-primary" onClick={() => setOpenNav(!openNav)} />)}
+                {openNav ? (<LuX className="text-primary size-5" onClick={() => setOpenNav(!openNav)} />
+                ) : (<LuAlignRight className="text-primary size-5" onClick={() => setOpenNav(!openNav)} />)}
             </div>
 
             {openNav && (<nav className={`w-full bg-transparent flex flex-col px-12 py-4`} id="mobileNav">

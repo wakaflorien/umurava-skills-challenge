@@ -31,7 +31,7 @@
     @apply w-full sm:w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3 rounded !important;
   }
   .secondary-btn {
-    @apply bg-secondary text-background hover:bg-secondary/90 font-semibold p-3 rounded !important;
+    @apply bg-secondary text-background hover:bg-secondary/90 sm:text-base text-sm font-semibold sm:p-3 p-2 rounded !important;
   }
 }
 
