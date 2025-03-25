@@ -37,8 +37,8 @@ const SingleHackathon = ({ searchParams }) => {
     // In-App data states
 
     // API Queries
-    const { data: singleChallenge, isLoading } = useQuery({ 
-        queryKey: ['challenges', id], 
+    const { data: singleChallenge, isLoading } = useQuery({
+        queryKey: ['challenges', id],
         queryFn: () => getSingleChallenge(id),
         enabled: !!id,
     })
@@ -52,7 +52,7 @@ const SingleHackathon = ({ searchParams }) => {
             <Nav />
             <main className="flex flex-col px-4 sm:px-24 py-4 sm:py-16 space-y-4 sm:space-y-8">
                 <div className="sm:px-4 flex-1 sm:pb-24 space-y-4">
-                    <div className=" bg-white sm:p-4 border rounded-lg">
+                    <div className=" bg-white sm:p-4 p-2 border rounded-lg">
                         <div className="flex gap-2 sm:gap-4 cursor-pointer">
                             <div className="flex items-center gap-2 text-tertiaryColor" onClick={() => router.push("/hackathons")}>
                                 <Image
@@ -70,7 +70,7 @@ const SingleHackathon = ({ searchParams }) => {
                         </div>
                     </div>
                     {isLoading ? <p>Loading ...</p> : (<div className='grid sm:grid-cols-3 gap-2 sm:gap-4'>
-                        <div className="col-span-2 bg-white grid sm:space-y-4 sm:p-4 border rounded-lg">
+                        <div className="col-span-2 bg-white grid sm:space-y-4 space-y-2 sm:p-4 p-2 border rounded-lg">
 
                             <div className="relative bg-primary flex flex-col w-full h-[240px] items-center justify-center rounded-md">
                                 <Image

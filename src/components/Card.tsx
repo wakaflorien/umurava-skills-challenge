@@ -84,7 +84,7 @@ export const Card: React.FC<CardProps> = ({
 
             <div className="border-t border-tertiary p-2 sm:p-4">
                 <Button
-                    className="w-[150px] bg-primary text-white sm:text-sm hover:bg-primary/90 font-semibold p-1 sm:p-2"
+                    className="primary-btn !py-2 !px-3 !w-fit"
                     onClick={onClick}
                 >
                     View Challenge
