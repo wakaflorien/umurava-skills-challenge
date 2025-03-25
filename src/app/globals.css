@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* add the code bellow */
 @layer utilities {
-
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -28,19 +27,25 @@
   .inputText {
     @apply rounded-[5px] sm:p-2 ring-1 ring-[#D0D5DD] outline-1 outline-[#FA9874] outline-offset-0 !important;
   }
+  .primary-btn {
+    @apply w-full sm:w-[200px] bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3 rounded !important;
+  }
+  .secondary-btn {
+    @apply bg-secondary text-background hover:bg-secondary/90 font-semibold p-3 rounded !important;
+  }
 }
 
 :root {
-  --font-work-sans: 'Work Sans', sans-serif;
+  --font-work-sans: "Work Sans", sans-serif;
   --background: #ffffff;
   --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #FFFFFF;
-    --foreground: #001A40;
-    --backgroundA: #F9FAFB;
+    --background: #ffffff;
+    --foreground: #001a40;
+    --backgroundA: #f9fafb;
   }
 }
 

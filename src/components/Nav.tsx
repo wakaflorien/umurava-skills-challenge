@@ -4,8 +4,10 @@ import * as React from "react";
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation";
-import { Button } from "./Button"
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import Button from "./Button";
+import { motion } from "motion/react";
+import { divVariants } from "@/@types/global";
 
 
 const activeLink = (label: string, pathname: string) => {
@@ -36,7 +38,7 @@ export const Nav = () => {
 
     return (
         <>
-            {!openNav && (<nav className="lg:flex justify-between sticky top-0 sm:px-16 bg-background hidden z-10">
+            {!openNav && (<motion.nav className="lg:flex justify-between sticky top-0 sm:px-16 bg-background hidden z-10">
                 <Link href={"/"} className="!cursor-pointer">
                     <Image
                         className="object-cover"
@@ -50,13 +52,19 @@ export const Nav = () => {
 
                 <ul className="flex items-center gap-4 sm:gap-8 cursor-pointer">
                     {[{ link: "/", label: "Home" }, { link: "/hackathons", label: "Challenges & Hackathons" }, { link: "/institutions", label: "For Learning Institutions" }, { link: "/about", label: "About Us" }, { link: "/#contact", label: "Contact Us" }].map((item, index) => (
-                        <li key={index} className={`${activeLink(item.label, pathname) ? "text-primary" : "text-secondary"} hover:text-primary cursor-pointer`} onClick={() => router.push(item.link)}>{item.label}</li>
+                        <motion.li key={index} className={`${activeLink(item.label, pathname) ? "text-primary" : "text-secondary"} hover:text-primary !cursor-pointer`} onClick={() => router.push(item.link)} variants={divVariants}
+                            initial="visible"
+                            animate="visible"
+                            whileHover="whileHover"
+                            whileTap="whileTap">{item.label}</motion.li>
                     ))}
                 </ul>
                 <div className="flex items-center mr-2 sm:mr-8">
-                    <Button classNames="bg-secondary text-background hover:bg-secondary/90 font-semibold p-3" label="Join the program" onClick={() => router.push("/dashboard")} />
+                    <Button className="secondary-btn" onClick={() => router.push("/dashboard")} >
+                        Join the program
+                    </Button>
                 </div>
-            </nav>)}
+            </motion.nav>)}
 
             <div className="w-full flex items-center lg:hidden justify-between my-2 px-4">
                 <Image
@@ -78,7 +86,7 @@ export const Nav = () => {
                     ))}
                 </ul>
                 <div className="flex items-center my-2">
-                    <Button classNames="bg-secondary text-background hover:bg-secondary/90 sm:font-semibold p-2 sm:p-3" label="Join the program" onClick={() => router.push("/dashboard")} />
+                    <Button className="secondary-btn" onClick={() => router.push("/dashboard")} >Join the program</Button>
                 </div>
             </nav>)}
         </>

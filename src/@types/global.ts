@@ -109,6 +109,7 @@ export interface ChallengeFormProps {
   deliverables?: string;
   levels?: Array<string>;
   skills?: Array<string>;
+  status?: string;
 }
 
 export interface CustomChangeEvent {
@@ -127,12 +128,19 @@ export interface ChallengeFormComponentProps {
     e:
       | CustomChangeEvent
       | React.ChangeEvent<
-          HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-        >
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
   ) => void;
   handleClearForm: () => void;
   handleSubmitForm: () => void;
   errors?: FormikErrors<ChallengeFormProps>;
   values?: ChallengeFormProps;
   submitType: "create" | "edit";
+}
+
+export const divVariants = {
+  hidden: { opacity: 0, y: 75 },
+  visible: { opacity: 1, y: 0 },
+  whileHover: { scale: 1.05 },
+  whileTap: { scale: 0.95 },
 }

@@ -1,16 +1,17 @@
 import { Icon } from '@iconify-icon/react/dist/iconify.mjs';
 import * as React from 'react';
+import Button from './Button';
 
 export const BackToTop: React.FC = () => {
     const [isVisible, setIsVisible] = React.useState(false);
 
     const toggleVisibility = React.useCallback(() => {
-            if (window.scrollY > 300) {
-                setIsVisible(true);
-            } else {
-                setIsVisible(false);
-            }
-        }, []);
+        if (window.scrollY > 300) {
+            setIsVisible(true);
+        } else {
+            setIsVisible(false);
+        }
+    }, []);
 
     React.useEffect(() => {
         window.addEventListener('scroll', toggleVisibility);
@@ -29,7 +30,7 @@ export const BackToTop: React.FC = () => {
     return (
         <>
             {isVisible && (
-                <button
+                <Button
                     onClick={scrollToTop}
                     className={`fixed bottom-4 right-2 p-3 bg-primary text-white rounded-full focus:outline-none focus:ring-1 focus:ring-primary
                      focus:ring-offset-2 transition-all duration-300 ease-in-out 
@@ -37,7 +38,7 @@ export const BackToTop: React.FC = () => {
                     aria-label="Back to top`}
                 >
                     <Icon icon="material-symbols:arrow-upward-rounded" width="24" height="24" className='group-hover:animate-bounce' />
-                </button>
+                </Button>
             )}
         </>
     );

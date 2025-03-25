@@ -1,6 +1,6 @@
 import Image from "next/image";
-import {Button} from "./Button";
 import { BackToTop } from "./BackToTop";
+import Button from "./Button";
 
 export const Footer = () => {
     return (
@@ -82,7 +82,7 @@ export const Footer = () => {
                     <h1 className="text-white text-sm sm:text-lg font-semibold">Join our newsletter to keep up to date with us!</h1>
                     <form className="flex items-center justify-between bg-white p-1 sm:p-2 rounded-md">
                         <input className="w-full text-secondary outline-none p-2 sm:p-3" placeholder="Email" />
-                        <Button classNames="bg-primary text-white hover:bg-primary/90 font-semibold p-2 sm:p-3" label="Subscribe" onClick={() => console.log("Subscribed")} />
+                        <Button className="primary-btn" onClick={() => console.log("Subscribed")} >Subscribe</Button>
                     </form>
 
                 </div>
